@@ -48,51 +48,47 @@
 
 ## General
 
-What is the general art style? 2D or 3D specific or a combination? Where and when is the game taking place?
+The art style will be as close to the original as possible, with some small adjustments to keep the scope down. It might even reuse the existing artwork.
 
-Make sure to include moodboards and what inspires the game.
+I will also try to get my nephew in somehow, maybe as the main character. Could maybe be done by modifying the original character.
+
+### Original
+
+#### Start screen:
+
+![start_screen](./assets/start_screen.jpg)
+
+#### Gameplay:
+
+![gameplay](./assets/gameplay.jpg)
+
+#### Collecting coins:
+
+![collecting_coins](./assets/coins.jpg)
+
+#### Slot machine ending:
+
+![slot_machine_ending](./assets/slot_machine.jpg)
 
 ## Visual Hook
 
-What makes this game stand out visually and make players want to play it?
+It looks like the original Jetpack Joyride.
 
 ## 2D
 
-More specifically, what is the 2D art style?
-
-Make sure to include moodboards and inspirations.
-
-## 3D
-
-More specifically, what is the 3D art style?
-
-Make sure to include moodboards and inspirations.
-
-## Color Palette
-
-What are the general guidelines for color palettes?
-
-Make sure to include moodboards and inspirations.
+- 2D sidescrolling
+- Colorful
+- Cartoony
 
 ## Animation
 
-What are the general guidelines for animations?
-
-Make sure to include moodboards and inspirations.
+Will be as in the orignial Jetpack Joyride.
 
 # Characters
 
-## General
+## Barry
 
-What is the general art style for characters? Any fine-grained guidelines regarding 2D, 3D, color palettes, or animations?
-
-Make sure to include moodboards and inspirations.
-
-## Character 1
-
-How is this character designed? Any specific color palette or animations?
-
-Make sure to include moodboards and inspirations.
+![barry_full_sprite_sheet](./assets/barry_full_sprite_sheet.jpg)
 
 # Entities
 

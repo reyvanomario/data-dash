@@ -29,7 +29,7 @@
 
 # Overview
 
-Describe the game in 1-3 sentences.
+Jetpack Joyride is a side-scrolling endless runner action video game. Join Barry as he breaks in to a secret laboratory to commandeer the experimental jetpacks from the clutches of science evildoers. After lift-off, simply touch the screen to ascend and release to descend, raining bullets, bubbles, rainbows and lasers downwards as you fly towards higher and higher scores!
 
 ## Skills
 
