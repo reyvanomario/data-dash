@@ -111,6 +111,8 @@ Juicy, punchy SFX, together with plenty of explosions and particle effexts.
 ## Tools
 
 - Godot
+- Git
+- Github
 
 # Marketing & funding
 

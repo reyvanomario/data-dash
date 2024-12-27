@@ -9,14 +9,9 @@
     - [General](#general)
     - [Visual Hook](#visual-hook)
     - [2D](#2d)
-    - [3D](#3d)
-    - [Color Palette](#color-palette)
-    - [Animation](#animation)
 - [Characters](#characters)
-    - [General](#general-1)
     - [Character 1](#character-1)
 - [Entities](#entities)
-    - [General](#general-2)
     - [Entity 1](#entity-1)
 - [Environments](#environments)
     - [General](#general-3)
@@ -80,43 +75,47 @@ It looks like the original Jetpack Joyride.
 - Colorful
 - Cartoony
 
-## Animation
-
-Will be as in the orignial Jetpack Joyride.
-
 # Characters
 
-## Barry
+## Barry Steakfries
 
 ![barry_full_sprite_sheet](./assets/barry_full_sprite_sheet.jpg)
 
+## Evil Scientists
+
+![scientists_in_game](./assets/scientists_in_game.jpg)
+
+![scientists_concept](./assets/scientists_concept.jpg)
+
 # Entities
 
-## General
+## Obstacles
 
-What is the general art style for entities? Any fine-grained guidelines regarding 2D, 3D, color palettes, or animations?
+![obstacles_sprites](./assets/obstacles_sprites.png)
 
-Make sure to include moodboards and inspirations.
+### Zappers
 
-## Entity 1
+![zappers](./assets/zappers.jpg)
 
-How is this entity designed? Any specific color palette or animations?
+### Missiles
 
-Make sure to include moodboards and inspirations.
+![missiles](./assets/missiles.jpg)
+
+### Lasers
+
+![lasers](./assets/lasers.png)
 
 # Environments
 
-## General
+In the original the laboratory changes from the typical laboritory rooms to some greenary, caves, or water parts.
 
-What is the general art style for environments? How does the environment change while the player progress? Any fine-grained guidelines regarding 2D, 3D, color palettes, or animations?
+But to keep the scope down this remake is only going to have the laboritory rooms included.
 
-Make sure to include moodboards and inspirations.
+It could include some blinking lights, signs and desks/computers.
 
-## Environment 1
+![hallway](./assets/gameplay.jpg)
 
-How is this environment designed? Any specific color palette or animations?
-
-Make sure to include moodboards and inspirations.
+![hallway_2](./assets/coins.jpg)
 
 # UI
 
