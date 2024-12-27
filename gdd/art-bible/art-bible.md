@@ -125,7 +125,7 @@ What is the general art style for the user interface? Any fine-grained guideline
 
 Make sure to include moodboards and inspirations.
 
-## Interface 1
+## Interface 1d
 
 How is this interface or interface component designed? Any specific color palette or animations?
 
@@ -133,17 +133,7 @@ Make sure to include moodboards and inspirations.
 
 # Camera
 
-## General
-
-What is the general art style for the camera? Any transitions or animations?
-
-Make sure to include moodboards and inspirations.
-
-## Camera 1
-
-Any specifics for this camera?
-
-Make sure to include moodboards and inspirations.
+Side-scrolling camera.
 
 # Marketing
 
