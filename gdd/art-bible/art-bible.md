@@ -1,6 +1,4 @@
-# GAME TITLE - SUBTITLE
-
-## Art Bible
+# JETPACK JOYRIDE - THE REMAKE (Art Bible)
 
 ## Table of content
 
