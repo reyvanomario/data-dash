@@ -1,6 +1,4 @@
-# GAME TITLE - SUBTITLE
-
-## Level Design Document
+# JETPACK JOYRIDE - THE REMAKE (Level Design Document)
 
 ## Table of content
 
