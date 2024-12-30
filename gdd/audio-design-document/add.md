@@ -1,6 +1,4 @@
-# GAME TITLE - SUBTITLE
-
-## Audio Design Document
+# JETPACK JOYRIDE - THE REMAKE (Audio Design Document)
 
 ## Table of content
 
