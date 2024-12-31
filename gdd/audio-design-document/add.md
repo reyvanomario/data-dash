@@ -119,7 +119,7 @@ There should be SFX for clicking buttons at least, but maybe even some more.
 ## Music
 
 | Type | Name |
-|---|---|---|
+|---|---|
 | Menu | Main menu music |
 | Game | Main game music |
 
