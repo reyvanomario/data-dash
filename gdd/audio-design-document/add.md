@@ -4,22 +4,15 @@
 
 - [Other Design Documents](#other-design-documents)
 - [Outline/Objectives](#outlineobjectives)
-    - [General](#general)
-    - [Music](#music)
-    - [SFX](#sfx)
-    - [Dialog](#dialog)
-    - [UI](#ui)
 - [Research](#research)
 - [Implementation](#implementation)
     - [General](#general-1)
     - [Music](#music-1)
     - [SFX](#sfx-1)
-    - [Dialog](#dialog-1)
     - [UI](#ui-1)
 - [Content List](#content-list)
     - [Music](#music-2)
     - [SFX](#sfx-2)
-    - [Dialog](#dialog-2)
     - [UI](#ui-2)
 - [Technical Guidelines](#technical-guidelines)
     - [Software](#software)
@@ -36,103 +29,151 @@
 
 # Outline/Objectives
 
-## General
-
-What is the overall style or purpose of the audio? What is trying to be conveyed as compared to the setting of the game?
-
-## Music
-
-What is the style and purpose of the music?
-
-## SFX
-
-What is the style and purpose of the SFX?
-
-## Dialog
-
-What is the style and purpose of dialogs?
-
-## UI
-
-What is the style and purpose of the UI audio?
+The audio should be punchy, immersive, and cocky, as in the original Jetpack Joyride.
 
 # Research
 
-What research have been done?  What are the inspirations for this games audio? What audio experiments have been done? What file formats have been tested/used?
+### Playlists
 
-This section can prove to be valuable in looking back at past experiments on the project.
+[YouTube: Jetpack Joyride Original Soundtrack](https://youtube.com/playlist?list=PLuNyw_z6mVdVP-P786PRmBxqdboTSL8Ja&feature=shared)
 
-You can also include moodboards in the form of playlists.
+[Downloadable: Jetpack Joyride (Original Game Soundtrack)](https://downloads.khinsider.com/game-soundtracks/album/jetpack-joyride-original-game-soundtrack-2021-android-ios)
+
+### File formats, compression, and size
+
+#### Lossless uncompressed:
+
+Size: Big
+Quality: Best
+Formats: `WAV`, `AIFF`
+
+#### Lossless compressed:
+
+Size: Medium
+Quality: High
+Formats: `FLAC`, `WMA Lossless`, `ALAC`
+
+#### Lossy compression:
+
+Size: Small
+Quality: Low
+Formats: `OGG`, `MP3`, `AAC`, `WMA`
+
+#### OPUS (for dialog)
+
+Size: Small
+Quality: High
+Formats: `OPUS`
+
+As of writing this, [Godot supports 3 audio formats](https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/importing_audio_samples.html):
+
+- WAV
+- OGG Vorbis
+- MP3
+
+According to [Audio File Formats | Godot Basics Tutorial | Ep 59](https://www.youtube.com/watch?v=ChJIKW2Y_U8) and [several comments online](https://www.reddit.com/r/godot/comments/s0p6ik/music_file_type_and_size/), the best practice is to use:
+
+- `OGG` for game music or long runtime sounds
+- `WAV` for sfx or short sounds
+
+According to one of the comments in the above Redit post the MP3 format should be avoided for short audio files, such as SFX, since it could lag/delay.
 
 # Implementation
 
 ## General
 
-What are some general implementations, rules, or boundaries for the game audio? How many audio layers/busses should there be? How will they act in the game and with each other?
+There should be 3 audio busses:
+
+- Master
+- Music
+- SFX
 
 ## Music
 
-What are some implementations, rules, or boundaries for the music? How many audio layers/busses should there be? How will they act in the game and with each other?
+Toggles for music will either enable or disable the music, which is played throughout the game.
+
+### Main Menu
+
+The music in the main menu should be played before the game starts or when the player returns to the menu.
+
+### In-game
+
+The theme music should be played as soon as the game starts and the player runs. Maybe the music lowers in volume when entering the pause menu or the end screen. And when running the music should go back to normal volume.
+
+When going back to the main menu the music transitions to that music.
 
 ## SFX
 
-What are some implementations, rules, or boundaries for the SFX? How many audio layers/busses should there be? How will they act in the game and with each other?
+Toggles for SFX will either enable or disable the music.
 
-## Dialog
-
-What are some implementations, rules, or boundaries for the dialogs? How many audio layers/busses should there be? How will they act in the game and with each other?
+There should be SFX for when the player runs on the floor, the jetpack, obstacles, explosions, alarms/warnings and the slot machine. Also maybe some state SFX like when the game starts or ends.
 
 ## UI
 
-What are some implementations, rules, or boundaries for the UI? How many audio layers/busses should there be? How will they act in the game and with each other?
+UI SFX are controlled by the same toggles for SFX, and are under the same bus.
+
+There should be SFX for clicking buttons at least, but maybe even some more.
 
 # Content List
 
 ## Music
 
-| Status | Type | Name |
+| Type | Name |
 |---|---|---|
-| Done | Menu | Menu music |
-| Editing | Calm | Nothing happens |
-| Recording | Action | Intense action |
+| Menu | Main menu music |
+| Game | Main game music |
 
 ## SFX
 
-| Status | Type | Name |
-|---|---|---|
-| To do | Pickup | Pickup coin |
-
-## Dialog
-
-### Character 1
-
-| Status | Event | Line |
-|---|---|---|
-| To do | Finish level | "Yes!" |
+| Type | Name |
+|---|---|
+| Obstacle | Zapper |
+| Obstacle | Laser |
+| Obstacle | Missile |
+| Obstacle | Warning for missile |
+| Obstacle | Hurt by the zapper/laser |
+| Obstacle | Hurt by the missile |
+| Environment | Explosion |
+| Player | Running |
+| Player | Revive |
+| Jetpack | Machinegun |
+| Collectable | Coins |
+| Collectable | Spin tokens |
 
 ## UI
 
-| Status | Type | Name |
-|---|---|---|
-| To do | Button | Button click |
+| Type | Name |
+|---|---|
+| Button | Button click |
+| Button | Purchase |
+| Slot machine | Pull lever |
+| Slot machine | Slots spin |
+| Slot machine | Win |
+| Slow machine | Lose |
 
 # Technical Guidelines
 
 ## Software
 
-What software is used and for what?
+- [Audacity](https://www.audacityteam.org/) (collecting and editing audio)
+- [Pro SFXR](https://pro.sfxr.me/) (generating SFX)
+- [Bosca Ceoil: The Blue Album](https://yurisizov.itch.io/boscaceoil-blue) (creating music)
+- [1BITDRAGON](https://1bitdragon.com/) (creating music)
 
 ## File Formats
 
-What are the different file formats for the assets, at any stage in production?
+- **Music:** .ogg
+- **SFX:** .wav
 
 ## Restrictions
 
-What are the restrictions or technical limitations to respect and be aware of?
+Keep the size of the files as small as possible.
+
+One limitation is GitHub's size limit for single files: 100MB.
 
 ## Naming Conventions
 
-How should files be named?
+As Godot's naming convention: [snake_case](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html#naming-conventions).
 
 ## Workflows
 

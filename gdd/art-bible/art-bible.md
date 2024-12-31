@@ -139,6 +139,12 @@ Buttons and windows in the original Jetpack Joyride are pretty squared and metal
 
 ![end_screen](./assets/end_screen.jpg)
 
+## The Stash (store)
+
+![stash_menu](./assets/stash_menu.jpg)
+
+![stash_list](./assets/stash_list.png)
+
 # Camera
 
 Side-scrolling camera.
