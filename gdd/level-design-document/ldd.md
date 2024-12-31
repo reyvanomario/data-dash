@@ -1,17 +1,11 @@
-# GAME TITLE - SUBTITLE
-
-## Level Design Document
+# JETPACK JOYRIDE - THE REMAKE (Level Design Document)
 
 ## Table of content
 
 - [Other Design Documents](#other-design-documents)
 - [Outline/Objectives](#outlineobjectives)
-    - [General](#general)
-    - [Level 1](#level-1)
 - [Research](#research)
 - [Implementation](#implementation)
-    - [General](#general-1)
-    - [Level 1](#level-1-1)
 - [Content List](#content-list)
 - [Technical Guidelines](#technical-guidelines)
     - [Software](#software)
@@ -28,57 +22,71 @@
 
 # Outline/Objectives
 
-## General
-
-What is the overall goal, purpose, and progression of the levels?
-
-## Level 1
-
-What is the purpose and structure of this level?
+As the original Jetpack Joyride the level is endless, and the goal is to get as far as possible to collect points, and on the side you can collect coins.
 
 # Research
 
-What are the inspirations for this games level design? What prototypes and experiments have been done? What file formats have been tested/used?
+## Obstacles and Difficulty
 
-This section can prove to be valuable in looking back at past experiments on the project.
-
-Make sure to include moodboards of inspirations, prototypes, or experiments.
+[A great answer how to increase the difficulty in an endless runner as Jetpack Joyride](https://gamedev.stackexchange.com/a/113529)
 
 # Implementation
 
-## General
+It's an endless runner, and the speed should increase the longer you run.
 
-What are some general implementations, rules, or boundaries for the game levels? What are the world measurements? How will the player progress and win levels?
+There will be obstacles of different types that stops you from progressing.
 
-## Level 1
+How these spawn could be determined using an interval and probability spawning system. Everything is placed by an interval system using a minimal and maximal interval length.
 
-What are some implementations, rules, or boundaries for this level? How will the player progress? What is unique, achievable, difficult, and gained with this level?
+![interval_system](./assets/interval_system.png)
+
+Different spawn groups could be implemented where the probability of the entities and/or their behaviour can change as the difficulty increases.
+
+The coins should be able to spawn in different shapes/groups. A straight or curvy line, a short or long block, or even make up words.
+
+Sometimes there should also spawn some floaty spin tokens.
+
+The systems for spawning collecables and obstacles should be smart enough to not overlap them or make it impossible to collect any collectables.
 
 # Content List
 
-| Status | Type | Name |
-|---|---|---|
-| Done | UI | Main menu |
-| To do | UI | Pause menu |
-| Prototype | Level | Level 1 |
+| Type | Name |
+|---|---|
+| UI | Main menu |
+| UI | Settings menu |
+| UI | Pause menu |
+| UI | Slot machine |
+| UI | End screen |
+| Level | Main level |
 
 # Technical Guidelines
 
 ## Software
 
-What software is used and for what?
+- Godot game engine (for building scenes and levels)
+- Krita (for mocking up scenes and levels)
+- Aseprite (for mocking up scenes and levels)
 
 ## File Formats
 
-What are the different file formats for the assets, at any stage in production?
+- **Mockup images:** .png
+- **Levels:** .scene
 
 ## Restrictions
 
-What are the restrictions or technical limitations to respect and be aware of?
+### Level Design
+
+Since it's an endless runner, the level have to be partly generated.
+
+### File Size
+
+Keep the size of the files as small as possible.
+
+One limitation is GitHub's size limit for single files: 100MB.
 
 ## Naming Conventions
 
-How should files be named?
+As Godot's naming convention: [snake_case](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html#naming-conventions).
 
 ## Workflows
 

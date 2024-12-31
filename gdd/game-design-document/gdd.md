@@ -1,13 +1,10 @@
-# GAME TITLE - SUBTITLE (Game Design Document)
+# JETPACK JOYRIDE - THE REMAKE (Game Design Document)
 
 ## Table of content
 
 - [Overview](#overview)
     - [Skills](#skills)
 - [Story](#story)
-    - [Narrative](#narrative)
-    - [Plot](#plot)
-    - [Setting](#setting)
     - [Characters](#characters)
 - [Gameplay](#gameplay)
     - [Gameplay Hook](#gameplay-hook)
@@ -31,103 +28,124 @@
 
 Jetpack Joyride is a side-scrolling endless runner action video game. Join Barry as he breaks in to a secret laboratory to commandeer the experimental jetpacks from the clutches of science evildoers. After lift-off, simply touch the screen to ascend and release to descend, raining bullets, bubbles, rainbows and lasers downwards as you fly towards higher and higher scores!
 
+[Great talk from the creators of the original Jetpack Joyride](https://www.gdcvault.com/play/1015527/Depth-in-Simplicity-The-Making)
+
 ## Skills
 
-List skills that are required or will be learned by the player.
+- Reaction
+- Aim
+- Speed
 
 # Story
 
-> [!NOTE]
-> Not all stories require a strict plot or a complex narrative structure.
-> Some stories focus more on character development or world-building.
->
-> Remove parts of this section that aren't needed for your game.
-
-Describe the story with anything between a hook/logline (1-3 sentences) or a synopsis (500-800 words), and include important characters and events.
-
-The story is the raw content - events, actions, and characters arranged in chronological order. Answer these 2 questions: who are these people, and what happened to them?
-
-#### Example story for **Halo**:
-> **Logline:**
-> _A super-soldier and his AI companion must stop an alien alliance from using a powerful ancient weapon to destroy humanity._
-
-> **Synopsis:**
-> _Set in the 26th century, the story follows Master Chief, a Spartan super-soldier, and Cortana, his AI companion, as they crash-land on a mysterious ringworld called Halo.
-> They discover the alien Covenant plans to use Halo’s power as a weapon, threatening all life in the galaxy.
-> As they explore Halo, they uncover the ring’s true purpose as a prison for the Flood, a parasitic species.
-> Master Chief must stop both the Covenant and the Flood by destroying Halo, ensuring the survival of humanity._
-
-## Narrative
-
-Write a narrative that's anything between a hook/logline (1-3 sentences) or a synopsis (500-800 words), and include important characters and events.
-
-How is the story told? What is the PoV? Is it in chronological order or non-linear? How/When is important information revealed?
-
-#### Example narrative for **Halo**:
-> **Logline:**
-> _The story unfolds through Master Chief’s experiences, blending action, environmental storytelling, and Cortana’s commentary to guide players through the conflict._
-
-> **Synopsis:**
-> _The narrative begins with the human ship Pillar of Autumn fleeing a Covenant attack, leading to its crash on Halo.
-> Told mostly through Master Chief’s perspective, the story reveals Halo’s secrets as players explore the ring’s environments, interact with allies, and face enemies.
-> Cortana provides exposition, explaining the Covenant’s fanaticism and Halo’s origins.
-> Flashbacks and dialogue with key characters like Captain Keyes deepen the mystery, culminating in a desperate race to prevent Halo’s activation._
-
-## Plot
-
-Write a plot that's anything between a hook/logline (1-3 sentences) or a synopsis (500-800 words), and include important characters and events.
-
-Why and how are events connected? What is the cause for one event to lead to another, and what is the purpose? What is the logic and motivation behind the sequence of events?
-
-#### Example plot for **Halo**:
-> **Logline:**
-> _Master Chief must destroy Halo to prevent both the Covenant and the Flood from annihilating humanity._
-
-> **Synopsis:**
-> _The plot centers on Master Chief’s mission to survive on Halo while uncovering its true purpose.
-> Initially tasked with defending humanity from the Covenant, the discovery of the Flood shifts the stakes, forcing him to ally with human survivors and AI allies.
-> The climax sees Master Chief infiltrating the ring’s control center to destroy Halo by overloading the Pillar of Autumn’s reactor, narrowly escaping before the ring is obliterated.
-> The plot ties together themes of survival, sacrifice, and the dangers of wielding ancient technology._
-
-## Setting
-
-When and where does the story take place?
+> Barry Steakfries breaks in to a secret laboratory, steals a machinegun jetpack from evil scientists and tries to fly away in order to do good.
 
 ## Characters
 
-Describe in detail the different characters.
+#### Barry Steakfries
 
-What relationships do the characters have (ally, opponent, or partnership)?
+> Works as a salesman for a gramophone-making company that is about to go bankrupt due to low sales.
+> After seeing the machinegun jetpack he dreams of using it to do good.
 
-What are their goals, and what's the motivation for certain actions?
+#### Evil Scientists
+
+> Working in the "top secret" laboratories of _Legitimate Research_.
+> Researching and developing experimental weapons and vehicles.
 
 # Gameplay
 
+[_Gameplay from the original Jetpack Joyride_](https://www.youtube.com/watch?v=OhU7tLtOIgE)
+
 ## Gameplay Hook
 
-What is the "wow" factor of the gameplay that makes players interested in this game?
+Travel as far as possible, collect coins, and avoid hazards such as zappers, missiles and high-intensity laser beams.
+
+When the player presses anywhere on the touchscreen, the jetpack fires and Barry rises.
+When the player lets go, the jetpack turns off, and Barry falls.
+
+Because he is continually in motion, the player does not control his speed, simply his movement along the vertical axis.
 
 ## Loops
 
-What repeatable cycles of actions make the player continue playing?
+Travel as far as you can without dying.
+When you die you can play again to beat the highest score and use bonuses from previous games.
 
 ## Entities
 
-All about the player, enemies, NPC:s, items, power-ups, etc., and their mechanics, properties, and screenshots in the game.
+### Player
+
+By tapping/holding your finger to the screen, the player rises with the jetpack.
+When no input is given the player falls down to the floor and runs.
+
+The player always move from left to right automatically, and the speed increases while you play.
+
+From the machinegun jetpack you fire bullets when flying, which can hit other entities.
+
+Upon hitting obstacles, the player dies and tumbles across the floor like a ragdoll. With some luck you'll still be able to collect collectables and travel some more distance.
+
+### Evil Scientists
+
+They either walk or run on the labority floor.
+
+They don't affect the player, but if they're hit by the player or explosions they will fall to the floor.
+
+### Obstacles
+
+- Zappers
+- Missiles
+- Lasers
+
+### Collectables
+
+- Coins
+- Spin tokens
+
+### Powerups
+
+- Powerups can be bought one at a time or in packs (5 per pack)
+- One type of powerup can only be used once per game
+- They can either be purchased in or between games
+
+#### Quick revive (heart)
+
+- Effect: Revive the player so you can continue from where you died
+- Use: Upon death
+- Cost: Single: 1500; Pack: 6000
+- Purchase: Upon death (single and used instantly) or in store
+
+#### Final blast (bomb)
+
+- Effect: Blasts the player so they tumble some additional distance before ending the game
+- Use: Upon death
+- Cost: Single: 1000; Pack: 4000
+- Purchase: Upon death (single and used instantly) or in store
+
+#### Head start
+
+- Effect: 750 meters head start
+- Use: At the start of a game
+- Cost: Single: 500; Pack: 2000
+- Purchase: Upon game start (single and used instantly) or in store
 
 ## Progression
 
-Describe how the player will progress, how the difficulty will increase, and how players mitigate it.
+Run endlessly from left to right while the speed increases.
+The score increments by the distance you travel and the goal is to get the highest score possible.
 
 ## Losing
 
-What are the losing conditions?
+Contact with any of obstacles results in instant death.
+Barry's body will tumble and slide for an additional distance upon dying.
+
+The player can choose to use a powerup if they have any, like revival or a bomb, to either continue running or propel the player's body for additional distance. Only one type of powerup can be used per game though.
+
+At the end of each run, the collected spin tokens are used in a slot machine (one token gives one spin) which can award the player various prizes, including coins, additional spin tokens, and powerups.
 
 # Assets
 
 ## Sensory Hook
 
-What is the "wow" factor using either sight, sound, touch, or all?
+Juicy, punchy SFX, together with plenty of explosions and particle effects.
 
 ## Art
 
@@ -145,20 +163,29 @@ What is the "wow" factor using either sight, sound, touch, or all?
 
 ## Platform
 
-What platforms, such as PC, handheld, or mobile, is this game targeting?
+- Windows
+- Mac
+- Linux
+- Web
 
 ## Tools
 
-What tools, such as game engine, art software, or version control system, are to be used for this game?
+- Godot
+- Git
+- Github
 
 # Marketing & funding
 
-How is the game marketed and funded?
+Promoted and available for free on:  
+ [![Itch.io](https://img.shields.io/badge/Itch-%23FF0B34.svg?style=for-the-badge&logo=Itch.io&logoColor=white)](https://brallex.itch.io/)  
+ [![youtube](https://img.shields.io/badge/youtube-FF0000?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtube.com/@brallex)  
+ [![github](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/Alexander-Jordan)  
+ [![the 20 game challenge](https://img.shields.io/badge/The_20_Games_Challenge-205375?style=for-the-badge&logoColor=white)](https://20_games_challenge.gitlab.io/)  
 
 ## Target
 
-Who is the game's target audience?
+Jetpack Joyride entusiasts and gamedevs.
 
 ## Localization
 
-What languages will the game support?
+English

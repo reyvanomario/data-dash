@@ -1,6 +1,4 @@
-# GAME TITLE - SUBTITLE
-
-## Art Bible
+# JETPACK JOYRIDE - THE REMAKE (Art Bible)
 
 ## Table of content
 
@@ -9,24 +7,17 @@
     - [General](#general)
     - [Visual Hook](#visual-hook)
     - [2D](#2d)
-    - [3D](#3d)
-    - [Color Palette](#color-palette)
-    - [Animation](#animation)
 - [Characters](#characters)
-    - [General](#general-1)
-    - [Character 1](#character-1)
 - [Entities](#entities)
-    - [General](#general-2)
-    - [Entity 1](#entity-1)
 - [Environments](#environments)
-    - [General](#general-3)
-    - [Environment 1](#environment-1)
 - [UI](#ui)
     - [General](#general-4)
-    - [Interface 1]()
+    - [Main Menu](#main-menu)
+    - [Settings Menu](#settings-menu)
+    - [Pause Menu](#pause-menu)
+    - [Slot Machine](#slot-machine)
+    - [End Screen](#end-screen)
 - [Camera](#camera)
-    - [General](#general-5)
-    - [Camera 1](#camera-1)
 - [Marketing](#marketing)
     - [General](#general-6)
     - [Internal](#internal)
@@ -80,109 +71,129 @@ It looks like the original Jetpack Joyride.
 - Colorful
 - Cartoony
 
-## Animation
-
-Will be as in the orignial Jetpack Joyride.
-
 # Characters
 
-## Barry
+## Barry Steakfries
 
 ![barry_full_sprite_sheet](./assets/barry_full_sprite_sheet.jpg)
 
+## Evil Scientists
+
+![scientists_in_game](./assets/scientists_in_game.jpg)
+
+![scientists_concept](./assets/scientists_concept.jpg)
+
 # Entities
 
-## General
+## Obstacles
 
-What is the general art style for entities? Any fine-grained guidelines regarding 2D, 3D, color palettes, or animations?
+![obstacles_sprites](./assets/obstacles_sprites.png)
 
-Make sure to include moodboards and inspirations.
+### Zappers
 
-## Entity 1
+![zappers](./assets/zappers.jpg)
 
-How is this entity designed? Any specific color palette or animations?
+### Missiles
 
-Make sure to include moodboards and inspirations.
+![missiles](./assets/missiles.jpg)
+
+### Lasers
+
+![lasers](./assets/lasers.png)
 
 # Environments
 
-## General
+In the original the laboratory changes from the typical laboritory rooms to some greenary, caves, or water parts.
 
-What is the general art style for environments? How does the environment change while the player progress? Any fine-grained guidelines regarding 2D, 3D, color palettes, or animations?
+But to keep the scope down this remake is only going to have the laboritory rooms included.
 
-Make sure to include moodboards and inspirations.
+It could include some blinking lights, signs and desks/computers.
 
-## Environment 1
+![hallway](./assets/gameplay.jpg)
 
-How is this environment designed? Any specific color palette or animations?
-
-Make sure to include moodboards and inspirations.
+![hallway_2](./assets/coins.jpg)
 
 # UI
 
 ## General
 
-What is the general art style for the user interface? Any fine-grained guidelines regarding 2D, 3D, color palettes, or animations?
+Buttons and windows in the original Jetpack Joyride are pretty squared and metallic.
 
-Make sure to include moodboards and inspirations.
+## Main Menu
 
-## Interface 1
+![main_menu](./assets/main_menu.jpg)
 
-How is this interface or interface component designed? Any specific color palette or animations?
+## Settings Menu
 
-Make sure to include moodboards and inspirations.
+![settings_menu](./assets/settings_menu.jpg)
+
+## Pause Menu
+
+![pause_menu](./assets/pause_menu.jpg)
+
+## Slot machine
+
+![slot_machine](./assets/slot_machine.jpg)
+
+## End screen
+
+![end_screen](./assets/end_screen.jpg)
+
+## The Stash (store)
+
+![stash_menu](./assets/stash_menu.jpg)
+
+![stash_list](./assets/stash_list.png)
 
 # Camera
 
-## General
-
-What is the general art style for the camera? Any transitions or animations?
-
-Make sure to include moodboards and inspirations.
-
-## Camera 1
-
-Any specifics for this camera?
-
-Make sure to include moodboards and inspirations.
+Side-scrolling camera.
 
 # Marketing
 
 ## General
 
-What is the general marketing art style? Any size or platform specifics?
-
-Make sure to include moodboards and inspirations.
+Should aim to be similar to the original art style for marketing.
 
 ## Internal
 
-How is the art for marketing the game or the studio from within the game designed? Such as the splash screen, videos, ads, or anything similar.
+### Icons
 
-Make sure to include moodboards and inspirations.
+![icon_original](./assets/icon_original.jpg)
+
+![icon](./assets/icon.jpg)
+
+### Loading Screen
+
+![loading_screen](./assets/loading_screen.jpg)
 
 ## External
 
-How is the art for marketing the game or studio from outside the game designed? Such as icons, banners, cover art, screenshots, gif:s, trailers, videos, or anything similar.
+### Banners
 
-Make sure to include moodboards and inspirations.
+![banner](./assets/banner.jpg)
 
 # Technical Guidelines
 
 ## Software
 
-What software is used and for what?
+- `Krita`
+- `Aseprite`
 
 ## File Formats
 
-What are the different file formats for the assets, at any stage in production?
+- 2D assets: `.png`
 
 ## Restrictions
 
-What are the restrictions or technical limitations to respect and be aware of?
+Keep the size of the files as small as possible.
+
+One limitation is GitHub's size limit for single files: 100MB.
 
 ## Naming Conventions
 
-How should files be named?
+As Godot's naming convention: [snake_case](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html#naming-conventions).
+
 
 ## Workflows
 
