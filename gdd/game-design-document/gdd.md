@@ -178,7 +178,7 @@ Juicy, punchy SFX, together with plenty of explosions and particle effects.
 
 Promoted and available for free on:  
  [![Itch.io](https://img.shields.io/badge/Itch-%23FF0B34.svg?style=for-the-badge&logo=Itch.io&logoColor=white)](https://brallex.itch.io/)  
- [![youtube](https://img.shields.io/badge/youtube-FF0000?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtube.com/@brallex)  
+ [![youtube](https://img.shields.io/badge/youtube-FF0000?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtube.com/@bbitofficial)  
  [![github](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=GitHub&logoColor=white)](https://github.com/Alexander-Jordan)  
  [![the 20 game challenge](https://img.shields.io/badge/The_20_Games_Challenge-205375?style=for-the-badge&logoColor=white)](https://20_games_challenge.gitlab.io/)  
 
