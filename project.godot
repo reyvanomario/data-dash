@@ -32,7 +32,8 @@ folder_colors={
 "res://gdd/": "teal",
 "res://localization/": "blue",
 "res://stages/": "purple",
-"res://utilities/": "pink"
+"res://ui/": "pink",
+"res://utilities/": "gray"
 }
 
 [rendering]
