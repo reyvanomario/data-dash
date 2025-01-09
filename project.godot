@@ -12,6 +12,11 @@ config_version=5
 
 config/name="Jetpack Joyride - The Remake"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://utilities/game/game_manager.gd"
 
 [display]
 
