@@ -7,8 +7,8 @@ enum Game {
 	PLAYING,
 }
 enum Speed {
-	MIN = 10,
-	MAX = 500,
+	MIN = 250,
+	MAX = 1000,
 }
 #endregion
 
@@ -28,9 +28,16 @@ var speed:float = Speed.MIN :
 			return
 		
 		speed = s
+		speed_changed.emit(speed)
 #endregion
 
 #region SIGNALS
 signal game_changed(game:int)
 signal speed_changed(speed:float)
 #endregion
+
+func _unhandled_input(event: InputEvent) -> void:
+	if game == Game.NEW and event.is_action_pressed('fly'):
+		game = Game.PLAYING
+	if game == Game.PLAYING and event.is_action_pressed("ui_cancel"):
+		game = Game.NEW
