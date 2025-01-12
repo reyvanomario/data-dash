@@ -34,6 +34,29 @@ As the original Jetpack Joyride the level is endless, and the goal is to get as 
 
 It's an endless runner, and the speed should increase the longer you run.
 
+## Game Manager
+
+The Game Manager keeps track of properties.
+
+### Game state
+
+At the moment there is 3 game states:
+- Game Over
+- New Game
+- Playing (mid-game)
+
+### Speed
+
+The speed can be within the min (250) and max (1000) speed.
+
+## Parallax background
+
+The background is scrolling endlessly using a parallax background.
+
+The speed is tracked through the Game Manager.
+
+## Obstacles/Spawner
+
 There will be obstacles of different types that stops you from progressing.
 
 How these spawn could be determined using an interval and probability spawning system. Everything is placed by an interval system using a minimal and maximal interval length.
@@ -70,6 +93,7 @@ The systems for spawning collecables and obstacles should be smart enough to not
 ## File Formats
 
 - **Mockup images:** .png
+- **Background parallax images:** .png
 - **Levels:** .scene
 
 ## Restrictions
@@ -77,6 +101,10 @@ The systems for spawning collecables and obstacles should be smart enough to not
 ### Level Design
 
 Since it's an endless runner, the level have to be partly generated.
+
+The endless background images are made out of 1080x1080 images that tile well together, like this base one:
+
+![](../../stages/parallax_background/sections/section_1/section_1_part_0.png)
 
 ### File Size
 

@@ -4,30 +4,30 @@
 
 - [Other Design Documents](#other-design-documents)
 - [Art Style](#art-style)
-    - [General](#general)
-    - [Visual Hook](#visual-hook)
-    - [2D](#2d)
+	- [General](#general)
+	- [Visual Hook](#visual-hook)
+	- [2D](#2d)
 - [Characters](#characters)
 - [Entities](#entities)
 - [Environments](#environments)
 - [UI](#ui)
-    - [General](#general-4)
-    - [Main Menu](#main-menu)
-    - [Settings Menu](#settings-menu)
-    - [Pause Menu](#pause-menu)
-    - [Slot Machine](#slot-machine)
-    - [End Screen](#end-screen)
+	- [General](#general-4)
+	- [Main Menu](#main-menu)
+	- [Settings Menu](#settings-menu)
+	- [Pause Menu](#pause-menu)
+	- [Slot Machine](#slot-machine)
+	- [End Screen](#end-screen)
 - [Camera](#camera)
 - [Marketing](#marketing)
-    - [General](#general-6)
-    - [Internal](#internal)
-    - [External](#external)
+	- [General](#general-6)
+	- [Internal](#internal)
+	- [External](#external)
 - [Technical Guidelines](#technical-guidelines)
-    - [Software](#software)
-    - [File Formats](#file-formats)
-    - [Restrictions](#restrictions)
-    - [Naming Conventions](#naming-conventions)
-    - [Workflows](#workflows)
+	- [Software](#software)
+	- [File Formats](#file-formats)
+	- [Restrictions](#restrictions)
+	- [Naming Conventions](#naming-conventions)
+	- [Workflows](#workflows)
 
 ### Other Design Documents:
 
@@ -103,15 +103,31 @@ It looks like the original Jetpack Joyride.
 
 # Environments
 
+## Original
+
 In the original the laboratory changes from the typical laboritory rooms to some greenary, caves, or water parts.
-
-But to keep the scope down this remake is only going to have the laboritory rooms included.
-
-It could include some blinking lights, signs and desks/computers.
 
 ![hallway](./assets/gameplay.jpg)
 
 ![hallway_2](./assets/coins.jpg)
+
+## The remake
+
+To keep the scope down this remake is only going to have the laboritory rooms included.
+
+It could include some blinking lights, signs and desks/computers.
+
+### Menu section
+
+The first section is the menu part and where the player collects the jetpack. The resolution is 1920x1080.
+
+![](../../stages/parallax_background/sections/section_0/section_0.png)
+
+### Endless section
+
+The other section is the same image repeating endlessly. It's squared (1080x1080 or 1:1), and similar tiles can be created to randomize the background a bit.
+
+![](../../stages/parallax_background/sections/section_1/section_1_part_0.png)
 
 # UI
 
@@ -159,9 +175,15 @@ Should aim to be similar to the original art style for marketing.
 
 ### Icons
 
+#### Original:
+
 ![icon_original](./assets/icon_original.jpg)
 
 ![icon](./assets/icon.jpg)
+
+#### The remake:
+
+![temp_icon](../../assets/icon.svg)
 
 ### Loading Screen
 
@@ -189,6 +211,8 @@ Should aim to be similar to the original art style for marketing.
 Keep the size of the files as small as possible.
 
 One limitation is GitHub's size limit for single files: 100MB.
+
+The base resolution is 1920x1080 (16:9), and all game assets that covers the whole screen should be in this size.
 
 ## Naming Conventions
 

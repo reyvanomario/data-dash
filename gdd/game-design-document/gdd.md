@@ -3,26 +3,26 @@
 ## Table of content
 
 - [Overview](#overview)
-    - [Skills](#skills)
+	- [Skills](#skills)
 - [Story](#story)
-    - [Characters](#characters)
+	- [Characters](#characters)
 - [Gameplay](#gameplay)
-    - [Gameplay Hook](#gameplay-hook)
+	- [Gameplay Hook](#gameplay-hook)
 	- [Loops](#loops)
-    - [Entities](#entities)
-    - [Progression](#progression)
-    - [Losing](#losing)
+	- [Entities](#entities)
+	- [Progression](#progression)
+	- [Losing](#losing)
 - [Assets](#assets)
-    - [Sensory Hook](#sensory-hook)
+	- [Sensory Hook](#sensory-hook)
 	- [Art](#art)
 	- [Level Design](#level-design)
-    - [Audio](#audio)
+	- [Audio](#audio)
 - [Technical](#technical)
-    - [Platform](#platform)
-    - [Tools](#tools)
+	- [Platform](#platform)
+	- [Tools](#tools)
 - [Marketing & funding](#marketing--funding)
-    - [Target](#target)
-    - [Localization](#localization)
+	- [Target](#target)
+	- [Localization](#localization)
 
 # Overview
 
@@ -167,6 +167,9 @@ Juicy, punchy SFX, together with plenty of explosions and particle effects.
 - Mac
 - Linux
 - Web
+
+The target resolution for the remake will is 1920x1080 (16:9).
+It's then overridden to 1280x720 (16:9) by default.
 
 ## Tools
 
