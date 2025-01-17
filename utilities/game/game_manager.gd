@@ -12,6 +12,10 @@ enum Speed {
 }
 #endregion
 
+#region CONSTANST
+const SPEED_AMPLIFIER:int = 10
+#endregion
+
 #region VARIABLES
 var game:int = Game.NEW :
 	set(g):
@@ -22,6 +26,9 @@ var game:int = Game.NEW :
 		
 		game = g
 		game_changed.emit(game)
+		
+		if game == Game.NEW:
+			speed = Speed.MIN
 var speed:float = Speed.MIN :
 	set(s):
 		if s < Speed.MIN or s > Speed.MAX:
@@ -36,8 +43,14 @@ signal game_changed(game:int)
 signal speed_changed(speed:float)
 #endregion
 
+#region FUNCTIONS
 func _unhandled_input(event: InputEvent) -> void:
 	if game == Game.NEW and event.is_action_pressed('fly'):
 		game = Game.PLAYING
 	if game == Game.PLAYING and event.is_action_pressed("ui_cancel"):
 		game = Game.NEW
+
+func _process(delta: float) -> void:
+	if game == Game.PLAYING:
+		speed += SPEED_AMPLIFIER * delta
+#endregion
