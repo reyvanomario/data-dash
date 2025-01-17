@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cw101ycuhjuav"]
+[gd_scene load_steps=23 format=3 uid="uid://cw101ycuhjuav"]
 
 [ext_resource type="Texture2D" uid="uid://cipyka5o76usi" path="res://entities/player/barry_spritesheet.png" id="1_4x2ys"]
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pptrt"]
@@ -127,6 +127,26 @@ states/ground/position = Vector2(391, 100)
 transitions = ["Start", "ground", SubResource("AnimationNodeStateMachineTransition_ckfqr"), "ground", "fly", SubResource("AnimationNodeStateMachineTransition_wprwu"), "fall", "ground", SubResource("AnimationNodeStateMachineTransition_8b60v"), "fly", "fall", SubResource("AnimationNodeStateMachineTransition_jfxnt"), "fall", "fly", SubResource("AnimationNodeStateMachineTransition_h1wi6"), "fly", "ground", SubResource("AnimationNodeStateMachineTransition_3eqk6")]
 graph_offset = Vector2(-42.0295, 0)
 
+[sub_resource type="Gradient" id="Gradient_17a8w"]
+offsets = PackedFloat32Array(0, 0.502242, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cgppb"]
+gradient = SubResource("Gradient_17a8w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2qded"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(3, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 25.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 20.0
+scale_max = 20.0
+color_ramp = SubResource("GradientTexture1D_cgppb")
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_pptrt")
@@ -149,3 +169,9 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_y2jas")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="bullet_particles" type="GPUParticles2D" parent="."]
+position = Vector2(-3, 15)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_2qded")
+lifetime = 0.25

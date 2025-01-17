@@ -7,7 +7,9 @@ const JETPACK_MAX_FORCE:int = 5000
 const MAX_FALL_SPEED = 1200
 #endregion
 
-#region VARIABLES
+#region VARIABLES 
+@onready var bullet_particles: GPUParticles2D = $bullet_particles
+
 var jetpack_force:float = 0 :
 	set(f):
 		if f < 0 or f > JETPACK_MAX_FORCE:
@@ -16,6 +18,7 @@ var jetpack_force:float = 0 :
 var jetpack_activated:bool = false :
 	set(a):
 		jetpack_activated = a
+		bullet_particles.emitting = jetpack_activated
 		if not jetpack_activated:
 			jetpack_force = 0
 var grounded:bool = false
