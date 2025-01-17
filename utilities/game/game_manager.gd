@@ -7,8 +7,8 @@ enum Game {
 	PLAYING,
 }
 enum Speed {
-	MIN = 250,
-	MAX = 1000,
+	MIN = 400,
+	MAX = 2000,
 }
 #endregion
 
