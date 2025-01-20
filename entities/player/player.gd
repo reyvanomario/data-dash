@@ -25,6 +25,9 @@ var grounded:bool = false
 #endregion
 
 #region FUNCTIONS
+func _ready() -> void:
+	GameManager.game_changed.connect(func(game:int): if game == GameManager.Game.NEW: reset())
+
 func _process(delta: float) -> void:
 	if Input.is_action_pressed('fly'):
 		jetpack_force += JETPACK_FORCE_AMPLIFIER * delta
@@ -42,4 +45,9 @@ func _physics_process(delta: float) -> void:
 		velocity.y += get_gravity().y * delta
 
 	move_and_slide()
+
+func reset():
+	velocity = Vector2.ZERO
+	jetpack_activated = false
+	position = Vector2(600, 940)
 #endregion
