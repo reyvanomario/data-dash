@@ -1,5 +1,6 @@
 extends Control
 
+#region FUNCTIONS
 func _ready() -> void:
 	GameManager.game_changed.connect(func(game:int):
 		match game:
@@ -8,3 +9,4 @@ func _ready() -> void:
 			GameManager.Game.PLAYING:
 				visible = false
 	)
+#endregion
