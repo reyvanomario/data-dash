@@ -1,20 +1,31 @@
 class_name Player
 extends CharacterBody2D
+## The main script for the player.
 
 #region CONSTANTS
+## How much the force is increasing every frame * delta when the jetpack is activated.
 const JETPACK_FORCE_AMPLIFIER:int = 4000
+## Highest amount of force for the jetpack.
 const JETPACK_MAX_FORCE:int = 5000
+## Highest fall speed.
 const MAX_FALL_SPEED = 1200
 #endregion
 
-#region VARIABLES 
+#region VARIABLES
+## Basic jetpack particles.
 @onready var bullet_particles: GPUParticles2D = $bullet_particles
 
+## Current jetpack force applied.[br]
+## Can only be set between [param 0] and [constant JETPACK_MAX_FORCE].[br]
+## It will be set to [param 0] if [member jetpack_activated] is set to [param false].
 var jetpack_force:float = 0 :
 	set(f):
 		if f < 0 or f > JETPACK_MAX_FORCE:
 			return
 		jetpack_force = f
+## Is the jetpack on?[br]
+## If [param true]: [member jetpack_force] will be applied to the velocity, and [member bullet_particles] will start emitting particles.[br]
+## If [param false]: [member jetpack_force] will be set to [param 0].
 var jetpack_activated:bool = false :
 	set(a):
 		jetpack_activated = a
@@ -46,6 +57,8 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+## Reset the player.[br]
+## Triggered by the [signal GameManagerGlobal.game] signal when set to [enum GameManagerGlobal.Game][param .NEW].
 func reset():
 	velocity = Vector2.ZERO
 	jetpack_activated = false
