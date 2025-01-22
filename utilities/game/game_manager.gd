@@ -13,16 +13,6 @@ enum Game {
 	NEW,
 	PLAYING,
 }
-## All range stages for the base speed.
-enum Speed {
-	MIN = 400,
-	MAX = 2000,
-}
-#endregion
-
-#region CONSTANST
-## How much the base speed increases every frame * delta
-const SPEED_AMPLIFIER:int = 10
 #endregion
 
 #region VARIABLES
@@ -39,26 +29,11 @@ var game:int = Game.NEW :
 		
 		game = g
 		game_changed.emit(game)
-		
-		if game == Game.NEW:
-			speed = Speed.MIN
-## The current game state.[br]
-## Can only be set between the lowest and highest values of the [enum Speed] enum values.[br]
-## When changed, the [signal speed_changed] signal will be emitted together with the new value.[br]
-var speed:float = Speed.MIN :
-	set(s):
-		if s < Speed.MIN or s > Speed.MAX:
-			return
-		
-		speed = s
-		speed_changed.emit(speed)
 #endregion
 
 #region SIGNALS
 ## Emitted when [member game] changes, together with the new value.
 signal game_changed(game:int)
-## Emitted when [member speed] changes, together with the new value.
-signal speed_changed(speed:float)
 #endregion
 
 #region FUNCTIONS
@@ -68,9 +43,4 @@ func _unhandled_input(event: InputEvent) -> void:
 		game = Game.PLAYING
 	if game == Game.PLAYING and event.is_action_pressed("ui_cancel"):
 		game = Game.NEW
-
-## Increasing the game speed is handled here.
-func _process(delta: float) -> void:
-	if game == Game.PLAYING:
-		speed += SPEED_AMPLIFIER * delta
 #endregion

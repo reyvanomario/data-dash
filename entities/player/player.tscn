@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pptrt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_72wjm"]
-size = Vector2(25, 32)
+size = Vector2(75, 96)
 
 [sub_resource type="Animation" id="Animation_ob4fw"]
 length = 0.001
@@ -140,21 +140,21 @@ emission_shape = 3
 emission_box_extents = Vector3(3, 1, 1)
 direction = Vector3(0, 1, 0)
 spread = 25.0
-initial_velocity_min = 100.0
-initial_velocity_max = 200.0
+initial_velocity_min = 300.0
+initial_velocity_max = 600.0
 gravity = Vector3(0, 0, 0)
 scale_min = 20.0
 scale_max = 20.0
 color_ramp = SubResource("GradientTexture1D_cgppb")
 
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(3, 3)
 script = ExtResource("1_pptrt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_72wjm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
 texture = ExtResource("1_4x2ys")
 hframes = 4
 vframes = 2
@@ -171,7 +171,16 @@ advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="bullet_particles" type="GPUParticles2D" parent="."]
-position = Vector2(-3, 15)
+position = Vector2(-9, 45)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_2qded")
 lifetime = 0.25
+local_coords = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-600, 0)
+anchor_mode = 0
+limit_left = 0
+limit_top = 0
+limit_right = 1410065408
+limit_bottom = 1080
