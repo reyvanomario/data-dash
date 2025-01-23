@@ -13,4 +13,4 @@
 [node name="StartScreen" parent="CanvasLayer" instance=ExtResource("2_dox6r")]
 
 [node name="Player" parent="." instance=ExtResource("3_7gqhq")]
-position = Vector2(-50, 940)
+position = Vector2(600, 940)
