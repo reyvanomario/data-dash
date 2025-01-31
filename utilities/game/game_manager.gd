@@ -70,6 +70,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## Increasing the game speed is handled here.
 func _process(delta: float) -> void:
-	if Game.PLAYING:
+	if game == Game.PLAYING:
 		speed += Speed.STEP * delta
 #endregion
