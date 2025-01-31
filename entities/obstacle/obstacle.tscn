@@ -47,3 +47,7 @@ texture = ExtResource("1_sb3uh")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(129, 2, 20, 22)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(4.76837e-06, 7.5)
+scale = Vector2(14.2, 4.05)
