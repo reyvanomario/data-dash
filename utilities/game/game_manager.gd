@@ -39,13 +39,14 @@ var game:int = Game.NEW :
 		assert(g in Game.values(), '%s is not a valid Game state.' % str(g))
 		
 		game = g
-		game_changed.emit(game)
 		
 		match game:
 			Game.OVER or Game.NEW:
 				speed = Speed.RESET
 			Game.PLAYING:
 				speed = Speed.START
+		
+		game_changed.emit(game)
 ## The current game speed.[br]
 ## It can't be set higher than [enum Speed][param .MAX].[br]
 var speed:float = Speed.RESET :
@@ -65,7 +66,7 @@ signal game_changed(game:int)
 func _unhandled_input(event: InputEvent) -> void:
 	if game == Game.NEW and event.is_action_pressed('fly'):
 		game = Game.PLAYING
-	if game == Game.PLAYING and event.is_action_pressed("ui_cancel"):
+	if game != Game.NEW and event.is_action_pressed("ui_cancel"):
 		game = Game.NEW
 
 ## Increasing the game speed is handled here.

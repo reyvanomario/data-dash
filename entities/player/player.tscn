@@ -154,6 +154,7 @@ script = ExtResource("1_pptrt")
 shape = SubResource("RectangleShape2D_72wjm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 scale = Vector2(3, 3)
 texture = ExtResource("1_4x2ys")
 hframes = 4

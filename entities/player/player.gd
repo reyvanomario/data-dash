@@ -44,6 +44,10 @@ func _ready() -> void:
 	)
 
 func _process(delta: float) -> void:
+	# for now, just ignore all physics if the game is over
+	if GameManager.game == GameManager.Game.OVER:
+		return
+	
 	if Input.is_action_pressed('fly'):
 		jetpack_force += JETPACK_FORCE_INCREMENT_STEP * delta
 	if Input.is_action_just_pressed('fly'):
@@ -52,6 +56,10 @@ func _process(delta: float) -> void:
 		jetpack_activated = false
 
 func _physics_process(delta: float) -> void:
+	# for now, just ignore all physics if the game is over
+	if GameManager.game == GameManager.Game.OVER:
+		return
+	
 	grounded = is_on_floor()
 	
 	if jetpack_activated:
