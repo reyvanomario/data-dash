@@ -1,9 +1,15 @@
 class_name Zapper
 extends Obstacle
+## A static or rotating energy field, acting as an obstacle for the player.
 
+#region VARIABLES
+## The initial rotation in radians.
 var init_rotation: float = 0
+## Is it rotating?
 var is_rotating: bool = false
+#endregion
 
+#region FUNCTIONS
 func _ready() -> void:
 	self.possible_spawn_points = [
 		Vector2(2000, 240),
@@ -26,3 +32,4 @@ func spawn() -> void:
 func disable() -> void:
 	super.disable()
 	rotation = init_rotation
+#endregion

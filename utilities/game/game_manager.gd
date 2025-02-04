@@ -29,8 +29,7 @@ enum Speed {
 ## The current game state.[br]
 ## Can only be set to one of the [enum Game] enum values.[br]
 ## When changed, the [signal game_changed] signal will be emitted together with the new value.[br]
-## If [enum Game][param .OVER] or [enum Game][param .NEW]: [member speed] is set to [enum Speed][param .RESET].
-## If [enum Game][param .PLAYING]: [member speed] is set to [enum Speed][param .START].
+## [member speed] will also change depending on the new game state.
 var game:int = Game.NEW :
 	set(g):
 		if g == game:

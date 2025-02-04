@@ -1,10 +1,14 @@
+class_name GameBackground
 extends ParallaxBackground
+## The games scrollable background.
 
+#region VARIABLES
 ## Is the game playing and scrolling?
 var scrolling:bool = false :
 	set(s):
 		if s == scrolling: return
 		scrolling = s
+#endregion
 
 #region FUNCTIONS
 func _ready() -> void:

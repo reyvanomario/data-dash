@@ -9,7 +9,7 @@ normal = Vector2(0, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7pn3i"]
 
-[node name="ParallaxBackground" type="ParallaxBackground"]
+[node name="GameBackground" type="ParallaxBackground"]
 script = ExtResource("1_0fqyy")
 
 [node name="boundaries" type="Node" parent="."]
