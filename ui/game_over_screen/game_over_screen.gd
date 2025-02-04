@@ -1,7 +1,8 @@
 extends Control
 
 #region VARIABLES
-@onready var restart_button: Button = $VBoxContainer/restart_button
+@onready var restart_button: Button = $HBoxContainer/MarginContainer/VBoxContainer/restart_button
+@onready var home_button: Button = $HBoxContainer/MarginContainer/VBoxContainer/home_button
 #endregion
 
 #region FUNCTIONS
@@ -13,5 +14,6 @@ func _ready() -> void:
 			GameManager.Game.OVER:
 				visible = true
 	)
-	restart_button.pressed.connect(func(): GameManager.game = GameManager.Game.NEW)
+	home_button.pressed.connect(func(): GameManager.game = GameManager.Game.NEW)
+	restart_button.pressed.connect(func(): GameManager.game = GameManager.Game.NEW; GameManager.game = GameManager.Game.PLAYING)
 #endregion
