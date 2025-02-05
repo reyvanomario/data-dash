@@ -6,6 +6,11 @@ extends Node
 ## This should be added as a global script named [param GameManager].[br]
 ## It's then reachable by all other components under that name.
 
+#region CONSTANTS
+## Meters per second when [member speed] is [enum Speed][param .START].
+const METERS_PER_SECOND:int = 8
+#endregion
+
 #region ENUMS
 ## All possible game states.
 enum Game {
@@ -40,10 +45,15 @@ var game:int = Game.NEW :
 		game = g
 		
 		match game:
-			Game.OVER or Game.NEW:
+			Game.OVER:
+				speed = Speed.RESET
+				SaveSystem.save_stats()
+			Game.NEW:
 				speed = Speed.RESET
 			Game.PLAYING:
+				distance = 0
 				speed = Speed.START
+				SaveSystem.stats.games_count += 1
 		
 		game_changed.emit(game)
 ## The current game speed.[br]
@@ -53,11 +63,21 @@ var speed:float = Speed.RESET :
 		if s > Speed.MAX:
 			return
 		speed = s
+## The current or last run distance in meters.
+var distance:float = 0.0 :
+	set(d):
+		if d < 0:
+			return
+		distance = d
+		SaveSystem.stats.last_distance = floori(distance)
+		distance_changed.emit(distance)
 #endregion
 
 #region SIGNALS
 ## Emitted when [member game] changes, together with the new value.
 signal game_changed(game:int)
+## Emitted when [member distance] changes, together with the new value.
+signal distance_changed(distance:int)
 #endregion
 
 #region FUNCTIONS
@@ -72,4 +92,5 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if game == Game.PLAYING:
 		speed += Speed.STEP * delta
+		distance += (METERS_PER_SECOND * delta) * (speed / Speed.START)
 #endregion
