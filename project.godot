@@ -18,6 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 GameManager="*res://utilities/game/game_manager.gd"
+SaveSystem="*res://utilities/save/save_system.gd"
 
 [display]
 
