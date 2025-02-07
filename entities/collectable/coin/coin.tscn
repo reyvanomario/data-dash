@@ -82,3 +82,5 @@ sprite_frames = SubResource("SpriteFrames_6yyfa")
 autoplay = "default"
 frame_progress = 0.746604
 speed_scale = 2.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

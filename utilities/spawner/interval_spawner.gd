@@ -7,6 +7,8 @@ extends Node2D
 #region VARIABLES
 ## All obstacle scenes.
 @export var obstacle_scenes: Array[PackedScene]
+## Coin scene.
+@export var coin_scene: PackedScene
 
 ## Timer to track distance between intervals
 @onready var timer: Timer = $Timer
