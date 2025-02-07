@@ -8,3 +8,5 @@ script = ExtResource("1_p1mdu")
 obstacle_scenes = Array[PackedScene]([ExtResource("2_1vmiy")])
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="CoinTimer" type="Timer" parent="."]

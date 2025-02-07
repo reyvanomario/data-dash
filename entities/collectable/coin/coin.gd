@@ -6,7 +6,18 @@ extends Area2D
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
 ## An array with possible spawn points.
-var possible_spawn_points: Array[Vector2] = [Vector2(2000, 0)]
+static var possible_spawn_points: Array[Vector2] = [
+	Vector2(2000, 120),
+	Vector2(2000, 394),
+	Vector2(2000, 667),
+	Vector2(2000, 940),
+]
+## The index of one position from all possible positions to spawn at.
+var position_index: int = 0 :
+	set(i):
+		if position_index > possible_spawn_points.size() - 1:
+			return
+		position_index = i
 ## Used to respawn or disable the coin.
 var enabled: bool = false :
 	set(e):
@@ -73,7 +84,7 @@ func disable() -> void:
 
 ## Used to spawn the coin.
 func spawn() -> void:
-	position = possible_spawn_points.pick_random()
+	position = possible_spawn_points[position_index]
 	visible = true
 	process_mode = ProcessMode.PROCESS_MODE_INHERIT
 	spawned.emit()

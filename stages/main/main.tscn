@@ -26,18 +26,19 @@ visible = false
 position = Vector2(600, 940)
 
 [node name="IntervalSpawner" parent="." instance=ExtResource("5_s4wfr")]
+coin_scene = ExtResource("7_ukuuh")
 
 [node name="Coin" parent="." instance=ExtResource("7_ukuuh")]
-position = Vector2(1792, 903)
+position = Vector2(1792, 667)
 
 [node name="Coin2" parent="." instance=ExtResource("7_ukuuh")]
-position = Vector2(1920, 903)
+position = Vector2(1920, 667)
 
 [node name="Coin3" parent="." instance=ExtResource("7_ukuuh")]
-position = Vector2(2040, 903)
+position = Vector2(2040, 667)
 
 [node name="Coin4" parent="." instance=ExtResource("7_ukuuh")]
-position = Vector2(2152, 903)
+position = Vector2(2152, 667)
 
 [node name="Coin5" parent="." instance=ExtResource("7_ukuuh")]
-position = Vector2(2264, 903)
+position = Vector2(2264, 667)
