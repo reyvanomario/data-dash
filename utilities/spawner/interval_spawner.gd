@@ -31,7 +31,7 @@ var coin_pool: Array[Coin] = []
 func _ready() -> void:
 	# always spawn a new obstacle and restart the timer when the timer reaches the end
 	timer.timeout.connect(func(): spawn_obstacle(); start_timer())
-	coin_timer.timeout.connect(func(): spawn_coins(randi_range(5, 10)); start_timer())
+	coin_timer.timeout.connect(func(): await spawn_coins(randi_range(5, 10)); start_timer())
 	GameManager.game_changed.connect(func(game):
 		match game:
 			GameManager.Game.PLAYING:
@@ -98,5 +98,6 @@ func spawn_coins(amount: int) -> void:
 		var coin: Coin = self.get_coin()
 		coin.position_index = coin_position
 		coin.enabled = true
-		await get_tree().create_timer(0.2).timeout
+		var interval_divider = GameManager.speed / GameManager.Speed.START
+		await get_tree().create_timer(0.3 / interval_divider).timeout
 #endregion

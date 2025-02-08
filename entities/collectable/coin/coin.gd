@@ -27,9 +27,9 @@ var enabled: bool = false :
 		enabled = e
 		
 		if enabled:
-			spawn()
+			spawn.call_deferred()
 		else:
-			disable()
+			disable.call_deferred()
 var speed: int = 0
 ## Is the game playing and scrolling?
 var scrolling:bool = true :
@@ -73,7 +73,7 @@ func _process(delta: float) -> void:
 		position.x += (-GameManager.speed + speed) * delta
 
 func collected(player: Player) -> void:
-	disable()
+	enabled = false
 	GameManager.coins += 1
 
 ## Used to disable the coin.
