@@ -7,6 +7,7 @@ extends Control
 #region VARIABLES
 ## The label for the displaying the current distance.
 @onready var distance_label: Label = $HBoxContainer/VBoxContainer/MarginContainer/distance
+@onready var coins_label: Label = $HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/coins
 #endregion
 
 #region FUNCTIONS
@@ -19,4 +20,5 @@ func _ready() -> void:
 				visible = true
 	)
 	GameManager.distance_changed.connect(func(distance: float): distance_label.text = "%03dM" % floori(distance))
+	GameManager.coins_changed.connect(func(coins: float): coins_label.text = "%03d" % floori(coins))
 #endregion

@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://c04c0t0p0lfve"]
+[gd_scene load_steps=9 format=3 uid="uid://c04c0t0p0lfve"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_terh0"]
 [ext_resource type="Texture2D" uid="uid://dxmamdwwu5hul" path="res://ui/pause_icon.png" id="2_fsihy"]
 [ext_resource type="Script" path="res://ui/hud/hud.gd" id="2_pbtj6"]
+[ext_resource type="Texture2D" uid="uid://botxktqdvtlc4" path="res://entities/collectable/coin/coin_sprite.png" id="3_ckfjp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3tqg"]
+atlas = ExtResource("3_ckfjp")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmgr4"]
 atlas = ExtResource("2_fsihy")
@@ -43,7 +48,7 @@ layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_bottom = 0
 
 [node name="distance" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
@@ -52,6 +57,30 @@ theme_override_font_sizes/font_size = 64
 text = "000"
 vertical_alignment = 1
 uppercase = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="coins" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.925, 0.25, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 48
+text = "000"
+vertical_alignment = 1
+uppercase = true
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_y3tqg")
+expand_mode = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
