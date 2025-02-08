@@ -8,6 +8,8 @@ extends Control
 
 ## The label for the displaying the current distance.
 @onready var distance_label: Label = $HBoxContainer/VBoxContainer/distance
+## The label for the displaying the collected coins.
+@onready var coins_label: Label = $HBoxContainer/VBoxContainer/HBoxContainer/coins
 ## The container for editing the name for the most recent score on the leaderboard.
 @onready var highscore: VBoxContainer = $HBoxContainer/MarginContainer/highscore
 ## LineEdit node for entering the name for the leaderboard entry.
@@ -47,6 +49,7 @@ func _ready() -> void:
 				visible = false
 			GameManager.Game.OVER:
 				distance_label.text = "%dM" % floori(GameManager.distance)
+				coins_label.text = "%d" % floori(GameManager.coins)
 				new_highscore = SaveSystem.stats.leaderboard.is_highscore(GameManager.distance)
 				visible = true
 	)
