@@ -35,7 +35,7 @@ enum Speed {
 ## Can only be set to one of the [enum Game] enum values.[br]
 ## When changed, the [signal game_changed] signal will be emitted together with the new value.[br]
 ## [member speed] will also change depending on the new game state.
-var game:int = Game.NEW :
+var game: int = Game.NEW :
 	set(g):
 		if g == game:
 			return
@@ -47,37 +47,48 @@ var game:int = Game.NEW :
 		match game:
 			Game.OVER:
 				speed = Speed.RESET
+				SaveSystem.stats.coins += coins
 				SaveSystem.save_stats()
 			Game.NEW:
 				speed = Speed.RESET
-			Game.PLAYING:
 				distance = 0
+				coins = 0
+			Game.PLAYING:
 				speed = Speed.START
 				SaveSystem.stats.games_count += 1
 		
 		game_changed.emit(game)
 ## The current game speed.[br]
 ## It can't be set higher than [enum Speed][param .MAX].[br]
-var speed:float = Speed.RESET :
+var speed: float = Speed.RESET :
 	set(s):
 		if s > Speed.MAX:
 			return
 		speed = s
 ## The current or last run distance in meters.
-var distance:float = 0.0 :
+var distance: float = 0.0 :
 	set(d):
 		if d < 0:
 			return
 		distance = d
 		SaveSystem.stats.last_distance = floori(distance)
 		distance_changed.emit(distance)
+## The total amount of coins collected the last run.
+var coins: int = 0 :
+	set(c):
+		if c < 0:
+			return
+		coins = c
+		coins_changed.emit(coins)
 #endregion
 
 #region SIGNALS
 ## Emitted when [member game] changes, together with the new value.
-signal game_changed(game:int)
+signal game_changed(game: int)
 ## Emitted when [member distance] changes, together with the new value.
-signal distance_changed(distance:int)
+signal distance_changed(distance: int)
+## Emitted when [member coins] changes, together with the new value.
+signal coins_changed(coins: int)
 #endregion
 
 #region FUNCTIONS

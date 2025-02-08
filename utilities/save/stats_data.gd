@@ -9,6 +9,8 @@ extends Resource
 @export var games_count:int = 0
 ## The distance of the most recent run.
 @export var last_distance:int = 0
+## The total coints collected.
+@export var coins:int = 0
 ## The name of the most recent player.
 @export var name: String = 'Isaac Jordan'
 ## The leaderboard with the top scores.

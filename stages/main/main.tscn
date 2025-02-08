@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkiufj3yhj50s"]
+[gd_scene load_steps=8 format=3 uid="uid://dkiufj3yhj50s"]
 
 [ext_resource type="PackedScene" uid="uid://d370gfo85kgf6" path="res://stages/parallax_background/parallax_background.tscn" id="1_6cvk4"]
 [ext_resource type="PackedScene" uid="uid://e4unmckmojc6" path="res://ui/start_screen/start_screen.tscn" id="2_dox6r"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c04c0t0p0lfve" path="res://ui/hud/hud.tscn" id="3_fha2a"]
 [ext_resource type="PackedScene" uid="uid://bua8h7f2d4u26" path="res://ui/game_over_screen/game_over_screen.tscn" id="3_vmle4"]
 [ext_resource type="PackedScene" uid="uid://b5ti0vhekv3ep" path="res://utilities/spawner/interval_spawner.tscn" id="5_s4wfr"]
+[ext_resource type="PackedScene" uid="uid://c0daa8774747j" path="res://entities/collectable/coin/coin.tscn" id="7_ukuuh"]
 
 [node name="Main" type="Node2D"]
 
@@ -25,3 +26,4 @@ visible = false
 position = Vector2(600, 940)
 
 [node name="IntervalSpawner" parent="." instance=ExtResource("5_s4wfr")]
+coin_scene = ExtResource("7_ukuuh")

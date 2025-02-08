@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bua8h7f2d4u26"]
+[gd_scene load_steps=6 format=3 uid="uid://bua8h7f2d4u26"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_t2egg"]
 [ext_resource type="Script" path="res://ui/game_over_screen/game_over_screen.gd" id="2_rovtf"]
 [ext_resource type="PackedScene" uid="uid://dibncjywm4vpa" path="res://ui/leaderboard/leaderboard_entry.tscn" id="3_tevej"]
+[ext_resource type="Texture2D" uid="uid://botxktqdvtlc4" path="res://entities/collectable/coin/coin_sprite.png" id="4_10ec3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7u26"]
+atlas = ExtResource("4_10ec3")
+region = Rect2(0, 0, 32, 32)
 
 [node name="GameOverScreen" type="Control"]
 layout_mode = 3
@@ -39,12 +44,40 @@ uppercase = true
 
 [node name="distance" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.55, 0, 1)
 theme_override_constants/outline_size = 64
 theme_override_font_sizes/font_size = 256
 text = "0M"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 64
+text = "AND COLLECTED "
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="coins" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.929412, 0.45098, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 64
+text = "0"
+vertical_alignment = 1
+uppercase = true
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_m7u26")
+expand_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
