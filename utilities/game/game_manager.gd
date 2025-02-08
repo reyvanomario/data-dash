@@ -51,8 +51,9 @@ var game: int = Game.NEW :
 				SaveSystem.save_stats()
 			Game.NEW:
 				speed = Speed.RESET
-			Game.PLAYING:
 				distance = 0
+				coins = 0
+			Game.PLAYING:
 				speed = Speed.START
 				SaveSystem.stats.games_count += 1
 		

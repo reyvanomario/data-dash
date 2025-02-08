@@ -39,6 +39,7 @@ func _ready() -> void:
 				start_coin_timer()
 			GameManager.Game.OVER, GameManager.Game.NEW:
 				timer.stop()
+				coin_timer.stop()
 	)
 
 ## Start the interval timer.
