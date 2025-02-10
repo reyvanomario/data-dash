@@ -58,6 +58,12 @@ var game: int = Game.NEW :
 				SaveSystem.stats.games_count += 1
 		
 		game_changed.emit(game)
+## Is the game paused?
+var paused: bool = false :
+	set(p):
+		paused = p
+		paused_changed.emit(paused)
+		get_tree().paused = paused
 ## The current game speed.[br]
 ## It can't be set higher than [enum Speed][param .MAX].[br]
 var speed: float = Speed.RESET :
@@ -85,6 +91,8 @@ var coins: int = 0 :
 #region SIGNALS
 ## Emitted when [member game] changes, together with the new value.
 signal game_changed(game: int)
+## Emitted when [member paused] changes, together with the new value.
+signal paused_changed(paused: bool)
 ## Emitted when [member distance] changes, together with the new value.
 signal distance_changed(distance: int)
 ## Emitted when [member coins] changes, together with the new value.
