@@ -96,10 +96,9 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="TextureButton" type="TextureButton" parent="HBoxContainer/VBoxContainer3/MarginContainer"]
+[node name="pause_button" type="TextureButton" parent="HBoxContainer/VBoxContainer3/MarginContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-mouse_filter = 1
 texture_normal = SubResource("AtlasTexture_vmgr4")
 texture_pressed = SubResource("AtlasTexture_ovtxq")
 texture_hover = SubResource("AtlasTexture_jmn0d")
