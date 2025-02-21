@@ -1,5 +1,6 @@
 class_name Spawner
 extends Node2D
+## A time interval based spawner.
 
 #region CONSTANTS
 ## An array of possible spawn points.
@@ -37,6 +38,7 @@ var spawn_point: Variant = null :
 #endregion
 
 #region SIGNALS
+## Emitted when it's time to spawn a new spawnable.
 signal time_to_spawn
 #endregion
 
@@ -68,15 +70,15 @@ func get_new_timer() -> SceneTreeTimer:
 func connect_time_to_spawn_to_timer(timer: SceneTreeTimer):
 	disconnect_time_to_spawn()
 	timer.timeout.connect(func(): time_to_spawn.emit())
-	time_to_spawn.connect(on_timeout)
+	time_to_spawn.connect(on_time_to_spawn)
 
 ## Disconnect the time_to_spawn signal.
 func disconnect_time_to_spawn():
-	if time_to_spawn.is_connected(on_timeout):
-		time_to_spawn.disconnect(on_timeout)
+	if time_to_spawn.is_connected(on_time_to_spawn):
+		time_to_spawn.disconnect(on_time_to_spawn)
 
-## What should happen when a one-shot timer runs out?
-func on_timeout() -> void:
+## What should happen when it's time to spawn?
+func on_time_to_spawn() -> void:
 	await spawn()
 	start_timer()
 

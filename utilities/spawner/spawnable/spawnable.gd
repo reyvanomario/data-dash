@@ -1,8 +1,11 @@
 class_name Spawnable
 extends Node2D
+## A spawnable component.
 
 #region VARIABLES
+## The root node of this game node.
 var root_node: Node2D = self
+## Has this spawnable been spawned?
 var is_spawned: bool = false :
 	set(s):
 		if s == is_spawned:
@@ -11,7 +14,9 @@ var is_spawned: bool = false :
 #endregion
 
 #region SIGNALS
+## Emitted when spawned.
 signal spawned(spawn_point: Vector2)
+## Emitted when despawned.
 signal despawned(new_position: Vector2)
 #endregion
 

@@ -1,7 +1,9 @@
 class_name Destructor2D
 extends Area2D
+## A simple component to make anything a destructor.
 
 #region VARIABLES
+## The amount of destruction.
 @export_range(1, 10) var destruct_amount: int = 1
 
 ## The collision shape for the destructor.

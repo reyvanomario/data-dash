@@ -1,5 +1,6 @@
 class_name Coin
 extends Node2D
+## A collectable coin.
 
 #region VARIABLES
 ## Used to make the coin a collectable.
@@ -47,6 +48,7 @@ func _process(delta: float) -> void:
 	if scrolling:
 		position.x += (-GameManager.speed + speed) * delta
 
+## What to do when the coin is collected.
 func collected() -> void:
 	GameManager.coins += 1
 	spawnable.despawn.call_deferred()
