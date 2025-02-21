@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dytqxqmo647ak"]
 
-[ext_resource type="Script" path="res://entities/collectable/coin/coin_spawner/coin_spawner.gd" id="1_77hci"]
+[ext_resource type="Script" path="res://entities/collectable/coin/spawner/coin_spawner.gd" id="1_77hci"]
 [ext_resource type="PackedScene" uid="uid://c0daa8774747j" path="res://entities/collectable/coin/coin.tscn" id="3_nl7s3"]
 
 [node name="CoinSpawner" type="Node2D"]

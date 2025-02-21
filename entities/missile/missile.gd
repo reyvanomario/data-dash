@@ -1,19 +1,15 @@
-class_name Zapper
+class_name Missile
 extends Node2D
-## A static or rotating energy field, acting as an obstacle for the player.
+## A flying missile, acting as an obstacle for the player.
 
 #region VARIABLES
-## Used to spawn and despawn the zapper.
+## Used to spawn and despawn the missile.
 @onready var spawnable: Spawnable = $Spawnable
-## Used to notify if the obstacle enters or exits the screen.
+## Used to notify if the missile enters or exits the screen.
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
-## The initial rotation in radians.
-var init_rotation: float = 0
-## Is it rotating?
-var is_rotating: bool = false
-## The speed of the zapper.
-var speed: int = 0
+## The speed of the missile.
+var speed: int = 1000
 ## Is the game playing and scrolling?
 var scrolling:bool = true :
 	set(s):
@@ -22,7 +18,7 @@ var scrolling:bool = true :
 #endregion
 
 #region SIGNALS
-## Emitted when the obstacle enters the screen.
+## Emitted when the missile enters the screen.
 signal screen_entered
 #endregion
 
@@ -43,14 +39,8 @@ func _ready() -> void:
 	visible_on_screen_notifier_2d.screen_exited.connect(func(): spawnable.despawn.call_deferred())
 	
 	spawnable.root_node = self
-	spawnable.spawned.connect(func(_spawn_point: Vector2):
-		is_rotating = randi_range(0, 4) == 0
-		rotation_degrees = 90 if randi_range(0, 2) == 0 else 0
-	)
 
 func _process(delta: float) -> void:
 	if scrolling:
 		position.x += (-GameManager.speed - speed) * delta
-	if is_rotating:
-		rotation -= 1 * 1.5 * delta
 #endregion

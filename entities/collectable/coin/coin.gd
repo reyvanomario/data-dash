@@ -10,7 +10,7 @@ extends Node2D
 ## Used to spawn and despawn the coin.
 @onready var spawnable: Spawnable = $Spawnable
 
-## An array with possible spawn points. 
+## The speed of the coin.
 var speed: int = 0
 ## Is the game playing and scrolling?
 var scrolling:bool = true :
@@ -46,7 +46,7 @@ func _ready():
 
 func _process(delta: float) -> void:
 	if scrolling:
-		position.x += (-GameManager.speed + speed) * delta
+		position.x += (-GameManager.speed - speed) * delta
 
 ## What to do when the coin is collected.
 func collected() -> void:

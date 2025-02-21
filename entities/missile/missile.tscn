@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtigid26sgbs5"]
+
+[ext_resource type="Script" path="res://entities/missile/missile.gd" id="1_e4log"]
+[ext_resource type="Script" path="res://common/components/destruct/destructor_2d.gd" id="2_ehd8s"]
+[ext_resource type="Texture2D" uid="uid://c24hev6c7qydd" path="res://gdd/art-bible/assets/obstacles_sprites.png" id="3_37mc4"]
+[ext_resource type="Script" path="res://utilities/spawner/spawnable/spawnable.gd" id="4_bn04m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2wn0"]
+size = Vector2(88, 48)
+
+[node name="Missile" type="Node2D"]
+script = ExtResource("1_e4log")
+
+[node name="Destructor2D" type="Area2D" parent="."]
+script = ExtResource("2_ehd8s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Destructor2D"]
+position = Vector2(-44, 0)
+shape = SubResource("RectangleShape2D_v2wn0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("3_37mc4")
+region_enabled = true
+region_rect = Rect2(1, 211, 62, 24)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Spawnable" type="Node2D" parent="."]
+script = ExtResource("4_bn04m")
