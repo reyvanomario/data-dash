@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://cw101ycuhjuav" path="res://entities/player/player.tscn" id="3_7gqhq"]
 [ext_resource type="PackedScene" uid="uid://c04c0t0p0lfve" path="res://ui/hud/hud.tscn" id="3_fha2a"]
 [ext_resource type="PackedScene" uid="uid://bua8h7f2d4u26" path="res://ui/game_over_screen/game_over_screen.tscn" id="3_vmle4"]
-[ext_resource type="PackedScene" uid="uid://b5ti0vhekv3ep" path="res://utilities/spawner/interval_spawner.tscn" id="5_s4wfr"]
 [ext_resource type="PackedScene" uid="uid://ds0s6dw8skubu" path="res://ui/pause_menu/pause_menu.tscn" id="5_svk77"]
-[ext_resource type="PackedScene" uid="uid://c0daa8774747j" path="res://entities/collectable/coin/coin.tscn" id="7_ukuuh"]
+[ext_resource type="PackedScene" uid="uid://cxjb5pwv7uiwc" path="res://entities/zapper/zapper_spawner/zapper_spawner.tscn" id="8_ffgde"]
+[ext_resource type="PackedScene" uid="uid://dytqxqmo647ak" path="res://entities/collectable/coin/coin_spawner/coin_spawner.tscn" id="10_1yawx"]
 
 [node name="Main" type="Node2D"]
 
@@ -29,5 +29,6 @@ visible = false
 [node name="Player" parent="." instance=ExtResource("3_7gqhq")]
 position = Vector2(600, 940)
 
-[node name="IntervalSpawner" parent="." instance=ExtResource("5_s4wfr")]
-coin_scene = ExtResource("7_ukuuh")
+[node name="CoinSpawner" parent="." instance=ExtResource("10_1yawx")]
+
+[node name="ZapperSpawner" parent="." instance=ExtResource("8_ffgde")]

@@ -1,27 +1,19 @@
-class_name Obstacle
+class_name Zapper
 extends Area2D
-## Base class for player obstacles.
+## A static or rotating energy field, acting as an obstacle for the player.
 
 #region VARIABLES
 ## The collision shape for the obstacle.
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+## Used to spawn and despawn the zapper.
+@onready var spawnable: Spawnable = $Spawnable
 ## Used to notify if the obstacle enters or exits the screen.
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
-## An array with possible spawn points.
-var possible_spawn_points: Array[Vector2] = [Vector2(2000, 0)]
-## Used to respawn or disable the obstacle.
-var enabled: bool = false :
-	set(e):
-		if e == enabled:
-			return
-		
-		enabled = e
-		
-		if enabled:
-			spawn()
-		else:
-			disable()
+## The initial rotation in radians.
+var init_rotation: float = 0
+## Is it rotating?
+var is_rotating: bool = false
 var speed: int = 0
 ## Is the game playing and scrolling?
 var scrolling:bool = true :
@@ -31,49 +23,40 @@ var scrolling:bool = true :
 #endregion
 
 #region SIGNALS
-## Emitted when the obstacle is spawned.
-signal spawned
-## Emitted when the obstacle is disabled.
-signal disabled
 ## Emitted when the obstacle enters the screen.
 signal screen_entered
 #endregion
 
 #region FUNCTIONS
-func _ready():
+func _ready() -> void:
 	GameManager.game_changed.connect(func(game:int):
 		match game:
 			GameManager.Game.OVER:
 				scrolling = false
 			GameManager.Game.NEW:
 				scrolling = false
-				self.enabled = false
+				spawnable.despawn.call_deferred()
 			GameManager.Game.PLAYING:
 				scrolling = true
 	)
 	
 	visible_on_screen_notifier_2d.screen_entered.connect(func(): self.screen_entered.emit())
-	visible_on_screen_notifier_2d.screen_exited.connect(func(): self.enabled = false)
+	visible_on_screen_notifier_2d.screen_exited.connect(func(): spawnable.despawn.call_deferred())
 	
 	body_entered.connect(func(body: Node2D):
 		if body is Player:
 			GameManager.game = GameManager.Game.OVER
 	)
+	
+	spawnable.root_node = self
+	spawnable.spawned.connect(func(_spawn_point: Vector2):
+		is_rotating = randi_range(0, 4) == 0
+		rotation_degrees = 90 if randi_range(0, 2) == 0 else 0
+	)
 
 func _process(delta: float) -> void:
 	if scrolling:
 		position.x += (-GameManager.speed + speed) * delta
-
-## Used to disable the obstacle.
-func disable() -> void:
-	visible = false
-	process_mode = ProcessMode.PROCESS_MODE_DISABLED
-	disabled.emit()
-
-## Used to spawn the obstacle.
-func spawn() -> void:
-	position = possible_spawn_points.pick_random()
-	visible = true
-	process_mode = ProcessMode.PROCESS_MODE_INHERIT
-	spawned.emit()
+	if is_rotating:
+		rotation -= 1 * 1.5 * delta
 #endregion

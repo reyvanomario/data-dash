@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0daa8774747j"]
+[gd_scene load_steps=14 format=3 uid="uid://c0daa8774747j"]
 
 [ext_resource type="Script" path="res://entities/collectable/coin/coin.gd" id="1_6vs20"]
 [ext_resource type="Texture2D" uid="uid://botxktqdvtlc4" path="res://entities/collectable/coin/coin_sprite.png" id="2_dbmr0"]
+[ext_resource type="Script" path="res://utilities/spawner/spawnable/spawnable.gd" id="3_6t4p2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wuwid"]
 radius = 40.0
@@ -84,3 +85,6 @@ frame_progress = 0.746604
 speed_scale = 2.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Spawnable" type="Node2D" parent="."]
+script = ExtResource("3_6t4p2")
