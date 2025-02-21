@@ -1,7 +1,9 @@
 class_name Coin
-extends Area2D
+extends Node2D
 
 #region VARIABLES
+## Used to make the coin a collectable.
+@onready var collectable_2d: Collectable2D = $Collectable2D
 ## Used to notify if the coin enters or exits the screen.
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 ## Used to spawn and despawn the coin.
@@ -34,21 +36,18 @@ func _ready():
 				scrolling = true
 	)
 	
+	collectable_2d.collected.connect(collected)
+	
 	visible_on_screen_notifier_2d.screen_entered.connect(func(): self.screen_entered.emit())
 	visible_on_screen_notifier_2d.screen_exited.connect(func(): spawnable.despawn.call_deferred())
 	
 	spawnable.root_node = self
-	
-	body_entered.connect(func(body: Node2D):
-		if body is Player:
-			collected(body)
-	)
 
 func _process(delta: float) -> void:
 	if scrolling:
 		position.x += (-GameManager.speed + speed) * delta
 
-func collected(_player: Player) -> void:
+func collected() -> void:
 	GameManager.coins += 1
 	spawnable.despawn.call_deferred()
 #endregion
