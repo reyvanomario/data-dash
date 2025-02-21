@@ -1,10 +1,8 @@
 class_name Zapper
-extends Area2D
+extends Node2D
 ## A static or rotating energy field, acting as an obstacle for the player.
 
 #region VARIABLES
-## The collision shape for the obstacle.
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 ## Used to spawn and despawn the zapper.
 @onready var spawnable: Spawnable = $Spawnable
 ## Used to notify if the obstacle enters or exits the screen.
@@ -42,11 +40,6 @@ func _ready() -> void:
 	
 	visible_on_screen_notifier_2d.screen_entered.connect(func(): self.screen_entered.emit())
 	visible_on_screen_notifier_2d.screen_exited.connect(func(): spawnable.despawn.call_deferred())
-	
-	body_entered.connect(func(body: Node2D):
-		if body is Player:
-			GameManager.game = GameManager.Game.OVER
-	)
 	
 	spawnable.root_node = self
 	spawnable.spawned.connect(func(_spawn_point: Vector2):

@@ -14,6 +14,8 @@ const MAX_FALL_SPEED = 1200
 #region VARIABLES
 ## Basic jetpack particles.
 @onready var bullet_particles: GPUParticles2D = $bullet_particles
+## The destructable is responsible to take damage when colliding with destructors.
+@onready var destructable_2d: Destructable2D = $Destructable2D
 
 ## Current jetpack force applied.[br]
 ## Can only be set between [param 0] and [constant JETPACK_MAX_FORCE].[br]
@@ -42,6 +44,7 @@ func _ready() -> void:
 			GameManager.Game.NEW:
 				reset()
 	)
+	destructable_2d.destroyed.connect(func(): GameManager.game = GameManager.Game.OVER)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed('fly'):
