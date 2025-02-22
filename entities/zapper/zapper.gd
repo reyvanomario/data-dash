@@ -19,6 +19,10 @@ var scrolling:bool = true :
 	set(s):
 		if s == scrolling: return
 		scrolling = s
+## To make sure the zapper doesn't go outside the top boundaries.
+var can_rotate_within_boundary_min: int = 325
+## To make sure the zapper doesn't go outside the bottom boundaries.
+var can_rotate_within_boundary_max: int = 735
 #endregion
 
 #region SIGNALS
@@ -44,8 +48,9 @@ func _ready() -> void:
 	
 	spawnable.root_node = self
 	spawnable.spawned.connect(func(_spawn_point: Vector2):
-		is_rotating = randi_range(0, 4) == 0
-		rotation_degrees = 90 if randi_range(0, 2) == 0 else 0
+		var is_within_rotatable_boundary: bool = position.y >= can_rotate_within_boundary_min and position.y <= can_rotate_within_boundary_max
+		is_rotating = is_within_rotatable_boundary and randi_range(0, 4) == 0
+		rotation_degrees = 90 if !is_within_rotatable_boundary or randi_range(0, 2) == 0 else 0
 	)
 
 func _process(delta: float) -> void:
