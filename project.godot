@@ -19,6 +19,7 @@ config/icon="res://assets/icon.svg"
 
 GameManager="*res://utilities/game/game_manager.gd"
 SaveSystem="*res://utilities/save/save_system.gd"
+SpawnerManager="*res://utilities/spawner/manager/spawner_manager.gd"
 
 [display]
 

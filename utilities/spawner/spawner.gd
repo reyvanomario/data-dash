@@ -4,13 +4,7 @@ extends Node2D
 
 #region CONSTANTS
 ## An array of possible spawn points.
-const possible_spawn_points: Array[Vector2] = [
-	Vector2(2000, 120),
-	Vector2(2000, 325),
-	Vector2(2000, 530),
-	Vector2(2000, 735),
-	Vector2(2000, 940),
-]
+const possible_spawn_points: Array[Vector2] = []
 #endregion
 
 #region VARIABLES
@@ -24,22 +18,13 @@ const possible_spawn_points: Array[Vector2] = [
 @export var interval_max: float = 5.0
 ## All instantiated but despawned spawnables are collected here.
 var spawnable_pool: Array[Spawnable] = []
-## Spawn point is either set to a Vector2 or null.
-## If null, a random Vector2 from possible_spawn_points will be returned.
-var spawn_point: Variant = null :
-	set(s):
-		if s != null and s is not Vector2:
-			return
-		spawn_point = s
-	get():
-		if spawn_point is Vector2:
-			return spawn_point
-		return possible_spawn_points.pick_random()
 #endregion
 
 #region SIGNALS
 ## Emitted when it's time to spawn a new spawnable.
 signal time_to_spawn
+## Emitted when the spawner just finished spawning.
+signal finished_spawning(spawn_point: Variant)
 #endregion
 
 #region FUNCTIONS
@@ -51,6 +36,7 @@ func _ready() -> void:
 			GameManager.Game.OVER, GameManager.Game.NEW:
 				disconnect_time_to_spawn()
 	)
+	finished_spawning.connect(on_finished_spawning)
 
 ## Start a new one-shot timer.
 func start_timer() -> void:
@@ -79,7 +65,17 @@ func disconnect_time_to_spawn():
 
 ## What should happen when it's time to spawn?
 func on_time_to_spawn() -> void:
-	await spawn()
+	var spawn_point = SpawnerManager.get_available_spawn_point()
+	if spawn_point is not Vector2:
+		start_timer()
+		return
+	
+	await spawn(spawn_point)
+	finished_spawning.emit(spawn_point)
+
+## What should happen when the spawner just finished spawning?
+func on_finished_spawning(spawn_point: Vector2) -> void:
+	SpawnerManager.make_spawn_point_available(spawn_point)
 	start_timer()
 
 ## Get spawnable component from node.
@@ -104,7 +100,7 @@ func add_node_and_get_spawnable() -> Spawnable:
 	return spawnable
 
 ## Spawn the specific spawnable assigned to this spawner.
-func spawn() -> void:
+func spawn(spawn_point: Vector2) -> void:
 	# check if movement has stopped before continuing
 	if GameManager.game != GameManager.Game.PLAYING:
 		return
