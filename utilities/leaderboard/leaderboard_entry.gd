@@ -4,7 +4,7 @@ extends Resource
 
 #region VARIABLES
 ## The name of the player.
-@export var name: String = 'Isaac J'
+@export var name: String = 'Isaac Jordan'
 ## The distance of the entry.
 @export var distance: int = 0
 ## The date when the entry was created.
@@ -13,7 +13,7 @@ extends Resource
 
 #region FUNCTIONS
 ## Construct of the entry data.
-func _init(n: String = 'Isaac J', d: int = 0):
+func _init(n: String = 'Isaac Jordan', d: int = 0):
 	name = n
 	distance = d
 	date = Time.get_date_string_from_system()

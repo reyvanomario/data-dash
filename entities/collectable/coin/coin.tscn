@@ -1,7 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0daa8774747j"]
+[gd_scene load_steps=15 format=3 uid="uid://c0daa8774747j"]
 
 [ext_resource type="Script" path="res://entities/collectable/coin/coin.gd" id="1_6vs20"]
 [ext_resource type="Texture2D" uid="uid://botxktqdvtlc4" path="res://entities/collectable/coin/coin_sprite.png" id="2_dbmr0"]
+[ext_resource type="Script" path="res://common/components/collect/collectable_2d.gd" id="2_msi5q"]
+[ext_resource type="Script" path="res://utilities/spawner/spawnable/spawnable.gd" id="3_6t4p2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wuwid"]
 radius = 40.0
@@ -70,10 +72,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Coin" type="Area2D"]
+[node name="Coin" type="Node2D"]
 script = ExtResource("1_6vs20")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collectable2D" type="Area2D" parent="."]
+script = ExtResource("2_msi5q")
+identifier = "coin"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectable2D"]
 shape = SubResource("CircleShape2D_wuwid")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -84,3 +90,6 @@ frame_progress = 0.746604
 speed_scale = 2.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Spawnable" type="Node2D" parent="."]
+script = ExtResource("3_6t4p2")

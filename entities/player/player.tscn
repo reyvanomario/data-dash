@@ -1,7 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://cw101ycuhjuav"]
+[gd_scene load_steps=27 format=3 uid="uid://cw101ycuhjuav"]
 
 [ext_resource type="Texture2D" uid="uid://cipyka5o76usi" path="res://entities/player/barry_spritesheet.png" id="1_4x2ys"]
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pptrt"]
+[ext_resource type="Script" path="res://common/components/destruct/destructible_2d.gd" id="3_n18c8"]
+[ext_resource type="Script" path="res://common/components/collect/collector_2d.gd" id="4_bbnl5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_72wjm"]
 size = Vector2(75, 96)
@@ -147,6 +149,12 @@ scale_min = 20.0
 scale_max = 20.0
 color_ramp = SubResource("GradientTexture1D_cgppb")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e3uj5"]
+size = Vector2(75, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m76gb"]
+size = Vector2(75, 96)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_pptrt")
 
@@ -177,3 +185,16 @@ emitting = false
 process_material = SubResource("ParticleProcessMaterial_2qded")
 lifetime = 0.25
 local_coords = true
+
+[node name="Destructable2D" type="Area2D" parent="."]
+script = ExtResource("3_n18c8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Destructable2D"]
+shape = SubResource("RectangleShape2D_e3uj5")
+
+[node name="Collector2D" type="Area2D" parent="."]
+script = ExtResource("4_bbnl5")
+collectable_identifiers = Array[String](["coin"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collector2D"]
+shape = SubResource("RectangleShape2D_m76gb")
