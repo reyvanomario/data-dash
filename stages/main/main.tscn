@@ -45,7 +45,7 @@ interval_max = 6.0
 
 [node name="MissileSpawner" type="Node2D" parent="." node_paths=PackedStringArray("target_node")]
 script = ExtResource("11_tf6qg")
-target_node = NodePath("../Player")
 node_scene = ExtResource("12_tc22m")
 interval_min = 5.0
 interval_max = 12.0
+target_node = NodePath("../Player")

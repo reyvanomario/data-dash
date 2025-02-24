@@ -16,6 +16,8 @@ const possible_spawn_points: Array[Vector2] = []
 ## The maximum time between spawnables.[br]
 ## This will decrease while the game speed increases.
 @export var interval_max: float = 5.0
+## The optional target node (to look, aim, follow, etc).
+@export var target_node: Node2D = null
 ## All instantiated but despawned spawnables are collected here.
 var spawnable_pool: Array[Spawnable] = []
 #endregion
@@ -109,5 +111,5 @@ func spawn(spawn_point: Vector2) -> void:
 	if spawnable == null:
 		return
 	
-	spawnable.spawn(spawn_point)
+	spawnable.spawn(spawn_point, target_node)
 #endregion
