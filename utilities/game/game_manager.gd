@@ -104,8 +104,9 @@ signal coins_changed(coins: int)
 func _unhandled_input(event: InputEvent) -> void:
 	if game == Game.NEW and event.is_action_pressed('fly'):
 		game = Game.PLAYING
-	if game != Game.NEW and event.is_action_pressed("ui_cancel"):
-		game = Game.NEW
+	if event.is_action_pressed('ui_cancel') and game == Game.PLAYING:
+		paused = !paused
+	get_viewport().set_input_as_handled()
 
 ## Increasing the game speed is handled here.
 func _process(delta: float) -> void:

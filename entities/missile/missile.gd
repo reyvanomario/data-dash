@@ -7,7 +7,10 @@ extends Node2D
 @onready var spawnable: Spawnable = $Spawnable
 ## Used to notify if the missile enters or exits the screen.
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
+## Animated sprite to warn the player of upcoming missile.
 @onready var warning_animation_sprite: AnimatedSprite2D = $warning_animation_sprite
+## The timer used to determine how long to show the warning.
+@onready var warning_timer: Timer = $warning_timer
 
 ## Is the missile aiming?
 var aiming: bool = true
@@ -60,13 +63,15 @@ func _process(delta: float) -> void:
 ## Custom functionality when a missile is spawned.
 func on_spawned(_spawn_point: Vector2, target_node: Node2D) -> void:
 	target = target_node
-	await get_tree().create_timer(warning_time_low).timeout
+	warning_timer.start(warning_time_low)
+	await warning_timer.timeout
 	
 	if GameManager.game == GameManager.Game.OVER:
 		return
 	
 	warning_animation_sprite.animation = 'warning_high'
-	await get_tree().create_timer(warning_time_high).timeout
+	warning_timer.start(warning_time_high)
+	await warning_timer.timeout
 	
 	if GameManager.game == GameManager.Game.OVER:
 		return

@@ -80,3 +80,5 @@ scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_0ufmw")
 animation = &"warning_high"
 autoplay = "warning_low"
+
+[node name="warning_timer" type="Timer" parent="."]

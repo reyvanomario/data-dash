@@ -24,4 +24,9 @@ func _ready() -> void:
 		GameManager.game = GameManager.Game.NEW
 		GameManager.paused = false
 	)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed('ui_cancel') and GameManager.game == GameManager.Game.PLAYING:
+		GameManager.paused = !GameManager.paused
+		get_viewport().set_input_as_handled()
 #endregion

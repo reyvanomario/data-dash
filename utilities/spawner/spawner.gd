@@ -20,56 +20,45 @@ const possible_spawn_points: Array[Vector2] = []
 @export var target_node: Node2D = null
 ## All instantiated but despawned spawnables are collected here.
 var spawnable_pool: Array[Spawnable] = []
+## The timer for this spawner.
+var timer: Timer = Timer.new()
+## Time left before spawning.
+var time_left: float = 0.0
 #endregion
 
 #region SIGNALS
-## Emitted when it's time to spawn a new spawnable.
-signal time_to_spawn
 ## Emitted when the spawner just finished spawning.
 signal finished_spawning(spawn_point: Variant)
 #endregion
 
 #region FUNCTIONS
 func _ready() -> void:
+	timer.timeout.connect(on_time_to_spawn)
+	add_child(timer)
+	
 	GameManager.game_changed.connect(func(game: int):
 		match game:
 			GameManager.Game.PLAYING:
-				start_timer()
+				timer.start(get_time())
 			GameManager.Game.OVER, GameManager.Game.NEW:
-				disconnect_time_to_spawn()
+				timer.stop()
 	)
+	
 	finished_spawning.connect(on_finished_spawning)
 
-## Start a new one-shot timer.
-func start_timer() -> void:
-	var timer: SceneTreeTimer = get_new_timer()
-	connect_time_to_spawn_to_timer(timer)
-
-## Create and return a new instance of a one-shot timer.
-func get_new_timer() -> SceneTreeTimer:
+## Returns a random time depending on the game speed.
+func get_time() -> float:
 	var interval_divider = GameManager.speed / GameManager.Speed.START
-	var time = randf_range(
+	return randf_range(
 		interval_min / interval_divider,
 		interval_max / interval_divider
 	)
-	return get_tree().create_timer(time)
-
-## Connect the time_to_spawn signal to the one-shot timer.
-func connect_time_to_spawn_to_timer(timer: SceneTreeTimer):
-	disconnect_time_to_spawn()
-	timer.timeout.connect(func(): time_to_spawn.emit())
-	time_to_spawn.connect(on_time_to_spawn)
-
-## Disconnect the time_to_spawn signal.
-func disconnect_time_to_spawn():
-	if time_to_spawn.is_connected(on_time_to_spawn):
-		time_to_spawn.disconnect(on_time_to_spawn)
 
 ## What should happen when it's time to spawn?
 func on_time_to_spawn() -> void:
 	var spawn_point = SpawnerManager.get_available_spawn_point()
 	if spawn_point is not Vector2:
-		start_timer()
+		timer.start(get_time())
 		return
 	
 	await spawn(spawn_point)
@@ -78,7 +67,7 @@ func on_time_to_spawn() -> void:
 ## What should happen when the spawner just finished spawning?
 func on_finished_spawning(spawn_point: Vector2) -> void:
 	SpawnerManager.make_spawn_point_available(spawn_point)
-	start_timer()
+	timer.start(get_time())
 
 ## Get spawnable component from node.
 func get_spawnable_from_node(node: Node) -> Spawnable:
