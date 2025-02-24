@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://common/components/collect/collector_2d.gd" id="4_bbnl5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_72wjm"]
-size = Vector2(75, 96)
+size = Vector2(60.5, 96)
 
 [sub_resource type="Animation" id="Animation_ob4fw"]
 length = 0.001
@@ -100,7 +100,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wprwu"]
 advance_mode = 2
-advance_expression = "jetpack_activated"
+advance_expression = "jetpack_activated and !grounded"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8b60v"]
 advance_mode = 2
@@ -116,7 +116,7 @@ advance_expression = "jetpack_activated"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3eqk6"]
 advance_mode = 2
-advance_expression = "grounded"
+advance_expression = "grounded and !jetpack_activated"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_y2jas"]
 states/Start/position = Vector2(216, 100)
@@ -150,15 +150,16 @@ scale_max = 20.0
 color_ramp = SubResource("GradientTexture1D_cgppb")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3uj5"]
-size = Vector2(75, 96)
+size = Vector2(60.5, 86)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m76gb"]
-size = Vector2(75, 96)
+size = Vector2(60.5, 96)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_pptrt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7.25, 0)
 shape = SubResource("RectangleShape2D_72wjm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -190,6 +191,7 @@ local_coords = true
 script = ExtResource("3_n18c8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Destructable2D"]
+position = Vector2(7.25, -5)
 shape = SubResource("RectangleShape2D_e3uj5")
 
 [node name="Collector2D" type="Area2D" parent="."]
@@ -197,4 +199,5 @@ script = ExtResource("4_bbnl5")
 collectable_identifiers = Array[String](["coin"])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collector2D"]
+position = Vector2(7.25, 0)
 shape = SubResource("RectangleShape2D_m76gb")

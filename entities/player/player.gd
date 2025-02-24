@@ -46,12 +46,14 @@ func _ready() -> void:
 	)
 	destructable_2d.destroyed.connect(func(): GameManager.game = GameManager.Game.OVER)
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action('fly'):
+		jetpack_activated = Input.is_action_pressed('fly')
+
 func _process(delta: float) -> void:
 	# for now, just ignore all physics if the game is over
 	if GameManager.game == GameManager.Game.OVER:
 		return
-	
-	jetpack_activated = Input.is_action_pressed('fly')
 	
 	if jetpack_activated:
 		jetpack_force += JETPACK_FORCE_INCREMENT_STEP * delta

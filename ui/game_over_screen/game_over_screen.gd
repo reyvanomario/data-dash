@@ -51,7 +51,7 @@ func _ready() -> void:
 			GameManager.Game.OVER:
 				distance_label.text = "%dM" % floori(GameManager.distance)
 				coins_label.text = "%d" % floori(GameManager.coins)
-				new_highscore = SaveSystem.stats.leaderboard.is_highscore(GameManager.distance)
+				new_highscore = SaveSystem.stats.leaderboard.is_highscore(int(GameManager.distance))
 				visible = true
 	)
 	continue_button.pressed.connect(func():
