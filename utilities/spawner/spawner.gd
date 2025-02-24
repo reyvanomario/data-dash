@@ -56,12 +56,13 @@ func get_time() -> float:
 
 ## What should happen when it's time to spawn?
 func on_time_to_spawn() -> void:
+	timer.stop()
 	var spawn_point = SpawnerManager.get_available_spawn_point()
 	if spawn_point is not Vector2:
 		timer.start(get_time())
 		return
 	
-	await spawn(spawn_point)
+	spawn(spawn_point)
 	finished_spawning.emit(spawn_point)
 
 ## What should happen when the spawner just finished spawning?

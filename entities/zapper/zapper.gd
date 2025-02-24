@@ -49,8 +49,8 @@ func _ready() -> void:
 	spawnable.root_node = self
 	spawnable.spawned.connect(func(_spawn_point: Vector2, _target_node: Node2D):
 		var is_within_rotatable_boundary: bool = position.y >= can_rotate_within_boundary_min and position.y <= can_rotate_within_boundary_max
-		is_rotating = is_within_rotatable_boundary and randi_range(0, 4) == 0
-		rotation_degrees = 90 if !is_within_rotatable_boundary or randi_range(0, 2) == 0 else 0
+		is_rotating = is_within_rotatable_boundary and randi_range(0, 2) == 0
+		rotation_degrees = 90 if !is_within_rotatable_boundary else 0
 	)
 
 func _process(delta: float) -> void:

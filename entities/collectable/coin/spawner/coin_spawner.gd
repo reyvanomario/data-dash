@@ -12,11 +12,19 @@ func _ready() -> void:
 	super._ready()
 	add_child(between_coins_timer)
 
-func spawn(spawn_point: Vector2) -> void:
+func on_time_to_spawn() -> void:
+	timer.stop()
+	var spawn_point = SpawnerManager.get_available_spawn_point()
+	if spawn_point is not Vector2:
+		timer.start(get_time())
+		return
+	
 	var amount = randi_range(5, 10)
 	for c in amount:
-		super.spawn(spawn_point)
 		var interval_divider = GameManager.speed / GameManager.Speed.START
 		between_coins_timer.start(0.3 / interval_divider)
+		spawn(spawn_point)
 		await between_coins_timer.timeout
+	
+	finished_spawning.emit(spawn_point)
 #endregion
