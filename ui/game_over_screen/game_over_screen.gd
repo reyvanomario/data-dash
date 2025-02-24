@@ -29,6 +29,7 @@ extends Control
 var new_highscore: bool = false :
 	set(h):
 		new_highscore = h
+		leaderboard_name.text = SaveSystem.stats.name
 		highscore.visible = new_highscore
 		show_leaderboard = !new_highscore
 ## Should the leaderboard be visible?
