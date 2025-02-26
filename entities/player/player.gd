@@ -16,6 +16,8 @@ const MAX_FALL_SPEED = 1200
 @onready var bullet_particles: GPUParticles2D = $bullet_particles
 ## The destructable is responsible to take damage when colliding with destructors.
 @onready var destructable_2d: Destructable2D = $Destructable2D
+## The audio stream player for when the player runs.
+@onready var stepping_audio_stream_player: AudioStreamPlayer2D = $stepping_audio_stream_player
 
 ## Current jetpack force applied.[br]
 ## Can only be set between [param 0] and [constant JETPACK_MAX_FORCE].[br]
@@ -34,7 +36,15 @@ var jetpack_activated:bool = false :
 		bullet_particles.emitting = jetpack_activated
 		if not jetpack_activated:
 			jetpack_force = 0
-var grounded:bool = false
+var grounded:bool = false :
+	set(g):
+		if g == grounded:
+			return
+		grounded = g
+		if grounded:
+			stepping_audio_stream_player.play()
+		else:
+			stepping_audio_stream_player.stop()
 #endregion
 
 #region FUNCTIONS
@@ -44,6 +54,7 @@ func _ready() -> void:
 			GameManager.Game.NEW:
 				reset()
 	)
+	
 	destructable_2d.destroyed.connect(func(): GameManager.game = GameManager.Game.OVER)
 
 func _unhandled_input(event: InputEvent) -> void:

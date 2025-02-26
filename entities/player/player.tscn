@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://cw101ycuhjuav"]
+[gd_scene load_steps=28 format=3 uid="uid://cw101ycuhjuav"]
 
 [ext_resource type="Texture2D" uid="uid://cipyka5o76usi" path="res://entities/player/barry_spritesheet.png" id="1_4x2ys"]
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pptrt"]
 [ext_resource type="Script" path="res://common/components/destruct/destructible_2d.gd" id="3_n18c8"]
 [ext_resource type="Script" path="res://common/components/collect/collector_2d.gd" id="4_bbnl5"]
+[ext_resource type="AudioStream" uid="uid://irx22g5wqvlo" path="res://entities/player/step.ogg" id="5_7y2qp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_72wjm"]
 size = Vector2(60.5, 96)
@@ -201,3 +202,6 @@ collectable_identifiers = Array[String](["coin"])
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collector2D"]
 position = Vector2(7.25, 0)
 shape = SubResource("RectangleShape2D_m76gb")
+
+[node name="stepping_audio_stream_player" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_7y2qp")
