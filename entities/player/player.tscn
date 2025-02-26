@@ -1,10 +1,17 @@
-[gd_scene load_steps=28 format=3 uid="uid://cw101ycuhjuav"]
+[gd_scene load_steps=35 format=3 uid="uid://cw101ycuhjuav"]
 
 [ext_resource type="Texture2D" uid="uid://cipyka5o76usi" path="res://entities/player/barry_spritesheet.png" id="1_4x2ys"]
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_pptrt"]
 [ext_resource type="Script" path="res://common/components/destruct/destructible_2d.gd" id="3_n18c8"]
 [ext_resource type="Script" path="res://common/components/collect/collector_2d.gd" id="4_bbnl5"]
-[ext_resource type="AudioStream" uid="uid://irx22g5wqvlo" path="res://entities/player/step.ogg" id="5_7y2qp"]
+[ext_resource type="AudioStream" uid="uid://duo0np7lg2c8h" path="res://assets/original_sfx/jetpack_firelp.wav" id="5_2nm23"]
+[ext_resource type="AudioStream" uid="uid://dtti04362vvul" path="res://assets/original_sfx/boots_step_left_1.wav" id="5_pojj2"]
+[ext_resource type="Script" path="res://entities/player/stepping_audio.gd" id="6_s5n0l"]
+[ext_resource type="AudioStream" uid="uid://do3vid274jf03" path="res://assets/original_sfx/boots_step_left_2.wav" id="7_oky31"]
+[ext_resource type="AudioStream" uid="uid://bin1k5iwgrsqc" path="res://assets/original_sfx/boots_step_left_3.wav" id="8_rj6pp"]
+[ext_resource type="AudioStream" uid="uid://cm3i5ap0y8rwo" path="res://assets/original_sfx/boots_step_right_1.wav" id="9_lncfw"]
+[ext_resource type="AudioStream" uid="uid://bbveeurawrwt1" path="res://assets/original_sfx/boots_step_right_2.wav" id="10_6h6k7"]
+[ext_resource type="AudioStream" uid="uid://2g7f2gffjt8d" path="res://assets/original_sfx/boots_step_right_3.wav" id="11_f5xqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_72wjm"]
 size = Vector2(60.5, 96)
@@ -203,5 +210,12 @@ collectable_identifiers = Array[String](["coin"])
 position = Vector2(7.25, 0)
 shape = SubResource("RectangleShape2D_m76gb")
 
-[node name="stepping_audio_stream_player" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_7y2qp")
+[node name="jetpack_audio_stream_player" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_2nm23")
+
+[node name="SteppingAudio" type="Node2D" parent="."]
+script = ExtResource("6_s5n0l")
+left_steps = Array[AudioStream]([ExtResource("5_pojj2"), ExtResource("7_oky31"), ExtResource("8_rj6pp")])
+right_steps = Array[AudioStream]([ExtResource("9_lncfw"), ExtResource("10_6h6k7"), ExtResource("11_f5xqv")])
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SteppingAudio"]
