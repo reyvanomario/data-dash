@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkiufj3yhj50s"]
+[gd_scene load_steps=16 format=3 uid="uid://dkiufj3yhj50s"]
 
 [ext_resource type="PackedScene" uid="uid://d370gfo85kgf6" path="res://stages/parallax_background/parallax_background.tscn" id="1_6cvk4"]
 [ext_resource type="PackedScene" uid="uid://e4unmckmojc6" path="res://ui/start_screen/start_screen.tscn" id="2_dox6r"]
@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://bp72kj0ecgu1t" path="res://entities/zapper/zapper.tscn" id="10_dsiyu"]
 [ext_resource type="Script" path="res://entities/missile/spawner/missile_spawner.gd" id="11_tf6qg"]
 [ext_resource type="PackedScene" uid="uid://dtigid26sgbs5" path="res://entities/missile/missile.tscn" id="12_tc22m"]
+[ext_resource type="Script" path="res://utilities/music/music_player.gd" id="13_spdfk"]
+[ext_resource type="AudioStream" uid="uid://bpeoke53tynbx" path="res://assets/original_music/01.main_theme.mp3" id="14_8irrw"]
+[ext_resource type="AudioStream" uid="uid://2yotpw8c408v" path="res://assets/original_music/04.home.mp3" id="15_imche"]
 
 [node name="Main" type="Node2D"]
 
@@ -49,3 +52,12 @@ node_scene = ExtResource("12_tc22m")
 interval_min = 5.0
 interval_max = 12.0
 target_node = NodePath("../Player")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_imche")
+volume_db = -12.0
+autoplay = true
+bus = &"music"
+script = ExtResource("13_spdfk")
+music_main_theme = ExtResource("14_8irrw")
+music_home = ExtResource("15_imche")
