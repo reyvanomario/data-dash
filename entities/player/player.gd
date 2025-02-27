@@ -65,7 +65,11 @@ func _ready() -> void:
 	
 	destructable_2d.destroyed.connect(func(): GameManager.game = GameManager.Game.OVER)
 
+## Used to handle input (only flying)
 func _unhandled_input(event: InputEvent) -> void:
+	if GameManager.game != GameManager.Game.PLAYING:
+		return
+	
 	if event.is_action('fly'):
 		jetpack_activated = Input.is_action_pressed('fly')
 
@@ -96,6 +100,7 @@ func _physics_process(delta: float) -> void:
 func reset():
 	velocity = Vector2.ZERO
 	bullet_particles.restart()
+	bullet_particles.emitting = false
 	jetpack_activated = false
 	position = Vector2(600, 940)
 #endregion
