@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ds0s6dw8skubu"]
+[gd_scene load_steps=7 format=3 uid="uid://ds0s6dw8skubu"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_yv2ts"]
 [ext_resource type="Script" path="res://ui/pause_menu/pause_menu.gd" id="2_f8cr8"]
+[ext_resource type="AudioStream" uid="uid://cgr7yxitx7ww3" path="res://assets/original_sfx/ui_pause.wav" id="3_it8q3"]
+[ext_resource type="AudioStream" uid="uid://c6gk44kojsfmf" path="res://assets/original_sfx/ui_select.wav" id="4_muf0j"]
 
 [sub_resource type="Gradient" id="Gradient_fqefy"]
 offsets = PackedFloat32Array(0, 0.5, 0.5, 1)
@@ -12,7 +14,7 @@ gradient = SubResource("Gradient_fqefy")
 fill_from = Vector2(1, 1)
 
 [node name="PauseMenu" type="Control"]
-process_mode = 2
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +23,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_yv2ts")
 script = ExtResource("2_f8cr8")
+audio_paused = ExtResource("3_it8q3")
+audio_select = ExtResource("4_muf0j")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -81,3 +85,6 @@ focus_neighbor_top = NodePath("../restart_button")
 focus_neighbor_bottom = NodePath("../resume_button")
 theme_override_font_sizes/font_size = 128
 text = "HOME"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"ui"

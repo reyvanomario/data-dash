@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bua8h7f2d4u26"]
+[gd_scene load_steps=8 format=3 uid="uid://bua8h7f2d4u26"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_t2egg"]
 [ext_resource type="Script" path="res://ui/game_over_screen/game_over_screen.gd" id="2_rovtf"]
+[ext_resource type="AudioStream" uid="uid://b0m613tntjxfn" path="res://assets/original_sfx/achievement_complete.wav" id="3_q2c20"]
 [ext_resource type="PackedScene" uid="uid://dibncjywm4vpa" path="res://ui/leaderboard/leaderboard_entry.tscn" id="3_tevej"]
 [ext_resource type="Texture2D" uid="uid://botxktqdvtlc4" path="res://entities/collectable/coin/coin_sprite.png" id="4_10ec3"]
+[ext_resource type="AudioStream" uid="uid://c6gk44kojsfmf" path="res://assets/original_sfx/ui_select.wav" id="4_w7vc5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m7u26"]
 atlas = ExtResource("4_10ec3")
@@ -18,6 +20,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_t2egg")
 script = ExtResource("2_rovtf")
+audio_highscore = ExtResource("3_q2c20")
+audio_select = ExtResource("4_w7vc5")
 leaderboard_entry_scene = ExtResource("3_tevej")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -159,3 +163,6 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 128
 text = "RESTART"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"ui"

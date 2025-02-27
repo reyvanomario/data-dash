@@ -5,10 +5,10 @@ extends Control
 ## This contains stats and pause button.
 
 #region VARIABLES
-## The label for the displaying the current distance.
-@onready var distance_label: Label = $HBoxContainer/VBoxContainer/MarginContainer/distance
 ## The label for the displaying the collected coins during the current run.
 @onready var coins_label: Label = $HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/coins
+## The label for the displaying the current distance.
+@onready var distance_label: Label = $HBoxContainer/VBoxContainer/MarginContainer/distance
 ## Button to pause the game.
 @onready var pause_button: TextureButton = $HBoxContainer/VBoxContainer3/MarginContainer/pause_button
 #endregion
