@@ -16,6 +16,10 @@ const MAX_FALL_SPEED = 1200
 @onready var bullet_particles: GPUParticles2D = $bullet_particles
 ## The destructable is responsible to take damage when colliding with destructors.
 @onready var destructable_2d: Destructable2D = $Destructable2D
+## The audio stream player for when the player runs.
+@onready var stepping_audio: SteppingAudio = $SteppingAudio
+## The audio stream player for when the jetpack is activated.
+@onready var jetpack_audio_stream_player: AudioStreamPlayer2D = $jetpack_audio_stream_player
 
 ## Current jetpack force applied.[br]
 ## Can only be set between [param 0] and [constant JETPACK_MAX_FORCE].[br]
@@ -30,11 +34,25 @@ var jetpack_force:float = 0 :
 ## If [param false]: [member jetpack_force] will be set to [param 0].
 var jetpack_activated:bool = false :
 	set(a):
+		if a == jetpack_activated:
+			return
+		
 		jetpack_activated = a
 		bullet_particles.emitting = jetpack_activated
-		if not jetpack_activated:
+		if jetpack_activated:
+			jetpack_audio_stream_player.play()
+		else:
+			jetpack_audio_stream_player.stop()
 			jetpack_force = 0
-var grounded:bool = false
+var grounded:bool = false :
+	set(g):
+		if g == grounded:
+			return
+		grounded = g
+		if grounded:
+			stepping_audio.start_playing()
+		else:
+			stepping_audio.stop_playing()
 #endregion
 
 #region FUNCTIONS
@@ -44,14 +62,21 @@ func _ready() -> void:
 			GameManager.Game.NEW:
 				reset()
 	)
+	
 	destructable_2d.destroyed.connect(func(): GameManager.game = GameManager.Game.OVER)
+
+## Used to handle input (only flying)
+func _unhandled_input(event: InputEvent) -> void:
+	if GameManager.game != GameManager.Game.PLAYING:
+		return
+	
+	if event.is_action('fly'):
+		jetpack_activated = Input.is_action_pressed('fly')
 
 func _process(delta: float) -> void:
 	# for now, just ignore all physics if the game is over
 	if GameManager.game == GameManager.Game.OVER:
 		return
-	
-	jetpack_activated = Input.is_action_pressed('fly')
 	
 	if jetpack_activated:
 		jetpack_force += JETPACK_FORCE_INCREMENT_STEP * delta
@@ -75,6 +100,7 @@ func _physics_process(delta: float) -> void:
 func reset():
 	velocity = Vector2.ZERO
 	bullet_particles.restart()
+	bullet_particles.emitting = false
 	jetpack_activated = false
 	position = Vector2(600, 940)
 #endregion

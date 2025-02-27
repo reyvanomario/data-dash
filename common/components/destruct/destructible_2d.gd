@@ -9,6 +9,9 @@ extends Area2D
 		health = h if h >= 0 else 0
 		if health == 0:
 			destroyed.emit()
+
+## To play audio when hit.
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 #endregion
 
 #region SIGNALS
@@ -18,6 +21,9 @@ signal destroyed
 
 #region FUNCTIONS
 ## Called by a destructor to make this destructable take damage.
-func destruct(amount: int = health) -> void:
+func destruct(amount: int = health, audio_stream: AudioStream = null) -> void:
 	health -= amount
+	if audio_stream != null:
+		audio_stream_player_2d.stream = audio_stream
+		audio_stream_player_2d.play()
 #endregion

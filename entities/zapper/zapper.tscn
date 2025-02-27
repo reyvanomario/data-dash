@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bp72kj0ecgu1t"]
+[gd_scene load_steps=7 format=3 uid="uid://bp72kj0ecgu1t"]
 
 [ext_resource type="Script" path="res://entities/zapper/zapper.gd" id="1_unkw2"]
 [ext_resource type="Texture2D" uid="uid://c24hev6c7qydd" path="res://gdd/art-bible/assets/obstacles_sprites.png" id="2_adlbb"]
 [ext_resource type="Script" path="res://common/components/destruct/destructor_2d.gd" id="2_t4h62"]
+[ext_resource type="AudioStream" uid="uid://b0w6keqqwo6nl" path="res://assets/original_sfx/dud_zapper_lp.wav" id="3_b5ol5"]
 [ext_resource type="Script" path="res://utilities/spawner/spawnable/spawnable.gd" id="3_wasl2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c455m"]
@@ -13,6 +14,7 @@ script = ExtResource("1_unkw2")
 
 [node name="Destructor2D" type="Area2D" parent="."]
 script = ExtResource("2_t4h62")
+audio_streams = Array[AudioStream]([ExtResource("3_b5ol5")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Destructor2D"]
 shape = SubResource("RectangleShape2D_c455m")
