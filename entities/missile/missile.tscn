@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dtigid26sgbs5"]
+[gd_scene load_steps=15 format=3 uid="uid://dtigid26sgbs5"]
 
 [ext_resource type="Script" path="res://entities/missile/missile.gd" id="1_e4log"]
 [ext_resource type="AudioStream" uid="uid://mgy43m0sw82f" path="res://assets/original_sfx/missile_launch.wav" id="2_40qnw"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://btspxtoyyxgip" path="res://assets/original_sfx/missile_warning.wav" id="3_ig0qo"]
 [ext_resource type="Script" path="res://utilities/spawner/spawnable/spawnable.gd" id="4_bn04m"]
 [ext_resource type="Texture2D" uid="uid://biptq4dk3ujyd" path="res://entities/missile/missile_warning.png" id="5_axx0x"]
+[ext_resource type="AudioStream" uid="uid://bohqgaph88tyi" path="res://assets/original_sfx/rocket_explode_1.wav" id="5_wkpev"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v2wn0"]
 size = Vector2(88, 48)
@@ -59,6 +60,7 @@ audio_warning = ExtResource("3_ig0qo")
 
 [node name="Destructor2D" type="Area2D" parent="."]
 script = ExtResource("2_ehd8s")
+audio_streams = Array[AudioStream]([ExtResource("5_wkpev")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Destructor2D"]
 position = Vector2(44, 0)
