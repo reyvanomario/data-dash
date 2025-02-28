@@ -134,4 +134,5 @@ theme_override_font_sizes/font_size = 128
 text = "HOME"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -12.0
 bus = &"ui"

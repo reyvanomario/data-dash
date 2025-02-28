@@ -8,6 +8,10 @@ extends Control
 ## Audio to be played when a button is pressed.
 @export var audio_select: AudioStream
 
+## The index for the sfx audio bus.
+@onready var audio_bus_sfx_index: int = AudioServer.get_bus_index('sfx')
+## The index for the music audio bus.
+@onready var audio_bus_music_index: int = AudioServer.get_bus_index('music')
 ## Audio stream player to play any audio related to this UI component.
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 ## Button to toggle music.
@@ -38,6 +42,12 @@ func _ready() -> void:
 	home_button.pressed.connect(on_home_button_pressed)
 	resume_button.pressed.connect(on_resume_button_pressed)
 	restart_button.pressed.connect(on_restart_button_pressed)
+	
+	button_music.set_pressed_no_signal(!SaveSystem.settings.audio.music)
+	button_sfx.set_pressed_no_signal(!SaveSystem.settings.audio.sfx)
+	
+	AudioServer.set_bus_mute(audio_bus_music_index, !SaveSystem.settings.audio.music)
+	AudioServer.set_bus_mute(audio_bus_sfx_index, !SaveSystem.settings.audio.sfx)
 
 ## What to do when the home button is pressed.
 func on_home_button_pressed() -> void:
@@ -45,9 +55,12 @@ func on_home_button_pressed() -> void:
 	GameManager.paused = false
 	play_audio(audio_select)
 
+## What to do when the music is toggled.
 func on_music_toggled(toggled_on: bool) -> void:
 	play_audio(audio_select)
-	pass
+	AudioServer.set_bus_mute(audio_bus_music_index, toggled_on)
+	SaveSystem.settings.audio.music = !toggled_on
+	SaveSystem.save_settings()
 
 ## What to do when the paused state is changed.
 func on_paused_changed(paused: bool) -> void:
@@ -68,9 +81,12 @@ func on_resume_button_pressed() -> void:
 	GameManager.paused = false
 	play_audio(audio_select)
 
+## What to do when the SFX are toggled.
 func on_sfx_toggled(toggled_on: bool) -> void:
 	play_audio(audio_select)
-	pass
+	AudioServer.set_bus_mute(audio_bus_sfx_index, toggled_on)
+	SaveSystem.settings.audio.sfx = !toggled_on
+	SaveSystem.save_settings()
 
 ## Play the provided audio stream.
 func play_audio(audio_stream: AudioStream) -> void:
