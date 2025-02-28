@@ -10,6 +10,10 @@ extends Control
 
 ## Audio stream player to play any audio related to this UI component.
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+## Button to toggle music.
+@onready var button_music: TextureButton = $VBoxContainer/TextureRect/HBoxContainer/button_music
+## Button to toggle SFX.
+@onready var button_sfx: TextureButton = $VBoxContainer/TextureRect/HBoxContainer/button_sfx
 ## Button to go back home.
 @onready var home_button: Button = $VBoxContainer/VBoxContainer/home_button
 ## Button to restart the a run.
@@ -28,6 +32,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		play_audio(audio_paused)
 
 func _ready() -> void:
+	button_music.toggled.connect(on_music_toggled)
+	button_sfx.toggled.connect(on_sfx_toggled)
 	GameManager.paused_changed.connect(on_paused_changed)
 	home_button.pressed.connect(on_home_button_pressed)
 	resume_button.pressed.connect(on_resume_button_pressed)
@@ -38,6 +44,10 @@ func on_home_button_pressed() -> void:
 	GameManager.game = GameManager.Game.NEW
 	GameManager.paused = false
 	play_audio(audio_select)
+
+func on_music_toggled(toggled_on: bool) -> void:
+	play_audio(audio_select)
+	pass
 
 ## What to do when the paused state is changed.
 func on_paused_changed(paused: bool) -> void:
@@ -57,6 +67,10 @@ func on_restart_button_pressed() -> void:
 func on_resume_button_pressed() -> void:
 	GameManager.paused = false
 	play_audio(audio_select)
+
+func on_sfx_toggled(toggled_on: bool) -> void:
+	play_audio(audio_select)
+	pass
 
 ## Play the provided audio stream.
 func play_audio(audio_stream: AudioStream) -> void:
