@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://e4unmckmojc6"]
+[gd_scene load_steps=7 format=3 uid="uid://e4unmckmojc6"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_7nh7e"]
 [ext_resource type="Script" path="res://ui/start_screen/start_screen.gd" id="2_gl2r5"]
 [ext_resource type="Texture2D" uid="uid://botxktqdvtlc4" path="res://entities/collectable/coin/coin_sprite.png" id="3_psbl7"]
+[ext_resource type="Texture2D" uid="uid://dgti2c6ubuj37" path="res://assets/start_screen_title_2.png" id="4_d6y6s"]
 [ext_resource type="AudioStream" uid="uid://pp5n8lp73sg" path="res://assets/original_sfx/ui_start_travel.wav" id="4_nyax7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ooxon"]
@@ -50,6 +51,36 @@ uppercase = true
 layout_mode = 2
 texture = SubResource("AtlasTexture_ooxon")
 expand_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_d6y6s")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -64
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.741385, 0.741385, 0.741385, 1)
+theme_override_constants/outline_size = 64
+theme_override_font_sizes/font_size = 256
+text = "JETPACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.7445, 0.27, 1)
+theme_override_constants/outline_size = 64
+theme_override_font_sizes/font_size = 256
+text = "JOYRIDE"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [node name="start" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
