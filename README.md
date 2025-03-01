@@ -2,7 +2,7 @@
 
 A remake made in Godo game engine.
 
-[![Itch.io](https://img.shields.io/badge/Itch-%23FF0B34.svg?style=for-the-badge&logo=Itch.io&logoColor=white)](https://brallex.itch.io/breakout)
+[![Itch.io](https://img.shields.io/badge/Itch-%23FF0B34.svg?style=for-the-badge&logo=Itch.io&logoColor=white)](https://brallex.itch.io/jetpack-joyride)
 
 ![icon](./assets/icon.png)
 
