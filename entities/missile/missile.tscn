@@ -285,4 +285,5 @@ frame_progress = 1.0
 [node name="warning_timer" type="Timer" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = 4.0
 bus = &"missile"

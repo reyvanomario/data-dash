@@ -1,39 +1,32 @@
 class_name Missile
 extends Node2D
 
-
-
-## The audio stream for launching the missile.
 @export var audio_launch: AudioStream
-## The audio stream to warn for incoming missile.
 @export var audio_warning: AudioStream
 
-## To play the audio for the missile.
+
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
-## Used to spawn and despawn the missile.
+
 @onready var spawnable: Spawnable = $Spawnable
-## Used to notify if the missile enters or exits the screen.
+
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
-## Animated sprite to warn the player of upcoming missile.
+
 @onready var warning_animation_sprite: AnimatedSprite2D = $warning_animation_sprite
-## The timer used to determine how long to show the warning.
+
 @onready var warning_timer: Timer = $warning_timer
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 
-## Is the missile aiming?
 var aiming: bool = true
-## The speed of the missile.
 var speed: int = 1000
-## Is the game playing and scrolling?
 var scrolling:bool = false :
 	set(s):
 		if s == scrolling: return
 		scrolling = s
-## The target node to aim for.
+
 var target: Node2D = null
-## The time for displaying the first warning.
+
 var warning_time_low: float = 2.0
 
 

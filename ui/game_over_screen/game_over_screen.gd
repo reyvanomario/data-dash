@@ -42,7 +42,7 @@ func on_game_changed(game: int) -> void:
 	match game:
 		GameManager.Game.NEW:
 			visible = false
-			MusicPlayer.volume_db = -10
+			MusicPlayer.volume_db = -15
 			
 		GameManager.Game.OVER:
 			
@@ -51,7 +51,7 @@ func on_game_changed(game: int) -> void:
 			visible = true
 			animation_player.play("transition_in")
 			
-			MusicPlayer.volume_db = -23
+			MusicPlayer.volume_db = -25
 			
 			label_distance.text = "%d" % floori(GameManager.distance)
 			label_coins.text = "%d" % floori(GameManager.coins)

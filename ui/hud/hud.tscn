@@ -1,11 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://c04c0t0p0lfve"]
+[gd_scene load_steps=14 format=3 uid="uid://c04c0t0p0lfve"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_terh0"]
-[ext_resource type="Texture2D" uid="uid://dxmamdwwu5hul" path="res://ui/pause_icon.png" id="2_fsihy"]
 [ext_resource type="Script" path="res://ui/hud/hud.gd" id="2_pbtj6"]
 [ext_resource type="Texture2D" uid="uid://cntk6bk6623gd" path="res://assets/compfest/Items&obstacles (glow)/coin blue.PNG" id="3_x5khu"]
 [ext_resource type="PackedScene" uid="uid://5ecappupqpb3" path="res://ui/hud/life_gui.tscn" id="4_rjsna"]
 [ext_resource type="Script" path="res://ui/hud/hearts_container.gd" id="4_sll8r"]
+[ext_resource type="Texture2D" uid="uid://urjaxbouoabp" path="res://assets/compfest/Menus/Pause (3).png" id="6_ielk5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y3tqg"]
 atlas = ExtResource("3_x5khu")
@@ -31,10 +31,6 @@ tracks/0/keys = {
 _data = {
 "decrement_life": SubResource("Animation_51ge8")
 }
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vmgr4"]
-atlas = ExtResource("2_fsihy")
-region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="Animation" id="Animation_h8r8k"]
 length = 0.001
@@ -211,7 +207,7 @@ theme_override_constants/margin_bottom = 16
 [node name="pause_button" type="TextureButton" parent="HBoxContainer/VBoxContainer3/MarginContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_vmgr4")
+texture_normal = ExtResource("6_ielk5")
 stretch_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

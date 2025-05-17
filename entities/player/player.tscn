@@ -118,7 +118,7 @@ animation = &"fly"
 animation = &"run"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_i2jll"]
-graph_offset = Vector2(19.2, 68.16)
+graph_offset = Vector2(52.8, 88.32)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_qjtgq")
 nodes/Animation/position = Vector2(380, 120)
 nodes/output/position = Vector2(600, 140)
@@ -129,7 +129,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wprwu"]
 advance_mode = 2
-advance_expression = "jetpack_activated and !grounded"
+advance_expression = "hoverboard_activated and !grounded"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8b60v"]
 advance_mode = 2
@@ -137,26 +137,26 @@ advance_expression = "grounded"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jfxnt"]
 advance_mode = 2
-advance_expression = "not jetpack_activated"
+advance_expression = "not hoverboard_activated"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h1wi6"]
 advance_mode = 2
-advance_expression = "jetpack_activated"
+advance_expression = "hoverboard_activated"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3eqk6"]
 advance_mode = 2
-advance_expression = "grounded and !jetpack_activated"
+advance_expression = "grounded and !hoverboard_activated"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_y2jas"]
 states/Start/position = Vector2(216.5, 100)
 states/fall/node = SubResource("AnimationNodeAnimation_kv5sd")
-states/fall/position = Vector2(474, 228)
+states/fall/position = Vector2(473.5, 227.75)
 states/fly/node = SubResource("AnimationNodeAnimation_j48t8")
 states/fly/position = Vector2(304, 228)
 states/ground/node = SubResource("AnimationNodeBlendTree_i2jll")
-states/ground/position = Vector2(391, 100)
+states/ground/position = Vector2(390.5, 100.25)
 transitions = ["Start", "ground", SubResource("AnimationNodeStateMachineTransition_ckfqr"), "ground", "fly", SubResource("AnimationNodeStateMachineTransition_wprwu"), "fall", "ground", SubResource("AnimationNodeStateMachineTransition_8b60v"), "fly", "fall", SubResource("AnimationNodeStateMachineTransition_jfxnt"), "fall", "fly", SubResource("AnimationNodeStateMachineTransition_h1wi6"), "fly", "ground", SubResource("AnimationNodeStateMachineTransition_3eqk6")]
-graph_offset = Vector2(56.3183, -31.0201)
+graph_offset = Vector2(-44.8414, 38.7749)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3uj5"]
 size = Vector2(75, 99)
