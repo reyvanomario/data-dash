@@ -1,11 +1,9 @@
 class_name Player
 extends CharacterBody2D
 
-## How much the force is increasing every frame * delta when the jetpack is activated.
-const JETPACK_FORCE_INCREMENT_STEP:int = 2000
-## Highest amount of force for the jetpack.
-const JETPACK_MAX_FORCE:int = 5000
-## Highest fall speed.
+
+const HOVERBOARD_FORCE_INCREMENT_STEP:int = 2000
+const HOVERBOARD_MAX_FORCE:int = 5000
 const MAX_FALL_SPEED = 1000
 
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
@@ -14,9 +12,9 @@ const MAX_FALL_SPEED = 1000
 
 var life_gui_container
 
-const JETPACK_PLAIN_START = preload("res://assets/original_sfx/jetpack_jet_start.wav")
-const JETPACK_PLAIN_LP = preload("res://assets/original_sfx/jetpack_jet_lp.wav")
-const JETPACK_PLAIN_STOP = preload("res://assets/original_sfx/jetpack_jet_stop.wav")
+const HOVERBOARD_PLAIN_START = preload("res://assets/compfest/sfx/hoverboard_start.wav")
+const HOVERBOARD_PLAIN_LP = preload("res://assets/compfest/sfx/hoverboard_ongoing.wav")
+const HOVERBOARD_PLAIN_STOP = preload("res://assets/compfest/sfx/hoverboard_stop.wav")
 
 var magnet_active: bool = false
 
@@ -33,28 +31,28 @@ var death_gravity: float = 4000  # Gravitasi saat mati
 var rotation_speed: float = 400
 
 
-var jetpack_force:float = 0 :
+var hoverboard_force:float = 0 :
 	set(f):
-		if f < 0 or f > JETPACK_MAX_FORCE:
+		if f < 0 or f > HOVERBOARD_MAX_FORCE:
 			return
-		jetpack_force = f
+		hoverboard_force = f
 
-var jetpack_activated:bool = false :
+var hoverboard_activated:bool = false :
 	set(a):
-		if a == jetpack_activated:
+		if a == hoverboard_activated:
 			return
 		
-		jetpack_activated = a
+		hoverboard_activated = a
 		
-		if jetpack_activated:
-			audio_stream_player.stream = JETPACK_PLAIN_LP
+		if hoverboard_activated:
+			audio_stream_player.stream = HOVERBOARD_PLAIN_LP
 			audio_stream_player.play()
 		else:
 			audio_stream_player.stop()
 			
-			audio_stream_player.stream = JETPACK_PLAIN_STOP
+			audio_stream_player.stream = HOVERBOARD_PLAIN_STOP
 			audio_stream_player.play()
-			jetpack_force = 0
+			hoverboard_force = 0
 			
 var grounded:bool = false :
 	set(g):
@@ -87,15 +85,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	if event.is_action('fly'):
-		jetpack_activated = Input.is_action_pressed('fly')
+		hoverboard_activated = Input.is_action_pressed('fly')
 
 func _process(delta: float) -> void:
 	# for now, just ignore all physics if the game is over
 	if not can_move or GameManager.game == GameManager.Game.OVER:
 		return
 	
-	if jetpack_activated:
-		jetpack_force += JETPACK_FORCE_INCREMENT_STEP * delta
+	if hoverboard_activated:
+		hoverboard_force += HOVERBOARD_FORCE_INCREMENT_STEP * delta
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -136,9 +134,9 @@ func _physics_process(delta: float) -> void:
 	
 	grounded = is_on_floor()
 	
-	if jetpack_activated:
-		velocity.y = -jetpack_force
-	if !jetpack_activated and not is_on_floor() and velocity.y < MAX_FALL_SPEED:
+	if hoverboard_activated:
+		velocity.y = -hoverboard_force
+	if !hoverboard_activated and not is_on_floor() and velocity.y < MAX_FALL_SPEED:
 		velocity.y += get_gravity().y * delta
 
 	move_and_slide()
@@ -149,7 +147,7 @@ func _physics_process(delta: float) -> void:
 func reset():
 	velocity = Vector2.ZERO
 	
-	jetpack_activated = false
+	hoverboard_activated = false
 	
 	position.x = -$Sprite2D.texture.get_size().x
 	position.y = entry_target_position.y
@@ -203,7 +201,7 @@ func on_player_died():
 		
 		# Reset rotasi dan mulai animasi
 		$Sprite2D.rotation_degrees = 0
-		jetpack_activated = false
+		hoverboard_activated = false
 		velocity = Vector2(1000, -400)  # Dorongan awal saat mati
 		
 		#await get_tree().create_timer(3.5).timeout

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://chfc7spvraqiq" path="res://assets/compfest/Spritesheet.png" id="3_p2fkq"]
 [ext_resource type="Script" path="res://common/components/collect/collector_2d.gd" id="4_bbnl5"]
 [ext_resource type="Shader" path="res://component/hit_flash_component.gdshader" id="6_j1aal"]
-[ext_resource type="AudioStream" uid="uid://d1vrl7v2lsqen" path="res://assets/original_sfx/jetpack_jet_start.wav" id="6_skdg6"]
+[ext_resource type="AudioStream" uid="uid://d1vrl7v2lsqen" path="res://assets/compfest/sfx/hoverboard_start.wav" id="6_skdg6"]
 [ext_resource type="PackedScene" uid="uid://djedurvogm28s" path="res://component/hit_flash_component.tscn" id="7_uaga7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fo5mq"]

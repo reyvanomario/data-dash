@@ -1,9 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bua8h7f2d4u26"]
+[gd_scene load_steps=16 format=3 uid="uid://bua8h7f2d4u26"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_t2egg"]
 [ext_resource type="Script" path="res://ui/game_over_screen/game_over_screen.gd" id="2_rovtf"]
-[ext_resource type="AudioStream" uid="uid://b0m613tntjxfn" path="res://assets/original_sfx/achievement_complete.wav" id="3_q2c20"]
-[ext_resource type="AudioStream" uid="uid://c6gk44kojsfmf" path="res://assets/original_sfx/ui_select.wav" id="4_w7vc5"]
 [ext_resource type="Texture2D" uid="uid://bkipdcybh0njc" path="res://assets/compfest/Menus/Bg-gameover resized.png" id="5_3m2s4"]
 [ext_resource type="Texture2D" uid="uid://cntk6bk6623gd" path="res://assets/compfest/Items&obstacles (glow)/coin blue.PNG" id="5_jwxvj"]
 [ext_resource type="Texture2D" uid="uid://dykg6qt0nityj" path="res://assets/compfest/Menus/Gameover1(holdduration3,3fps) resized.png" id="6_pchey"]
@@ -85,8 +83,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_t2egg")
 script = ExtResource("2_rovtf")
-audio_highscore = ExtResource("3_q2c20")
-audio_select = ExtResource("4_w7vc5")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0

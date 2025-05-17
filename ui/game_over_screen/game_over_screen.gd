@@ -1,7 +1,6 @@
 class_name GameOverScreen
 extends Control
 
-@export var audio_highscore: AudioStream
 @export var audio_select: AudioStream
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
