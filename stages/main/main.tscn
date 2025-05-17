@@ -1,22 +1,35 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkiufj3yhj50s"]
+[gd_scene load_steps=23 format=3 uid="uid://dkiufj3yhj50s"]
 
 [ext_resource type="PackedScene" uid="uid://d370gfo85kgf6" path="res://stages/parallax_background/parallax_background.tscn" id="1_6cvk4"]
+[ext_resource type="Script" path="res://stages/main/main.gd" id="1_elsft"]
+[ext_resource type="PackedScene" uid="uid://bac06arj7ahsa" path="res://component/random_stream_player_component.tscn" id="2_0ynxy"]
 [ext_resource type="PackedScene" uid="uid://e4unmckmojc6" path="res://ui/start_screen/start_screen.tscn" id="2_dox6r"]
 [ext_resource type="PackedScene" uid="uid://cw101ycuhjuav" path="res://entities/player/player.tscn" id="3_7gqhq"]
 [ext_resource type="PackedScene" uid="uid://c04c0t0p0lfve" path="res://ui/hud/hud.tscn" id="3_fha2a"]
 [ext_resource type="PackedScene" uid="uid://bua8h7f2d4u26" path="res://ui/game_over_screen/game_over_screen.tscn" id="3_vmle4"]
+[ext_resource type="AudioStream" uid="uid://bjrhtxieptqy4" path="res://assets/compfest/sfx/alarm-301729 (mp3cut.net).wav" id="3_xya1u"]
 [ext_resource type="PackedScene" uid="uid://ds0s6dw8skubu" path="res://ui/pause_menu/pause_menu.tscn" id="5_svk77"]
+[ext_resource type="PackedScene" uid="uid://dohnffue7y7v" path="res://manager/quest_manager.tscn" id="7_8y6gp"]
 [ext_resource type="Script" path="res://entities/collectable/coin/spawner/coin_spawner.gd" id="7_h8lfd"]
 [ext_resource type="PackedScene" uid="uid://c0daa8774747j" path="res://entities/collectable/coin/coin.tscn" id="8_2l1dg"]
 [ext_resource type="Script" path="res://entities/zapper/spawner/zapper_spawner.gd" id="9_xutpq"]
 [ext_resource type="PackedScene" uid="uid://bp72kj0ecgu1t" path="res://entities/zapper/zapper.tscn" id="10_dsiyu"]
 [ext_resource type="Script" path="res://entities/missile/spawner/missile_spawner.gd" id="11_tf6qg"]
 [ext_resource type="PackedScene" uid="uid://dtigid26sgbs5" path="res://entities/missile/missile.tscn" id="12_tc22m"]
-[ext_resource type="Script" path="res://utilities/music/music_player.gd" id="13_spdfk"]
-[ext_resource type="AudioStream" uid="uid://bpeoke53tynbx" path="res://assets/original_music/01.main_theme.mp3" id="14_8irrw"]
-[ext_resource type="AudioStream" uid="uid://2yotpw8c408v" path="res://assets/original_music/04.home.mp3" id="15_imche"]
+[ext_resource type="Script" path="res://stages/main/power_up_spawner.gd" id="13_dcvjj"]
+[ext_resource type="PackedScene" uid="uid://cyadkk6w52w1o" path="res://entities/powerup/powerup_collectibles.tscn" id="14_i8eyo"]
+[ext_resource type="Script" path="res://ui/quest/coin_quest.gd" id="16_fy0xu"]
+[ext_resource type="Script" path="res://stages/main/take_3_power_up_quest.gd" id="18_o84ay"]
+[ext_resource type="Script" path="res://stages/main/survival_quest.gd" id="19_xv68k"]
+[ext_resource type="Script" path="res://stages/main/distance_quest.gd" id="20_lqw2t"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_elsft")
+
+[node name="RandomStreamPlayerComponent" parent="." instance=ExtResource("2_0ynxy")]
+volume_db = -7.0
+streams = Array[AudioStream]([ExtResource("3_xya1u")])
+randomize_pitch = false
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_6cvk4")]
 
@@ -33,8 +46,10 @@ visible = false
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("5_svk77")]
 visible = false
 
+[node name="QuestManager" parent="." instance=ExtResource("7_8y6gp")]
+
 [node name="Player" parent="." instance=ExtResource("3_7gqhq")]
-position = Vector2(600, 940)
+position = Vector2(-195, 969)
 
 [node name="CoinSpawner" type="Node2D" parent="."]
 script = ExtResource("7_h8lfd")
@@ -53,11 +68,42 @@ interval_min = 5.0
 interval_max = 12.0
 target_node = NodePath("../Player")
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("15_imche")
-volume_db = -12.0
-autoplay = true
-bus = &"music"
-script = ExtResource("13_spdfk")
-music_main_theme = ExtResource("14_8irrw")
-music_home = ExtResource("15_imche")
+[node name="PowerUpSpawner" type="Node2D" parent="."]
+script = ExtResource("13_dcvjj")
+node_scene = ExtResource("14_i8eyo")
+interval_min = 20.0
+interval_max = 25.0
+
+[node name="QuestIntervalTimer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[node name="CoinQuest" type="Node2D" parent="."]
+script = ExtResource("16_fy0xu")
+quest_name = "Collect Coins"
+quest_description = "Collect 50 Coins"
+reached_goal_text = "Quest Completed"
+reward_amount = 15
+
+[node name="Take3PowerUpQuest" type="Node2D" parent="."]
+script = ExtResource("18_o84ay")
+quest_name = "Power Up Quest"
+quest_description = "Take 3 Powerups"
+reached_goal_text = "Quest Completed"
+reward_amount = 20
+
+[node name="SurvivalQuest" type="Node2D" parent="."]
+script = ExtResource("19_xv68k")
+quest_name = "Survival Quest"
+quest_description = "Survive 40 seconds"
+reached_goal_text = "Quest Completed"
+reward_amount = 40
+
+[node name="Timer" type="Timer" parent="SurvivalQuest"]
+
+[node name="DistanceQuest" type="Node2D" parent="."]
+script = ExtResource("20_lqw2t")
+quest_name = "Distance Quest"
+quest_description = "Fly 1000M"
+reached_goal_text = "Quest Completed"
+reward_amount = 40

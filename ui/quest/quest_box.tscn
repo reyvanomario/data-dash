@@ -1,0 +1,131 @@
+[gd_scene load_steps=10 format=3 uid="uid://cjds3od882xor"]
+
+[ext_resource type="Script" path="res://ui/quest/quest_box.gd" id="1_122t7"]
+[ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="2_uxb2f"]
+[ext_resource type="PackedScene" uid="uid://bac06arj7ahsa" path="res://component/random_stream_player_component.tscn" id="3_jjcmd"]
+[ext_resource type="AudioStream" uid="uid://d3lwciy1ec2qe" path="res://assets/compfest/kenney_interface-sounds/Audio/confirmation_001.ogg" id="4_kevvu"]
+[ext_resource type="AudioStream" uid="uid://dwfi1cotr8k64" path="res://assets/compfest/kenney_interface-sounds/Audio/confirmation_002.ogg" id="5_2aak1"]
+
+[sub_resource type="Animation" id="Animation_wa7b8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-400, 410)]
+}
+
+[sub_resource type="Animation" id="Animation_arjny"]
+resource_name = "transition_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.217638, 1),
+"update": 0,
+"values": [Vector2(-400, 410), Vector2(10, 410)]
+}
+
+[sub_resource type="Animation" id="Animation_56xmd"]
+resource_name = "transition_out"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(10, 410), Vector2(-400, 410)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_frrvq"]
+_data = {
+"RESET": SubResource("Animation_wa7b8"),
+"transition_in": SubResource("Animation_arjny"),
+"transition_out": SubResource("Animation_56xmd")
+}
+
+[node name="QuestBox" type="CanvasLayer" groups=["quest_box"]]
+script = ExtResource("1_122t7")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -130.0
+offset_right = -400.0
+offset_bottom = -130.0
+grow_vertical = 2
+theme = ExtResource("2_uxb2f")
+
+[node name="Panel" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -94.5
+offset_right = 297.0
+offset_bottom = 94.5
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="QuestTitleLabel" type="Label" parent="Control/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuestDescriptionLabel" type="Label" parent="Control/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Description"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuestProgressLabel" type="Label" parent="Control/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "(Default)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_frrvq")
+}
+
+[node name="RandomStreamPlayerComponent" parent="." instance=ExtResource("3_jjcmd")]
+streams = Array[AudioStream]([ExtResource("4_kevvu"), ExtResource("5_2aak1")])
+randomize_pitch = false

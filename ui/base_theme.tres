@@ -1,6 +1,23 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://f1t8okxjimt2"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://f1t8okxjimt2"]
 
-[ext_resource type="FontFile" uid="uid://dj6pf50e2il0o" path="res://assets/fonts/new_athletic_m54/New Athletic M54.ttf" id="1_dap86"]
+[ext_resource type="FontFile" uid="uid://yraxhxqh0jn3" path="res://assets/compfest/fonts/Abaddon_Fonts_v1.2/Abaddon Bold.ttf" id="1_n6cuf"]
+[ext_resource type="Texture2D" uid="uid://54twljevl7cf" path="res://assets/compfest/gui/GUI.png" id="1_sjmio"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8aftw"]
+texture = ExtResource("1_sjmio")
+region_rect = Rect2(145, 65, 46, 14)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kwpmi"]
+texture = ExtResource("1_sjmio")
+texture_margin_left = 1.698
+texture_margin_top = 1.74115
+texture_margin_right = 1.698
+texture_margin_bottom = 1.61945
+region_rect = Rect2(96, 36, 26, 24)
 
 [resource]
-default_font = ExtResource("1_dap86")
+default_font = ExtResource("1_n6cuf")
+default_font_size = 16
+Button/colors/font_color = Color(0.247059, 0.14902, 0.192157, 1)
+Button/styles/normal = SubResource("StyleBoxTexture_8aftw")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_kwpmi")

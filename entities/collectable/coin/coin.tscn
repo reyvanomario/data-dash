@@ -1,97 +1,69 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0daa8774747j"]
+[gd_scene load_steps=12 format=3 uid="uid://c0daa8774747j"]
 
 [ext_resource type="Script" path="res://entities/collectable/coin/coin.gd" id="1_6vs20"]
-[ext_resource type="Texture2D" uid="uid://botxktqdvtlc4" path="res://entities/collectable/coin/coin_sprite.png" id="2_dbmr0"]
 [ext_resource type="Script" path="res://common/components/collect/collectable_2d.gd" id="2_msi5q"]
 [ext_resource type="Script" path="res://utilities/spawner/spawnable/spawnable.gd" id="3_6t4p2"]
-[ext_resource type="AudioStream" uid="uid://dddxumg2gpbga" path="res://assets/original_sfx/coin_pickup_1.wav" id="6_ufq8h"]
-[ext_resource type="AudioStream" uid="uid://ktttb5iuwk8n" path="res://assets/original_sfx/coin_pickup_2.wav" id="7_x7l2a"]
-[ext_resource type="AudioStream" uid="uid://gtjcsh5ad5pr" path="res://assets/original_sfx/coin_pickup_3.wav" id="8_7engc"]
+[ext_resource type="AudioStream" uid="uid://qpa1j1h21tm3" path="res://assets/compfest/sfx/coin-257878 (mp3cut.net).wav" id="3_soy7p"]
+[ext_resource type="Texture2D" uid="uid://cntk6bk6623gd" path="res://assets/compfest/Items&obstacles (glow)/coin blue.PNG" id="6_oy3w1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wuwid"]
 radius = 40.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5s1e0"]
-atlas = ExtResource("2_dbmr0")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntuvn"]
+atlas = ExtResource("6_oy3w1")
+region = Rect2(0, 0, 168, 215)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s151r"]
-atlas = ExtResource("2_dbmr0")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_onpbv"]
+atlas = ExtResource("6_oy3w1")
+region = Rect2(168, 0, 168, 215)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q2jw2"]
-atlas = ExtResource("2_dbmr0")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ts2g"]
+atlas = ExtResource("6_oy3w1")
+region = Rect2(336, 0, 168, 215)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7fbs5"]
-atlas = ExtResource("2_dbmr0")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_otxs4"]
-atlas = ExtResource("2_dbmr0")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cpot5"]
-atlas = ExtResource("2_dbmr0")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_71u6v"]
-atlas = ExtResource("2_dbmr0")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_drc8y"]
-atlas = ExtResource("2_dbmr0")
-region = Rect2(224, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rjg3"]
+atlas = ExtResource("6_oy3w1")
+region = Rect2(504, 0, 168, 215)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6yyfa"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5s1e0")
+"texture": SubResource("AtlasTexture_ntuvn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_s151r")
+"texture": SubResource("AtlasTexture_onpbv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q2jw2")
+"texture": SubResource("AtlasTexture_8ts2g")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7fbs5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_otxs4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cpot5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_71u6v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_drc8y")
+"texture": SubResource("AtlasTexture_0rjg3")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 3.0
 }]
 
-[node name="Coin" type="Node2D"]
+[node name="Coin" type="Node2D" groups=["coin", "collectibles"]]
 script = ExtResource("1_6vs20")
 
 [node name="Collectable2D" type="Area2D" parent="."]
+collision_layer = 5
 script = ExtResource("2_msi5q")
 identifier = "coin"
-audio_streams = Array[AudioStream]([ExtResource("6_ufq8h"), ExtResource("7_x7l2a"), ExtResource("8_7engc")])
+audio_streams = Array[AudioStream]([ExtResource("3_soy7p")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collectable2D"]
 shape = SubResource("CircleShape2D_wuwid")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(3, 3)
+scale = Vector2(0.57, 0.57)
 sprite_frames = SubResource("SpriteFrames_6yyfa")
 autoplay = "default"
 frame_progress = 0.746604
 speed_scale = 2.0
+offset = Vector2(-6, 0)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

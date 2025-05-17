@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://vrf86fmy2n0y"]
+
+[ext_resource type="Script" path="res://ui/sound_button.gd" id="1_85qsh"]
+[ext_resource type="PackedScene" uid="uid://bac06arj7ahsa" path="res://component/random_stream_player_component.tscn" id="2_73luv"]
+[ext_resource type="AudioStream" uid="uid://6anls0htj8yt" path="res://assets/compfest/sfx/button_click_1.wav" id="3_850l0"]
+
+[node name="SoundButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Sound Button"
+script = ExtResource("1_85qsh")
+
+[node name="RandomStreamPlayerComponent" parent="." instance=ExtResource("2_73luv")]
+streams = Array[AudioStream]([ExtResource("3_850l0")])

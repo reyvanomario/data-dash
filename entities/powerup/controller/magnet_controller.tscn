@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dedxluloykxd0"]
+
+[ext_resource type="Script" path="res://entities/powerup/controller/magnet_controller.gd" id="1_d284l"]
+[ext_resource type="PackedScene" uid="uid://b7tododsdqghs" path="res://entities/powerup/magnet_ability.tscn" id="2_d4nk8"]
+
+[node name="MagnetController" type="Node"]
+script = ExtResource("1_d284l")
+magnet_ability = ExtResource("2_d4nk8")
+
+[node name="MagnetTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true

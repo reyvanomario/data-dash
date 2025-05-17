@@ -1,30 +1,123 @@
-[gd_scene load_steps=8 format=3 uid="uid://bua8h7f2d4u26"]
+[gd_scene load_steps=18 format=3 uid="uid://bua8h7f2d4u26"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_t2egg"]
 [ext_resource type="Script" path="res://ui/game_over_screen/game_over_screen.gd" id="2_rovtf"]
 [ext_resource type="AudioStream" uid="uid://b0m613tntjxfn" path="res://assets/original_sfx/achievement_complete.wav" id="3_q2c20"]
-[ext_resource type="PackedScene" uid="uid://dibncjywm4vpa" path="res://ui/leaderboard/leaderboard_entry.tscn" id="3_tevej"]
-[ext_resource type="Texture2D" uid="uid://botxktqdvtlc4" path="res://entities/collectable/coin/coin_sprite.png" id="4_10ec3"]
 [ext_resource type="AudioStream" uid="uid://c6gk44kojsfmf" path="res://assets/original_sfx/ui_select.wav" id="4_w7vc5"]
+[ext_resource type="Texture2D" uid="uid://bkipdcybh0njc" path="res://assets/compfest/Menus/Bg-gameover resized.png" id="5_3m2s4"]
+[ext_resource type="Texture2D" uid="uid://cntk6bk6623gd" path="res://assets/compfest/Items&obstacles (glow)/coin blue.PNG" id="5_jwxvj"]
+[ext_resource type="Texture2D" uid="uid://dykg6qt0nityj" path="res://assets/compfest/Menus/Gameover1(holdduration3,3fps) resized.png" id="6_pchey"]
+[ext_resource type="Texture2D" uid="uid://bvc68v136psr2" path="res://assets/compfest/Menus/Gameover adj (1).png" id="7_hpv64"]
+[ext_resource type="Script" path="res://ui/game_over_screen/game_over_sprite.gd" id="8_16yfh"]
+[ext_resource type="Texture2D" uid="uid://c2yu15xkrikg1" path="res://assets/compfest/Menus/Gameover2 adj (1).png" id="8_teknb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omr5x"]
+atlas = ExtResource("7_hpv64")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djppu"]
+atlas = ExtResource("8_teknb")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_khjr4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omr5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djppu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_w3b2s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1080)]
+}
+
+[sub_resource type="Animation" id="Animation_ki5o6"]
+resource_name = "transition_in"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(0.466516, 1),
+"update": 0,
+"values": [Vector2(0, -1080), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2rxis"]
+_data = {
+"RESET": SubResource("Animation_w3b2s"),
+"transition_in": SubResource("Animation_ki5o6")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m7u26"]
-atlas = ExtResource("4_10ec3")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("5_jwxvj")
+region = Rect2(23, 42, 134, 132)
 
 [node name="GameOverScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1080.0
+offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_t2egg")
 script = ExtResource("2_rovtf")
 audio_highscore = ExtResource("3_q2c20")
 audio_select = ExtResource("4_w7vc5")
-leaderboard_entry_scene = ExtResource("3_tevej")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_3m2s4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_pchey")
+
+[node name="GameOverSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 0)
+sprite_frames = SubResource("SpriteFrames_khjr4")
+animation = &"idle"
+frame_progress = 0.633154
+offset = Vector2(960, 540)
+script = ExtResource("8_16yfh")
+
+[node name="ExitSelectedSprite" type="AnimatedSprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2rxis")
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,7 +143,7 @@ uppercase = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.55, 0, 1)
 theme_override_constants/outline_size = 64
-theme_override_font_sizes/font_size = 256
+theme_override_font_sizes/font_size = 200
 text = "0M"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -59,13 +152,14 @@ uppercase = true
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/outline_size = 32
 theme_override_font_sizes/font_size = 64
-text = "AND COLLECTED "
-horizontal_alignment = 1
+text = "COINS COLLECTED: "
 vertical_alignment = 1
 uppercase = true
 
@@ -79,86 +173,79 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 texture = SubResource("AtlasTexture_m7u26")
 expand_mode = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 128
-theme_override_constants/margin_bottom = 32
+size_flags_horizontal = 4
 
-[node name="highscore" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 32
-
-[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/highscore"]
-custom_minimum_size = Vector2(800, 150)
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_constants/outline_size = 32
-theme_override_font_sizes/font_size = 128
-text = "NEW HIGHSCORE"
+theme_override_font_sizes/font_size = 64
+text = "QUEST BONUS: "
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
 uppercase = true
 
-[node name="leaderboard_name" type="LineEdit" parent="HBoxContainer/MarginContainer/highscore"]
+[node name="QuestBonusLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_font_sizes/font_size = 128
-placeholder_text = "YOUR NAME"
-alignment = 1
-max_length = 16
+theme_override_colors/font_color = Color(1, 0.929412, 0.45098, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 64
+text = "0"
+vertical_alignment = 1
+uppercase = true
 
-[node name="continue_button" type="Button" parent="HBoxContainer/MarginContainer/highscore"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 8
-theme_override_font_sizes/font_size = 128
-text = "CONTINUE"
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="leaderboard" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/outline_size = 64
+theme_override_font_sizes/font_size = 140
+text = "Final Score "
+
+[node name="score" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/outline_size = 64
+theme_override_font_sizes/font_size = 140
+text = "0"
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 600)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 32
-
-[node name="TabContainer" type="TabContainer" parent="HBoxContainer/MarginContainer/leaderboard"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 64
-current_tab = 0
-
-[node name="Leaderboard" type="Control" parent="HBoxContainer/MarginContainer/leaderboard/TabContainer"]
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer/leaderboard/TabContainer/Leaderboard"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+size_flags_vertical = 4
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/leaderboard/TabContainer/Leaderboard/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 
-[node name="home_button" type="Button" parent="HBoxContainer/MarginContainer/leaderboard"]
+[node name="home_button" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 128
 text = "HOME"
 
-[node name="restart_button" type="Button" parent="HBoxContainer/MarginContainer/leaderboard"]
+[node name="restart_button" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 128
@@ -167,3 +254,53 @@ text = "RESTART"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -12.0
 bus = &"ui"
+
+[node name="distance" type="Label" parent="."]
+layout_mode = 0
+offset_left = 990.0
+offset_top = 268.0
+offset_right = 1203.0
+offset_bottom = 493.0
+theme_override_colors/font_color = Color(1, 0.55, 0, 1)
+theme_override_constants/outline_size = 64
+theme_override_font_sizes/font_size = 75
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="coins" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1121.0
+offset_top = 519.0
+offset_right = 1149.0
+offset_bottom = 591.0
+theme_override_colors/font_color = Color(1, 0.929412, 0.45098, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 64
+text = "0"
+vertical_alignment = 1
+uppercase = true
+
+[node name="QuestBonusLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1121.0
+offset_top = 431.0
+offset_right = 1149.0
+offset_bottom = 503.0
+theme_override_colors/font_color = Color(1, 0.929412, 0.45098, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 64
+text = "0"
+vertical_alignment = 1
+uppercase = true
+
+[node name="score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1207.0
+offset_top = 599.0
+offset_right = 1268.0
+offset_bottom = 757.0
+theme_override_constants/outline_size = 64
+theme_override_font_sizes/font_size = 140
+text = "0"

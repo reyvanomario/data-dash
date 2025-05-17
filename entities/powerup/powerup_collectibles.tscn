@@ -1,0 +1,165 @@
+[gd_scene load_steps=18 format=3 uid="uid://cyadkk6w52w1o"]
+
+[ext_resource type="Script" path="res://common/components/collect/collectable_2d.gd" id="1_3qwsg"]
+[ext_resource type="Script" path="res://entities/powerup/powerup_collectibles.gd" id="1_nqgn5"]
+[ext_resource type="Script" path="res://utilities/spawner/spawnable/spawnable.gd" id="2_sdisw"]
+[ext_resource type="Script" path="res://resources/powerup/powerup.gd" id="3_x1xbv"]
+[ext_resource type="Resource" uid="uid://caocem51sb321" path="res://resources/powerup/magnet.tres" id="4_i0stt"]
+[ext_resource type="Resource" uid="uid://cq1vn1knvu4c8" path="res://resources/powerup/extra_life.tres" id="4_l3wis"]
+[ext_resource type="Resource" uid="uid://c4e7cxvl3cceg" path="res://resources/powerup/multiplier.tres" id="5_xg4vu"]
+[ext_resource type="AudioStream" uid="uid://byiycf0ijfjxf" path="res://assets/compfest/sfx/zapsplat_pack_retro_game_musical_tones_mp3/zapsplat_multimedia_game_retro_musical_short_tone_004.mp3" id="9_r4cny"]
+[ext_resource type="Texture2D" uid="uid://c3f8oimlj5nnr" path="res://assets/compfest/Items&obstacles (glow)/ScoreMultiplier.PNG" id="10_rtj31"]
+[ext_resource type="AudioStream" uid="uid://bn16soc8kgptp" path="res://assets/compfest/sfx/zapsplat_pack_retro_game_musical_tones_mp3/zapsplat_multimedia_game_retro_musical_short_tone_001.mp3" id="13_dlvo4"]
+[ext_resource type="AudioStream" uid="uid://cffpge51qn000" path="res://assets/compfest/sfx/zapsplat_pack_retro_game_musical_tones_mp3/zapsplat_multimedia_game_retro_musical_short_tone_002.mp3" id="14_2viu3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dnu32"]
+radius = 40.0
+
+[sub_resource type="Animation" id="Animation_xqf62"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xqplo"]
+resource_name = "heart_default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(38, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_m2ja2"]
+resource_name = "magnet_default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(26, -6)]
+}
+
+[sub_resource type="Animation" id="Animation_ko1km"]
+resource_name = "multiplier_default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, -5), Vector2(44, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_15wl4"]
+_data = {
+"RESET": SubResource("Animation_xqf62"),
+"heart_default": SubResource("Animation_xqplo"),
+"magnet_default": SubResource("Animation_m2ja2"),
+"multiplier_default": SubResource("Animation_ko1km")
+}
+
+[node name="PowerUpCollectibles" type="Node2D" groups=["powerup"]]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_nqgn5")
+powerup_pool = Array[ExtResource("3_x1xbv")]([ExtResource("4_l3wis"), ExtResource("4_i0stt"), ExtResource("5_xg4vu")])
+
+[node name="Collectable2D" type="Area2D" parent="."]
+script = ExtResource("1_3qwsg")
+identifier = "coin"
+audio_streams = Array[AudioStream]([ExtResource("13_dlvo4"), ExtResource("14_2viu3"), ExtResource("9_r4cny")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectable2D"]
+shape = SubResource("CircleShape2D_dnu32")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_rtj31")
+offset = Vector2(-38, 0)
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_15wl4")
+}
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-30, -150, 60, 300)
+
+[node name="Spawnable" type="Node2D" parent="."]
+script = ExtResource("2_sdisw")

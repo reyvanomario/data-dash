@@ -1,29 +1,39 @@
 class_name Collector2D
 extends Area2D
-## A simple component to make anything a collector.
 
-#region VARIABLES
-## The identifiers for the collectables this collector can collect.
 @export var collectable_identifiers: Array[String] = []
 
-## The collision shape for the collector.
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-## The audio stream player respoinsible to play the specific audio for a collected collectable.
+
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
-#endregion
 
-#region FUNCTIONS
+
+
 func _ready() -> void:
-	area_entered.connect(func(area: Area2D):
-		if area is Collectable2D:
-			if area.identifier in collectable_identifiers:
-				area.collect()
-				play_audio(area)
-	)
+	area_entered.connect(on_area_entered)
+	
 
-## Used to play the audio fetched from the collectable when collected.
+
+func on_area_entered(other_area: Area2D):
+	if other_area is Collectable2D:
+		if other_area.get_parent().is_in_group("powerup"):
+			var player = get_tree().get_first_node_in_group("player")
+			player.power_up_collected.emit()
+			
+		if other_area.identifier in collectable_identifiers:
+			other_area.collect()
+			play_audio(other_area)
+			
+			if other_area.get_parent().is_in_group("coin"):
+				get_parent().coin_collected.emit()
+				
+			
+				
+				
+				
+
+
 func play_audio(collectable: Collectable2D) -> void:
 	audio_stream_player_2d.stream = collectable.get_audio()
 	if audio_stream_player_2d.stream != null:
 		audio_stream_player_2d.play()
-#endregion

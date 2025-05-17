@@ -63,6 +63,7 @@ func on_time_to_spawn() -> void:
 		return
 	
 	spawn(spawn_point)
+
 	finished_spawning.emit(spawn_point)
 
 ## What should happen when the spawner just finished spawning?
@@ -86,7 +87,10 @@ func add_node_and_get_spawnable() -> Spawnable:
 		if spawnable == null:
 			return null
 		
+		
 		add_child(node)
+	
+
 		spawnable.despawned.connect(func(_new_position: Vector2): spawnable_pool.append(spawnable))
 	
 	return spawnable
@@ -94,6 +98,7 @@ func add_node_and_get_spawnable() -> Spawnable:
 ## Spawn the specific spawnable assigned to this spawner.
 func spawn(spawn_point: Vector2) -> void:
 	# check if movement has stopped before continuing
+	
 	if GameManager.game != GameManager.Game.PLAYING:
 		return
 	
@@ -102,4 +107,5 @@ func spawn(spawn_point: Vector2) -> void:
 		return
 	
 	spawnable.spawn(spawn_point, target_node)
+	
 #endregion

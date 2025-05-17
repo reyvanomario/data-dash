@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7tododsdqghs"]
+
+[ext_resource type="Script" path="res://entities/powerup/magnet_ability.gd" id="1_xl0sl"]
+[ext_resource type="Texture2D" uid="uid://dpddko6q5ascm" path="res://assets/compfest/Items&obstacles (glow)/Magnet.PNG" id="2_28daw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsu0t"]
+atlas = ExtResource("2_28daw")
+region = Rect2(0, 0, 270, 300)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sl6fe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsu0t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_er6oj"]
+radius = 700.0
+
+[node name="MagnetAbility" type="Node2D"]
+z_index = 2
+script = ExtResource("1_xl0sl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_sl6fe")
+autoplay = "default"
+frame_progress = 0.341328
+offset = Vector2(150, -70)
+
+[node name="MagnetArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea2D"]
+shape = SubResource("CircleShape2D_er6oj")

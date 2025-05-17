@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://c4e7cxvl3cceg"]
+
+[ext_resource type="Script" path="res://resources/powerup/powerup.gd" id="1_cjpfp"]
+
+[resource]
+script = ExtResource("1_cjpfp")
+id = "multiplier"
+name = "Score Multiplier"
+duration = 10.0
+description = "Multiply score."

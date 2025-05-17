@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://5ecappupqpb3"]
+
+[ext_resource type="Texture2D" uid="uid://b3pxbl31sbfl0" path="res://assets/hud/Heart.png" id="1_dsfjp"]
+
+[sub_resource type="GDScript" id="GDScript_w8upi"]
+script/source = "extends Panel
+"
+
+[node name="LifeGUI" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(16, 13)
+offset_right = 80.0
+offset_bottom = 65.0
+script = SubResource("GDScript_w8upi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+scale = Vector2(5, 5)
+texture = ExtResource("1_dsfjp")
+centered = false
+hframes = 5
+frame = 4

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://2kydd375cwuc"]
+
+[ext_resource type="AudioStream" uid="uid://cu2yvvythbky2" path="res://assets/compfest/music/HeatleyBros - HeatleyBros III - 03 8 Bit Select.mp3" id="1_mjspb"]
+[ext_resource type="Script" path="res://music/music_player.gd" id="1_sguw8"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_mjspb")
+volume_db = -12.0
+autoplay = true
+bus = &"music"
+script = ExtResource("1_sguw8")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

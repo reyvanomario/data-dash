@@ -10,18 +10,24 @@ config_version=5
 
 [application]
 
-config/name="Jetpack Joyride - The Remake"
-run/main_scene="res://stages/main/main.tscn"
+config/name="game compfest update"
+run/main_scene="res://ui/menu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-boot_splash/image="res://assets/splash_screen.png"
-config/icon="res://assets/icon.png"
+boot_splash/image="res://Ristek_Gamedev.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 boot_splash/minimum_display_time=3000
+
+[audio]
+
+buses/default_bus_layout="res://default_bus.tres"
 
 [autoload]
 
 GameManager="*res://utilities/game/game_manager.gd"
-SaveSystem="*res://utilities/save/save_system.gd"
 SpawnerManager="*res://utilities/spawner/manager/spawner_manager.gd"
+MusicPlayer="*res://music/music_player.tscn"
+ScreenTransition="*res://autoload/screen_transition.tscn"
 
 [display]
 
@@ -31,19 +37,13 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
 
-[file_customization]
+[global_group]
 
-folder_colors={
-"res://assets/": "red",
-"res://common/": "orange",
-"res://config/": "yellow",
-"res://entities/": "green",
-"res://gdd/": "teal",
-"res://localization/": "blue",
-"res://stages/": "purple",
-"res://ui/": "pink",
-"res://utilities/": "gray"
-}
+player=""
+collectibles=""
+powerup=""
+quest_box=""
+coin=""
 
 [input]
 
@@ -55,6 +55,10 @@ fly={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_3="collectibles"
+
 [physics]
 
 2d/default_gravity=3000.0
@@ -62,6 +66,4 @@ fly={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true

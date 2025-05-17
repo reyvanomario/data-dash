@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://cq1vn1knvu4c8"]
+
+[ext_resource type="Script" path="res://resources/powerup/powerup.gd" id="1_bmnqs"]
+
+[resource]
+script = ExtResource("1_bmnqs")
+id = "extra_life"
+name = "Extra Life"
+duration = 0.0
+description = "Add 1 extra life to player."

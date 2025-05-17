@@ -1,25 +1,106 @@
-[gd_scene load_steps=9 format=3 uid="uid://c04c0t0p0lfve"]
+[gd_scene load_steps=15 format=3 uid="uid://c04c0t0p0lfve"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_terh0"]
 [ext_resource type="Texture2D" uid="uid://dxmamdwwu5hul" path="res://ui/pause_icon.png" id="2_fsihy"]
 [ext_resource type="Script" path="res://ui/hud/hud.gd" id="2_pbtj6"]
-[ext_resource type="Texture2D" uid="uid://botxktqdvtlc4" path="res://entities/collectable/coin/coin_sprite.png" id="3_ckfjp"]
+[ext_resource type="Texture2D" uid="uid://cntk6bk6623gd" path="res://assets/compfest/Items&obstacles (glow)/coin blue.PNG" id="3_x5khu"]
+[ext_resource type="PackedScene" uid="uid://5ecappupqpb3" path="res://ui/hud/life_gui.tscn" id="4_rjsna"]
+[ext_resource type="Script" path="res://ui/hud/hearts_container.gd" id="4_sll8r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y3tqg"]
-atlas = ExtResource("3_ckfjp")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("3_x5khu")
+region = Rect2(24, 42, 132, 133)
+
+[sub_resource type="Animation" id="Animation_51ge8"]
+resource_name = "decrement_life"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LifeLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.890196, 0.0196078, 0.0196078, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8jku7"]
+_data = {
+"decrement_life": SubResource("Animation_51ge8")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmgr4"]
 atlas = ExtResource("2_fsihy")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ovtxq"]
-atlas = ExtResource("2_fsihy")
-region = Rect2(32, 0, 16, 16)
+[sub_resource type="Animation" id="Animation_h8r8k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/VBoxContainer/MarginContainer/distance:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer/VBoxContainer/MarginContainer/distance:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jmn0d"]
-atlas = ExtResource("2_fsihy")
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="Animation" id="Animation_odluh"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/VBoxContainer/MarginContainer/distance:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_ecdpl"]
+resource_name = "multiplier"
+length = 1.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/VBoxContainer/MarginContainer/distance:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.851225, 0.681008, 0.234263, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ossdo"]
+_data = {
+"RESET": SubResource("Animation_h8r8k"),
+"default": SubResource("Animation_odluh"),
+"multiplier": SubResource("Animation_ecdpl")
+}
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -48,12 +129,11 @@ layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 0
 
 [node name="distance" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 32
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 100
 text = "000"
 vertical_alignment = 1
 uppercase = true
@@ -61,18 +141,17 @@ uppercase = true
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="coins" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.929412, 0.45098, 1)
 theme_override_constants/outline_size = 32
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 70
 text = "000"
 vertical_alignment = 1
 uppercase = true
@@ -82,12 +161,45 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_y3tqg")
 expand_mode = 3
 
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HeartsContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 75
+script = ExtResource("4_sll8r")
+
+[node name="LifeGUI" parent="HBoxContainer/VBoxContainer/MarginContainer3/HeartsContainer" instance=ExtResource("4_rjsna")]
+layout_mode = 2
+script = null
+
+[node name="LifeLabel" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer3/HeartsContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.929412, 0.45098, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 70
+text = "x 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/VBoxContainer/MarginContainer3/HeartsContainer"]
+libraries = {
+"": SubResource("AnimationLibrary_8jku7")
+}
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer3" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer3"]
 layout_mode = 2
@@ -100,6 +212,13 @@ theme_override_constants/margin_bottom = 16
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_vmgr4")
-texture_pressed = SubResource("AtlasTexture_ovtxq")
-texture_hover = SubResource("AtlasTexture_jmn0d")
 stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ossdo")
+}
+
+[node name="MultiplierTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true

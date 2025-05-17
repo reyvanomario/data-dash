@@ -1,8 +1,8 @@
 class_name Missile
 extends Node2D
-## A flying missile, acting as an obstacle for the player.
 
-#region VARIABLES
+
+
 ## The audio stream for launching the missile.
 @export var audio_launch: AudioStream
 ## The audio stream to warn for incoming missile.
@@ -19,6 +19,9 @@ extends Node2D
 ## The timer used to determine how long to show the warning.
 @onready var warning_timer: Timer = $warning_timer
 
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+
 ## Is the missile aiming?
 var aiming: bool = true
 ## The speed of the missile.
@@ -32,14 +35,13 @@ var scrolling:bool = false :
 var target: Node2D = null
 ## The time for displaying the first warning.
 var warning_time_low: float = 2.0
-#endregion
 
-#region SIGNALS
-## Emitted when the missile enters the screen.
+
+
 signal screen_entered
-#endregion
 
-#region FUNCTIONS
+
+
 func _ready() -> void:
 	GameManager.game_changed.connect(func(game:int):
 		match game:
@@ -65,7 +67,8 @@ func _process(delta: float) -> void:
 	if aiming and target != null:
 		position.y = lerpf(position.y, target.position.y, 0.1)
 
-## Custom functionality when a missile is spawned.
+
+
 func on_spawned(_spawn_point: Vector2, target_node: Node2D) -> void:
 	target = target_node
 	warning_timer.start(warning_time_low)
@@ -88,10 +91,9 @@ func on_spawned(_spawn_point: Vector2, target_node: Node2D) -> void:
 	audio_stream_player_2d.stream = audio_launch
 	audio_stream_player_2d.play()
 
-## Custom functionality when a missile is despawned.
+
 func on_despawned(_new_position: Vector2) -> void:
 	aiming = true
 	scrolling = false
 	warning_animation_sprite.animation = 'warning_low'
 	warning_animation_sprite.visible = true
-#endregion

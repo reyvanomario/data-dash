@@ -1,22 +1,19 @@
 extends Control
 
-#region VARIABLES
-## Audio stream player to play any audio related to this UI component.
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
-## Label for displaying the total amount of collected coins.
-@onready var coins_label: Label = $VBoxContainer/MarginContainer/HBoxContainer/coins
-#endregion
 
-#region FUNCTIONS
 func _ready() -> void:
-	coins_label.text = "%d" % floori(SaveSystem.stats.coins)
-	GameManager.game_changed.connect(func(game:int):
-		match game:
-			GameManager.Game.NEW:
-				coins_label.text = "%d" % floori(SaveSystem.stats.coins)
-				visible = true
-			GameManager.Game.PLAYING:
-				audio_stream_player.play()
-				visible = false
-	)
-#endregion
+	GameManager.game_changed.connect(on_game_changed)
+	
+	
+
+func on_game_changed(game: int):
+	if game == GameManager.Game.NEW:
+		visible = true
+	
+	elif game == GameManager.Game.PLAYING:
+		audio_stream_player.play()
+		visible = false
+		
+		MusicPlayer.play_game_music()
+	

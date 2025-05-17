@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://caocem51sb321"]
+
+[ext_resource type="Script" path="res://resources/powerup/powerup.gd" id="1_oa320"]
+
+[resource]
+script = ExtResource("1_oa320")
+id = "magnet"
+name = "Magnet"
+duration = 15.0
+description = "Attracts collectibles near the player within a certain radius."

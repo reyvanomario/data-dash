@@ -1,15 +1,12 @@
 class_name CoinSpawner
 extends Spawner
-## A time interval based spawner for missiles.
 
-#region VARIABLES
-## Used to spawn coins spaced out.
+
 var between_coins_timer: Timer = Timer.new()
-## Used to interupt spawning when the game state changes.
 var interupt_spawning: bool = false
-#endregion
 
-#region FUNCTIONS
+
+
 func _ready() -> void:
 	super._ready()
 	
@@ -41,4 +38,3 @@ func on_time_to_spawn() -> void:
 		between_coins_timer.stop()
 	
 	finished_spawning.emit(spawn_point)
-#endregion
