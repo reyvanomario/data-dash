@@ -9,15 +9,19 @@ var credit_selected_texture: Texture2D = preload("res://assets/compfest/Menus/Ma
 var current_selection: int = 0
 const OPTION_COUNT = 3
 
+var _input_locked := false
+
+
 
 func _ready() -> void:
-	#$%CreditButton.pressed.connect(on_credit_pressed)
-	#$%QuitButton.pressed.connect(on_quit_pressed)
-	
 	update_menu_display()
 	
 
 func _input(event):
+	if _input_locked:
+		return
+		
+		
 	if event.is_action_pressed("ui_down"):
 		current_selection = (current_selection + 1) % OPTION_COUNT
 		update_menu_display()
@@ -28,12 +32,16 @@ func _input(event):
 		
 		
 	if event.is_action_pressed("ui_accept"):
+		_input_locked = true
+		
 		$RandomStreamPlayerComponent.play_random()
 		await $RandomStreamPlayerComponent.finished
+	
 		
-		handle_selection()
+		await _on_accept()
 		
 
+	
 
 func on_credit_pressed():
 	pass
@@ -50,18 +58,34 @@ func update_menu_display():
 
 
 func handle_selection():
+	if not is_inside_tree():
+		return
+	
+	print(GameManager.game)
+		
 	match current_selection:
 		0:
 			ScreenTransition.transition()
 			await ScreenTransition.transitioned_halfway
 			
-			#GameManager.game = GameManager.Game.PLAYING
-			get_tree().change_scene_to_file("res://stages/main/main.tscn")
+			if is_inside_tree():
+				GameManager.game = GameManager.Game.NEW
+				get_tree().change_scene_to_file("res://stages/main/main.tscn")
 
 		1:
-			get_tree().quit()
+			if is_inside_tree():
+				get_tree().quit()
 		
 		2:
-			print("credit")
+			if is_inside_tree():
+				print("credit")
+			
+			
+func _on_accept() -> void:
+	handle_selection()
+	_input_locked = false
+			
+
+
 	
 	

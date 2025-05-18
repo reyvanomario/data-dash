@@ -88,7 +88,7 @@ signal paused_changed(paused: bool)
 signal distance_changed(distance: float)
 signal coins_changed(coins: int)
 signal multiplier_activated
-
+signal distance_increased(distance: float)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -108,8 +108,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if game == Game.PLAYING:
 		speed += Speed.STEP * delta
+		var prev_distance = distance
 		distance += (METERS_PER_SECOND * delta) * (speed / Speed.START) * score_multiplier
 		
+		if floor(distance / 100) > floor(prev_distance / 100):
+			distance_increased.emit(distance)
+			
+			
 	elif game == Game.OVER:
 		speed = lerp(float(speed), float(Speed.RESET), delta * 2.0)
 		distance += (METERS_PER_SECOND * delta) * (speed / Speed.START)

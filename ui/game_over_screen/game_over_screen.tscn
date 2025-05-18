@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bua8h7f2d4u26"]
+[gd_scene load_steps=24 format=3 uid="uid://bua8h7f2d4u26"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_t2egg"]
 [ext_resource type="Script" path="res://ui/game_over_screen/game_over_screen.gd" id="2_rovtf"]
@@ -6,8 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://cntk6bk6623gd" path="res://assets/compfest/Items&obstacles (glow)/coin blue.PNG" id="5_jwxvj"]
 [ext_resource type="Texture2D" uid="uid://dykg6qt0nityj" path="res://assets/compfest/Menus/Gameover1(holdduration3,3fps) resized.png" id="6_pchey"]
 [ext_resource type="Texture2D" uid="uid://bvc68v136psr2" path="res://assets/compfest/Menus/Gameover adj (1).png" id="7_hpv64"]
+[ext_resource type="Texture2D" uid="uid://b0gvrn3d54rg3" path="res://assets/compfest/Menus/Main-credits (1).png" id="8_6qi02"]
 [ext_resource type="Script" path="res://ui/game_over_screen/game_over_sprite.gd" id="8_16yfh"]
 [ext_resource type="Texture2D" uid="uid://c2yu15xkrikg1" path="res://assets/compfest/Menus/Gameover2 adj (1).png" id="8_teknb"]
+[ext_resource type="Texture2D" uid="uid://pofjcdygdda8" path="res://assets/compfest/Menus/Main opt.PNG" id="9_eyqr6"]
+[ext_resource type="Script" path="res://ui/game_over_screen/exit_selected_sprite.gd" id="10_883e7"]
+[ext_resource type="PackedScene" uid="uid://bac06arj7ahsa" path="res://component/random_stream_player_component.tscn" id="12_wvvan"]
+[ext_resource type="AudioStream" uid="uid://cpx8e7r35ai84" path="res://assets/compfest/sfx/button-305770.wav" id="13_7jhbt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_omr5x"]
 atlas = ExtResource("7_hpv64")
@@ -25,6 +30,28 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_djppu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj6yn"]
+atlas = ExtResource("8_6qi02")
+region = Rect2(0, 0, 1920, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ns2n1"]
+atlas = ExtResource("9_eyqr6")
+region = Rect2(0, 0, 2568, 1440)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3k7mn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj6yn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ns2n1")
 }],
 "loop": true,
 "name": &"idle",
@@ -97,7 +124,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("6_pchey")
 
-[node name="GameOverSprite" type="AnimatedSprite2D" parent="."]
+[node name="TryAgainSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(2, 0)
 sprite_frames = SubResource("SpriteFrames_khjr4")
 animation = &"idle"
@@ -106,6 +133,11 @@ offset = Vector2(960, 540)
 script = ExtResource("8_16yfh")
 
 [node name="ExitSelectedSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_3k7mn")
+animation = &"idle"
+offset = Vector2(960, 540)
+script = ExtResource("10_883e7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -300,3 +332,7 @@ offset_bottom = 757.0
 theme_override_constants/outline_size = 64
 theme_override_font_sizes/font_size = 140
 text = "0"
+
+[node name="RandomStreamPlayerComponent" parent="." instance=ExtResource("12_wvvan")]
+streams = Array[AudioStream]([ExtResource("13_7jhbt")])
+randomize_pitch = false

@@ -10,6 +10,7 @@ func _ready() -> void:
 	
 
 func play_main_menu_music():
+	volume_db = -15
 	stream = main_menu_music_audio
 	play()
 	

@@ -83,5 +83,7 @@ func on_sfx_toggled(toggled_on: bool) -> void:
 func play_audio(audio_stream: AudioStream) -> void:
 	if audio_stream == null:
 		return
-	audio_stream_player.stream = audio_stream
-	audio_stream_player.play()
+		
+	if is_inside_tree():
+		audio_stream_player.stream = audio_stream
+		audio_stream_player.play()

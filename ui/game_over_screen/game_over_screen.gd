@@ -30,12 +30,22 @@ var displayed_score: int:
 		label_score.text = str(val)
 		
 
+@onready var try_again_sprite: AnimatedSprite2D = $TryAgainSprite
+@onready var exit_selected_sprite: AnimatedSprite2D = $ExitSelectedSprite
+
+
+var current_selection: int = 0
+
+
+
 
 func _ready() -> void:
 	GameManager.game_changed.connect(on_game_changed)
 	#button_continue.pressed.connect(on_continue)
 	home_button.pressed.connect(on_home)
 	restart_button.pressed.connect(on_restart)
+	
+	#update_menu_display()
 		
 
 func on_game_changed(game: int) -> void:
@@ -89,4 +99,65 @@ func count_up_score(target: int, duration: float = 0.5) -> void:
 	  .tween_property(self, "displayed_score", target, duration) \
 	  .set_trans(Tween.TRANS_SINE) \
 	  .set_ease(Tween.EASE_OUT)
+	
+
+
+var start_selected_texture: Texture2D = preload("res://assets/compfest/Menus/Main-start (1).png")
+var exit_selected_texture: Texture2D = preload("res://assets/compfest/Menus/Main-exit (1).png")
+var credit_selected_texture: Texture2D = preload("res://assets/compfest/Menus/Main-credits (1).png")
+
+
+
+
+func _input(event):
+	if GameManager.game != GameManager.Game.OVER:
+		return
+		
+	
+	if event.is_action_pressed("ui_left") || event.is_action_pressed("ui_right"):
+		pass
+		#current_selection = 1 - current_selection  
+		#update_menu_display()
+		
+		#$RandomStreamPlayerComponent.play_random()
+		#
+		#await $RandomStreamPlayerComponent.finished
+		
+		
+	if event.is_action_pressed("ui_accept"):
+		$RandomStreamPlayerComponent.play_random()
+		await $RandomStreamPlayerComponent.finished
+		
+		handle_selection()
+
+
+func update_menu_display():
+	match current_selection:
+		0:
+			$TryAgainSprite.visible = true
+			$ExitSelectedSprite.visible = false
+		1:
+			$TryAgainSprite.visible = false
+			$ExitSelectedSprite.visible = true
+
+
+
+
+func handle_selection():
+	if GameManager.game != GameManager.Game.OVER:
+		return
+		
+	match current_selection:
+		0:
+			ScreenTransition.transition()
+			await ScreenTransition.transitioned_halfway
+			
+			GameManager.game = GameManager.Game.NEW
+			GameManager.game = GameManager.Game.PLAYING
+
+		1:
+			GameManager.game = GameManager.Game.NEW
+			get_tree().change_scene_to_file("res://ui/menu/main_menu.tscn")
+			MusicPlayer.play_main_menu_music()
+		
 	
