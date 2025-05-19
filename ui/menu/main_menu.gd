@@ -181,7 +181,6 @@ func on_game_code_failed(error_message: String):
 	response_label.visible = true
 	
 	
-	line_edit.text_submitted.connect(on_line_edit_text_submitted)
 
 
 	
