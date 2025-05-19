@@ -43,7 +43,7 @@ func damage(amount: int = health, audio_stream: AudioStream = null, is_missile =
 
 
 func check_death():
-	if health == 0:
+	if health <= 0:
 		died.emit()
 		
 

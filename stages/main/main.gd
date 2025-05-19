@@ -7,9 +7,9 @@ extends Node2D
 @onready var player = $Player
 
 @onready var quests: Array[Quest] = [
-	$CoinQuest,
-	$Take3PowerUpQuest,
-	$SurvivalQuest,
+	#$CoinQuest,
+	#$Take3PowerUpQuest,
+	#$SurvivalQuest,
 	$DistanceQuest
 ]
 

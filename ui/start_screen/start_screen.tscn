@@ -30,13 +30,11 @@ size_flags_vertical = 6
 [node name="Label" type="Label" parent="VBoxContainer/start"]
 layout_mode = 2
 size_flags_vertical = 10
+theme_override_colors/font_color = Color(1, 0.992157, 0.960784, 1)
+theme_override_colors/font_outline_color = Color(0.0705882, 0.109804, 0.160784, 1)
 theme_override_constants/outline_size = 32
 theme_override_font_sizes/font_size = 64
 text = "PRESS SPACE TO PLAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -12.0
-bus = &"ui"

@@ -21,8 +21,9 @@ func on_area_entered(other_area: Area2D):
 	if other_area is HurtboxComponent:
 		if get_parent().name == "Missile":
 			is_missile = true
-			
-		other_area.damage(damage_amount, get_audio(), is_missile)
+		
+		print(damage_amount)
+		other_area.damage(1, get_audio(), is_missile)
 		
 		
 		

@@ -2,7 +2,7 @@ class_name GameManagerGlobal
 extends Node
 
 
-const METERS_PER_SECOND:int = 2
+const METERS_PER_SECOND:int = 1
 
 
 

@@ -1,12 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://c78kinrn6mims"]
+[gd_scene load_steps=12 format=3 uid="uid://c78kinrn6mims"]
 
 [ext_resource type="Script" path="res://ui/menu/main_menu.gd" id="1_b5dg6"]
 [ext_resource type="PackedScene" uid="uid://vrf86fmy2n0y" path="res://ui/sound_button.tscn" id="1_qj2vg"]
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="2_2j24o"]
 [ext_resource type="Texture2D" uid="uid://cdus3iea2j50c" path="res://assets/compfest/Menus/Bg-main.PNG" id="2_xyvy7"]
 [ext_resource type="Texture2D" uid="uid://dn3svqraaufcy" path="res://assets/compfest/Menus/Main-start (1).png" id="3_hbrhu"]
+[ext_resource type="Texture2D" uid="uid://c7dgh1hfj8ptu" path="res://assets/compfest/Menus/Bg+credits.PNG" id="4_ak1n3"]
+[ext_resource type="Texture2D" uid="uid://blvjq4f13c5th" path="res://assets/compfest/Menus/Press-esc.PNG" id="5_sdien"]
 [ext_resource type="PackedScene" uid="uid://bac06arj7ahsa" path="res://component/random_stream_player_component.tscn" id="6_7wej0"]
 [ext_resource type="AudioStream" uid="uid://cpx8e7r35ai84" path="res://assets/compfest/sfx/button-305770.wav" id="7_rslg8"]
+[ext_resource type="Texture2D" uid="uid://lctf3lu0u10e" path="res://assets/compfest/Inputcode.PNG" id="10_1o8tk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gx0og"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_b5dg6")
@@ -28,6 +33,18 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_hbrhu")
 expand_mode = 2
+
+[node name="CreditTexture" type="TextureRect" parent="."]
+visible = false
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("4_ak1n3")
+
+[node name="TextureRect" type="TextureRect" parent="CreditTexture"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_sdien")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 visible = false
@@ -83,6 +100,62 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Quit"
+
+[node name="InputCodeTexture" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_1o8tk")
+stretch_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="InputCodeTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -246.0
+offset_top = 62.0
+offset_right = 273.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_2j24o")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gx0og")
+placeholder_text = "Enter Game Code"
+alignment = 1
+max_length = 10
+expand_to_text_length = true
+
+[node name="MarginContainer" type="MarginContainer" parent="InputCodeTexture"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -214.0
+offset_top = -68.0
+offset_right = 214.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 250
+
+[node name="ResponseLabel" type="Label" parent="InputCodeTexture/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_2j24o")
+theme_override_colors/font_color = Color(0.960784, 0.027451, 0.105882, 1)
+theme_override_font_sizes/font_size = 60
+text = "Kode game salah"
+horizontal_alignment = 1
 
 [node name="RandomStreamPlayerComponent" parent="." instance=ExtResource("6_7wej0")]
 streams = Array[AudioStream]([ExtResource("7_rslg8")])

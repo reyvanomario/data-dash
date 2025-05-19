@@ -1,57 +1,60 @@
-[gd_scene load_steps=24 format=3 uid="uid://bua8h7f2d4u26"]
+[gd_scene load_steps=27 format=3 uid="uid://bua8h7f2d4u26"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_t2egg"]
 [ext_resource type="Script" path="res://ui/game_over_screen/game_over_screen.gd" id="2_rovtf"]
+[ext_resource type="Texture2D" uid="uid://ceuw5ms3wpmnj" path="res://assets/compfest/Menus/Gameover-retry1 (1).png" id="5_2p4sn"]
 [ext_resource type="Texture2D" uid="uid://bkipdcybh0njc" path="res://assets/compfest/Menus/Bg-gameover resized.png" id="5_3m2s4"]
 [ext_resource type="Texture2D" uid="uid://cntk6bk6623gd" path="res://assets/compfest/Items&obstacles (glow)/coin blue.PNG" id="5_jwxvj"]
+[ext_resource type="Texture2D" uid="uid://be4s61tgv2bdq" path="res://assets/compfest/Menus/Gameover-retry2 (1).png" id="6_c1y7j"]
 [ext_resource type="Texture2D" uid="uid://dykg6qt0nityj" path="res://assets/compfest/Menus/Gameover1(holdduration3,3fps) resized.png" id="6_pchey"]
-[ext_resource type="Texture2D" uid="uid://bvc68v136psr2" path="res://assets/compfest/Menus/Gameover adj (1).png" id="7_hpv64"]
-[ext_resource type="Texture2D" uid="uid://b0gvrn3d54rg3" path="res://assets/compfest/Menus/Main-credits (1).png" id="8_6qi02"]
 [ext_resource type="Script" path="res://ui/game_over_screen/game_over_sprite.gd" id="8_16yfh"]
-[ext_resource type="Texture2D" uid="uid://c2yu15xkrikg1" path="res://assets/compfest/Menus/Gameover2 adj (1).png" id="8_teknb"]
-[ext_resource type="Texture2D" uid="uid://pofjcdygdda8" path="res://assets/compfest/Menus/Main opt.PNG" id="9_eyqr6"]
+[ext_resource type="Texture2D" uid="uid://s5tanc4obq6t" path="res://assets/compfest/Menus/Gameover-exit1 (1).png" id="8_hpdg6"]
+[ext_resource type="Texture2D" uid="uid://631rpx1mrkll" path="res://assets/compfest/Menus/Gameover-exit2 (1).png" id="9_6hwum"]
 [ext_resource type="Script" path="res://ui/game_over_screen/exit_selected_sprite.gd" id="10_883e7"]
+[ext_resource type="Texture2D" uid="uid://bu6f87s06x2sr" path="res://assets/compfest/Menus/gameover-bg-1.PNG" id="11_1r47i"]
+[ext_resource type="Texture2D" uid="uid://dro5wtmeyms8s" path="res://assets/compfest/Menus/gameover-bg-2.PNG" id="12_h13ha"]
 [ext_resource type="PackedScene" uid="uid://bac06arj7ahsa" path="res://component/random_stream_player_component.tscn" id="12_wvvan"]
 [ext_resource type="AudioStream" uid="uid://cpx8e7r35ai84" path="res://assets/compfest/sfx/button-305770.wav" id="13_7jhbt"]
+[ext_resource type="Texture2D" uid="uid://clt6ml5nskgil" path="res://assets/compfest/Menus/gameover-bg-3.PNG" id="13_kc3un"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_omr5x"]
-atlas = ExtResource("7_hpv64")
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4yqt"]
+atlas = ExtResource("5_2p4sn")
 region = Rect2(0, 0, 1920, 1080)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_djppu"]
-atlas = ExtResource("8_teknb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ehws"]
+atlas = ExtResource("6_c1y7j")
 region = Rect2(0, 0, 1920, 1080)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_khjr4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_omr5x")
+"texture": SubResource("AtlasTexture_l4yqt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_djppu")
+"texture": SubResource("AtlasTexture_5ehws")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nj6yn"]
-atlas = ExtResource("8_6qi02")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ow3ed"]
+atlas = ExtResource("8_hpdg6")
 region = Rect2(0, 0, 1920, 1080)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ns2n1"]
-atlas = ExtResource("9_eyqr6")
-region = Rect2(0, 0, 2568, 1440)
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5uwk"]
+atlas = ExtResource("9_6hwum")
+region = Rect2(0, 0, 1920, 1080)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3k7mn"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nj6yn")
+"texture": SubResource("AtlasTexture_ow3ed")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ns2n1")
+"texture": SubResource("AtlasTexture_a5uwk")
 }],
 "loop": true,
 "name": &"idle",
@@ -63,30 +66,174 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("Background:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -1080)]
+"update": 1,
+"values": [ExtResource("5_3m2s4")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TryAgainSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("distance:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("QuestBonusLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("score:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("coins:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Background:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_ki5o6"]
 resource_name = "transition_in"
-length = 0.8
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("Background:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(0.466516, 1),
-"update": 0,
-"values": [Vector2(0, -1080), Vector2(0, 0)]
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("11_1r47i"), ExtResource("12_h13ha"), ExtResource("13_kc3un"), ExtResource("5_3m2s4")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TryAgainSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("distance:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("coins:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("QuestBonusLabel:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("score:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Background:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2rxis"]
@@ -104,14 +251,13 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -1080.0
-offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_t2egg")
 script = ExtResource("2_rovtf")
 
 [node name="Background" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -136,6 +282,7 @@ script = ExtResource("8_16yfh")
 visible = false
 sprite_frames = SubResource("SpriteFrames_3k7mn")
 animation = &"idle"
+frame_progress = 0.543027
 offset = Vector2(960, 540)
 script = ExtResource("10_883e7")
 
@@ -289,7 +436,7 @@ offset_left = 990.0
 offset_top = 268.0
 offset_right = 1203.0
 offset_bottom = 493.0
-theme_override_colors/font_color = Color(1, 0.55, 0, 1)
+theme_override_colors/font_color = Color(0.737255, 0.615686, 0.294118, 1)
 theme_override_constants/outline_size = 64
 theme_override_font_sizes/font_size = 75
 text = "0"
@@ -298,12 +445,13 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="coins" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1121.0
 offset_top = 519.0
 offset_right = 1149.0
 offset_bottom = 591.0
-theme_override_colors/font_color = Color(1, 0.929412, 0.45098, 1)
+theme_override_colors/font_color = Color(1, 0.894118, 0.431373, 1)
 theme_override_constants/outline_size = 32
 theme_override_font_sizes/font_size = 64
 text = "0"
@@ -311,12 +459,13 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="QuestBonusLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1121.0
 offset_top = 431.0
 offset_right = 1149.0
 offset_bottom = 503.0
-theme_override_colors/font_color = Color(1, 0.929412, 0.45098, 1)
+theme_override_colors/font_color = Color(1, 0.894118, 0.431373, 1)
 theme_override_constants/outline_size = 32
 theme_override_font_sizes/font_size = 64
 text = "0"
@@ -324,14 +473,44 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="score" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1207.0
 offset_top = 599.0
 offset_right = 1268.0
 offset_bottom = 757.0
+theme_override_colors/font_color = Color(1, 0.960784, 0.784314, 1)
 theme_override_constants/outline_size = 64
 theme_override_font_sizes/font_size = 140
 text = "0"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -214.0
+offset_top = -68.0
+offset_right = 214.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 260
+
+[node name="SendCodeResponseLabel" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_t2egg")
+theme_override_colors/font_color = Color(0.960784, 0.027451, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(0.0705882, 0.109804, 0.160784, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 60
+text = "Gagal Mengirim Poin"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RandomStreamPlayerComponent" parent="." instance=ExtResource("12_wvvan")]
 streams = Array[AudioStream]([ExtResource("13_7jhbt")])

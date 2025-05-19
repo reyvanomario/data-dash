@@ -28,6 +28,9 @@ GameManager="*res://utilities/game/game_manager.gd"
 SpawnerManager="*res://utilities/spawner/manager/spawner_manager.gd"
 MusicPlayer="*res://music/music_player.tscn"
 ScreenTransition="*res://autoload/screen_transition.tscn"
+GlobalGameCodeVerifier="*res://global_script/game_code_verifier_new.gd"
+GlobalGamePointSender="*res://global_script/game_point_sender_new.gd"
+SHA512Request="*res://global_script/sha512_request.gd"
 
 [display]
 

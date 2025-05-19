@@ -13,8 +13,6 @@ extends Control
 
 @onready var audio_bus_music_index: int = AudioServer.get_bus_index('music')
 
-@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
-
 
 @onready var home_button: Button = $VBoxContainer/VBoxContainer/home_button
 
@@ -22,6 +20,9 @@ extends Control
 
 @onready var resume_button: Button = $VBoxContainer/VBoxContainer/resume_button
 
+@onready var audio_stream_player: AudioStreamPlayer = $RandomStreamPlayerComponent
+
+var _input_locked := false
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -30,7 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		if GameManager.paused:
 			return
-		#play_audio(audio_paused)
+
 
 func _ready() -> void:
 	GameManager.paused_changed.connect(on_paused_changed)
@@ -38,20 +39,21 @@ func _ready() -> void:
 	resume_button.pressed.connect(on_resume_button_pressed)
 	restart_button.pressed.connect(on_restart_button_pressed)
 	
-	
 
 
 func on_home_button_pressed() -> void:
+	if _input_locked:
+		return
+		
+	_input_locked = true
+	
+	audio_stream_player.play_random()
+	await audio_stream_player.finished
+	
 	GameManager.game = GameManager.Game.NEW
 	get_tree().change_scene_to_file("res://ui/menu/main_menu.tscn")
 	MusicPlayer.play_main_menu_music()
 	GameManager.paused = false
-	play_audio(audio_select)
-
-
-func on_music_toggled(toggled_on: bool) -> void:
-	play_audio(audio_select)
-	AudioServer.set_bus_mute(audio_bus_music_index, toggled_on)
 
 
 
@@ -59,31 +61,32 @@ func on_paused_changed(paused: bool) -> void:
 	visible = paused
 	if !paused:
 		return
-	#play_audio(audio_paused)
+		
+	audio_stream_player.play_random()
+	_input_locked = false
 
 
 func on_restart_button_pressed() -> void:
+	if _input_locked:
+		return
+		
+	_input_locked = true
+	audio_stream_player.play_random()
+	
+	await audio_stream_player.finished
 	GameManager.game = GameManager.Game.NEW
 	GameManager.game = GameManager.Game.PLAYING
 	GameManager.paused = false
-	play_audio(audio_select)
 
 
 func on_resume_button_pressed() -> void:
-	GameManager.paused = false
-	play_audio(audio_select)
-
-
-func on_sfx_toggled(toggled_on: bool) -> void:
-	play_audio(audio_select)
-	AudioServer.set_bus_mute(audio_bus_sfx_index, toggled_on)
-
-
-
-func play_audio(audio_stream: AudioStream) -> void:
-	if audio_stream == null:
+	if _input_locked:
 		return
 		
-	if is_inside_tree():
-		audio_stream_player.stream = audio_stream
-		audio_stream_player.play()
+	_input_locked = true
+	audio_stream_player.play_random()
+	
+	GameManager.paused = false
+
+
+	

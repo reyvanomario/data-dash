@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dkiufj3yhj50s"]
+[gd_scene load_steps=25 format=3 uid="uid://dkiufj3yhj50s"]
 
 [ext_resource type="PackedScene" uid="uid://d370gfo85kgf6" path="res://stages/parallax_background/parallax_background.tscn" id="1_6cvk4"]
 [ext_resource type="Script" path="res://stages/main/main.gd" id="1_elsft"]
@@ -19,7 +19,9 @@
 [ext_resource type="Script" path="res://stages/main/power_up_spawner.gd" id="13_dcvjj"]
 [ext_resource type="PackedScene" uid="uid://cyadkk6w52w1o" path="res://entities/powerup/powerup_collectibles.tscn" id="14_i8eyo"]
 [ext_resource type="Script" path="res://ui/quest/coin_quest.gd" id="16_fy0xu"]
+[ext_resource type="Script" path="res://stages/main/drone_spawner.gd" id="17_ael8n"]
 [ext_resource type="Script" path="res://stages/main/take_3_power_up_quest.gd" id="18_o84ay"]
+[ext_resource type="PackedScene" uid="uid://c57t8hopbwn48" path="res://entities/drone/drone.tscn" id="18_rswog"]
 [ext_resource type="Script" path="res://stages/main/survival_quest.gd" id="19_xv68k"]
 [ext_resource type="Script" path="res://stages/main/distance_quest.gd" id="20_lqw2t"]
 
@@ -68,6 +70,12 @@ interval_min = 5.0
 interval_max = 12.0
 target_node = NodePath("../Player")
 
+[node name="DroneSpawner" type="Node2D" parent="."]
+script = ExtResource("17_ael8n")
+node_scene = ExtResource("18_rswog")
+interval_min = 5.0
+interval_max = 10.0
+
 [node name="PowerUpSpawner" type="Node2D" parent="."]
 script = ExtResource("13_dcvjj")
 node_scene = ExtResource("14_i8eyo")
@@ -83,27 +91,27 @@ script = ExtResource("16_fy0xu")
 quest_name = "Collect Coins"
 quest_description = "Collect 50 Coins"
 reached_goal_text = "Quest Completed"
-reward_amount = 15
+reward_amount = 10
 
 [node name="Take3PowerUpQuest" type="Node2D" parent="."]
 script = ExtResource("18_o84ay")
 quest_name = "Power Up Quest"
 quest_description = "Take 3 Powerups"
 reached_goal_text = "Quest Completed"
-reward_amount = 20
+reward_amount = 15
 
 [node name="SurvivalQuest" type="Node2D" parent="."]
 script = ExtResource("19_xv68k")
 quest_name = "Survival Quest"
 quest_description = "Survive 40 seconds"
 reached_goal_text = "Quest Completed"
-reward_amount = 40
+reward_amount = 30
 
 [node name="Timer" type="Timer" parent="SurvivalQuest"]
 
 [node name="DistanceQuest" type="Node2D" parent="."]
 script = ExtResource("20_lqw2t")
 quest_name = "Distance Quest"
-quest_description = "Fly 1000M"
+quest_description = "Fly 150M"
 reached_goal_text = "Quest Completed"
-reward_amount = 40
+reward_amount = 30

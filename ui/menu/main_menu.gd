@@ -6,14 +6,28 @@ var exit_selected_texture: Texture2D = preload("res://assets/compfest/Menus/Main
 var credit_selected_texture: Texture2D = preload("res://assets/compfest/Menus/Main-credits (1).png")
 
 @onready var menu_option_texture: TextureRect = $MenuOptionTexture
+@onready var credit_texture: TextureRect = $CreditTexture
+
+@onready var input_code_texture: TextureRect = $InputCodeTexture
+@onready var line_edit: LineEdit = $InputCodeTexture/LineEdit
+@onready var response_label: Label = $%ResponseLabel
+
 var current_selection: int = 0
 const OPTION_COUNT = 3
 
 var _input_locked := false
 
+var credit_opened := false
+var input_opened := false
+
 
 
 func _ready() -> void:
+	GlobalGameCodeVerifier.request_failed.connect(on_request_failed)
+	GlobalGameCodeVerifier.game_code_succeed.connect(on_game_code_succeed)
+	GlobalGameCodeVerifier.game_code_failed.connect(on_game_code_failed)
+	
+	line_edit.text_submitted.connect(on_line_edit_text_submitted)
 	update_menu_display()
 	
 
@@ -21,17 +35,33 @@ func _input(event):
 	if _input_locked:
 		return
 		
+	if credit_opened:
+		if event.is_action_pressed("ui_cancel"):
+			$RandomStreamPlayerComponent.play_random()
+			await $RandomStreamPlayerComponent.finished
+			credit_texture.visible = false
+			credit_opened = false
 		
-	if event.is_action_pressed("ui_down"):
+	
+	if input_opened:
+		if event.is_action_pressed("ui_cancel"):
+			$RandomStreamPlayerComponent.play_random()
+			await $RandomStreamPlayerComponent.finished
+			input_code_texture.visible = false
+			input_opened = false
+			
+		
+		
+	if event.is_action_pressed("ui_down") and !credit_opened and !input_opened:
 		current_selection = (current_selection + 1) % OPTION_COUNT
 		update_menu_display()
 
-	elif event.is_action_pressed("ui_up"):
+	elif event.is_action_pressed("ui_up") and !credit_opened and !input_opened:
 		current_selection = (current_selection + OPTION_COUNT - 1) % OPTION_COUNT
 		update_menu_display()
 		
 		
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("ui_accept") and !credit_opened and !input_opened:
 		_input_locked = true
 		
 		$RandomStreamPlayerComponent.play_random()
@@ -42,9 +72,6 @@ func _input(event):
 		
 
 	
-
-func on_credit_pressed():
-	pass
 	
 
 func update_menu_display():
@@ -61,16 +88,20 @@ func handle_selection():
 	if not is_inside_tree():
 		return
 	
-	print(GameManager.game)
 		
 	match current_selection:
 		0:
-			ScreenTransition.transition()
-			await ScreenTransition.transitioned_halfway
-			
 			if is_inside_tree():
-				GameManager.game = GameManager.Game.NEW
-				get_tree().change_scene_to_file("res://stages/main/main.tscn")
+				input_code_texture.visible = true
+				input_opened = true
+			
+			
+			#if is_inside_tree():
+				#ScreenTransition.transition()
+				#await ScreenTransition.transitioned_halfway
+				#
+				#GameManager.game = GameManager.Game.NEW
+				#get_tree().change_scene_to_file("res://stages/main/main.tscn")
 
 		1:
 			if is_inside_tree():
@@ -78,13 +109,43 @@ func handle_selection():
 		
 		2:
 			if is_inside_tree():
-				print("credit")
+				credit_texture.visible = true
+				credit_opened = true
 			
 			
 func _on_accept() -> void:
 	handle_selection()
 	_input_locked = false
+	
+
+func on_line_edit_text_submitted(game_code: String):
+	GlobalGameCodeVerifier.verify_game_code(game_code)
+	#print(game_code)
 			
+			
+func on_request_failed(error_message: String):
+	response_label.text = error_message
+	response_label.add_theme_color_override("font_color", Color.RED)
+	response_label.visible = true	
+	
+
+func on_game_code_succeed(response_messages: String):
+	response_label.visible = false
+	
+	if is_inside_tree():
+		ScreenTransition.transition()
+		await ScreenTransition.transitioned_halfway
+		
+		GameManager.game = GameManager.Game.NEW
+		get_tree().change_scene_to_file("res://stages/main/main.tscn")
+
+	
+	
+
+func on_game_code_failed(error_message: String):
+	response_label.text = error_message
+	response_label.add_theme_color_override("font_color", Color.RED)
+	response_label.visible = true
 
 
 	
