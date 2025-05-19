@@ -6,8 +6,8 @@ signal game_code_succeed(response_messages: String)
 signal game_code_failed(error_message: String)
 
 const GAME_CODE = "WHACK_A_VIM"  # TODO: Replace with your actual X-Gamecode
-const SIGNATURE_SECRET = "ua/HDyYrvb+lce90Z0fUUw=="  # TODO: Replace with your actual secret key
-const URL := "https://lever.compfest.id/dev/v1/token" # TODO: Change based on environment (dev, production), this one is for development
+const SIGNATURE_SECRET = "A8242CBD53FA129D9B1FCB72753AE"  # TODO: Replace with your actual secret key
+const URL := "https://lever.compfest.id/v1/token" # TODO: Change based on environment (dev, production), this one is for development
 
 var user_playground_id: String
 var attempt_id: String
@@ -44,6 +44,8 @@ func verify_game_code(code: String):
 	var error := _http_request.request(URL, headers, HTTPClient.METHOD_POST, request_body)
 	if error != OK:
 		request_failed.emit(error)
+		#print(error)
+	#print(error)
 	#print(timestamp)
 	#print(headers)
 
@@ -55,6 +57,7 @@ func _on_request_completed(result: int, response_code: int, headers: PackedStrin
 	
 	if result_body.is_empty() or result_body.begins_with("<!DOCTYPE html>"):
 		game_code_failed.emit("Request Error")
+		#print(result_body)
 		return
 	
 	var response: Dictionary = JSON.parse_string(result_body)

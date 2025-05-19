@@ -6,8 +6,8 @@ signal send_point_succeed(response_messages: String, added_point: int)
 signal send_point_failed(error_message: String)
 
 const GAME_CODE = "WHACK_A_VIM"  # TODO: Replace with your actual X-Gamecode
-const SIGNATURE_SECRET = "ua/HDyYrvb+lce90Z0fUUw=="  # TODO: Replace with your actual secret key
-const URL := "https://lever.compfest.id/dev/v1/point" # TODO: Change based on environment (dev, production), this one is for development
+const SIGNATURE_SECRET = "A8242CBD53FA129D9B1FCB72753AE"  # TODO: Replace with your actual secret key
+const URL := "https://lever.compfest.id/v1/point" # TODO: Change based on environment (dev, production), this one is for development
 
 
 func sha256(data: PackedByteArray) -> PackedByteArray:

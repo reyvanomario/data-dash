@@ -67,7 +67,7 @@ func on_game_changed(game: int) -> void:
 			
 		GameManager.Game.OVER:
 			
-			await get_tree().create_timer(1.5).timeout
+			await get_tree().create_timer(1.8).timeout
 			
 			visible = true
 			
@@ -89,6 +89,7 @@ func on_game_changed(game: int) -> void:
 			var final_score = floori((GameManager.distance + (0.2 * GameManager.coins) \
 			 + quest_bonus)/2)
 			
+			# send poin ke compfest
 			GlobalGamePointSender.send_point(final_score)
 			
 			await animation_player.animation_finished
@@ -117,12 +118,6 @@ func on_restart() -> void:
 	GameManager.game = GameManager.Game.NEW; GameManager.game = GameManager.Game.PLAYING
 	
 
-
-func play_audio(audio_stream: AudioStream) -> void:
-	if audio_stream == null:
-		return
-	audio_stream_player.stream = audio_stream
-	audio_stream_player.play()
 	
 	
 func count_up_score(target: int, duration: float = 0.5) -> void:
@@ -178,13 +173,13 @@ func handle_selection():
 			ScreenTransition.transition()
 			await ScreenTransition.transitioned_halfway
 			
-			on_restart()
-			
-
-		1:
 			GameManager.game = GameManager.Game.NEW
 			get_tree().change_scene_to_file("res://ui/menu/main_menu.tscn")
 			MusicPlayer.play_main_menu_music()
+			
+
+		1:
+			get_tree().quit()
 			
 
 func on_request_failed(error_messages: String):

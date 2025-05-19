@@ -22,7 +22,7 @@ func on_area_entered(other_area: Area2D):
 		if get_parent().name == "Missile":
 			is_missile = true
 		
-		print(damage_amount)
+		#print(damage_amount)
 		other_area.damage(1, get_audio(), is_missile)
 		
 		

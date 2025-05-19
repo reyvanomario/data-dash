@@ -8,9 +8,10 @@ var credit_selected_texture: Texture2D = preload("res://assets/compfest/Menus/Ma
 @onready var menu_option_texture: TextureRect = $MenuOptionTexture
 @onready var credit_texture: TextureRect = $CreditTexture
 
-@onready var input_code_texture: TextureRect = $InputCodeTexture
-@onready var line_edit: LineEdit = $InputCodeTexture/LineEdit
+
+@onready var line_edit: LineEdit = $%InputCodeLineEdit
 @onready var response_label: Label = $%ResponseLabel
+@onready var input_code_container: Control = $InputCodeContainer
 
 var current_selection: int = 0
 const OPTION_COUNT = 3
@@ -19,6 +20,8 @@ var _input_locked := false
 
 var credit_opened := false
 var input_opened := false
+
+var _is_processing_request: bool = false
 
 
 
@@ -47,7 +50,7 @@ func _input(event):
 		if event.is_action_pressed("ui_cancel"):
 			$RandomStreamPlayerComponent.play_random()
 			await $RandomStreamPlayerComponent.finished
-			input_code_texture.visible = false
+			input_code_container.visible = false
 			input_opened = false
 			
 		
@@ -92,7 +95,7 @@ func handle_selection():
 	match current_selection:
 		0:
 			if is_inside_tree():
-				input_code_texture.visible = true
+				input_code_container.visible = true
 				input_opened = true
 			
 			
@@ -119,17 +122,41 @@ func _on_accept() -> void:
 	
 
 func on_line_edit_text_submitted(game_code: String):
+	if _is_processing_request:
+		return
+		
+	_is_processing_request = true
+	line_edit.editable = false
+	line_edit.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		
+		
+	$RandomStreamPlayerComponent.play_random()
+	await $RandomStreamPlayerComponent.finished
+
+	
 	GlobalGameCodeVerifier.verify_game_code(game_code)
+	
 	#print(game_code)
+	
+
 			
 			
 func on_request_failed(error_message: String):
+	_is_processing_request = false
+	line_edit.editable = true
+	line_edit.mouse_filter = Control.MOUSE_FILTER_STOP
+	
 	response_label.text = error_message
 	response_label.add_theme_color_override("font_color", Color.RED)
 	response_label.visible = true	
 	
+		
 
 func on_game_code_succeed(response_messages: String):
+	_is_processing_request = false
+	line_edit.editable = true
+	line_edit.mouse_filter = Control.MOUSE_FILTER_STOP
+	
 	response_label.visible = false
 	
 	if is_inside_tree():
@@ -138,14 +165,23 @@ func on_game_code_succeed(response_messages: String):
 		
 		GameManager.game = GameManager.Game.NEW
 		get_tree().change_scene_to_file("res://stages/main/main.tscn")
-
+	
+	
+	
 	
 	
 
 func on_game_code_failed(error_message: String):
+	_is_processing_request = false
+	line_edit.editable = true
+	line_edit.mouse_filter = Control.MOUSE_FILTER_STOP
+	
 	response_label.text = error_message
 	response_label.add_theme_color_override("font_color", Color.RED)
 	response_label.visible = true
+	
+	
+	line_edit.text_submitted.connect(on_line_edit_text_submitted)
 
 
 	

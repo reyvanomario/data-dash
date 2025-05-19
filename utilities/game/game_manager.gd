@@ -15,7 +15,7 @@ enum Game {
 
 enum Speed {
 	RESET = 0,
-	STEP = 10,
+	STEP = 15,
 	START = 400,
 	MAX = 2000,
 }
@@ -122,7 +122,7 @@ func _process(delta: float) -> void:
 	
 func activate_score_multiplier(duration: float):
 	multiplier_active = true
-	score_multiplier += 0.5
+	score_multiplier += 0.7
 	multiplier_timer.start(duration)
 	
 	multiplier_activated.emit()

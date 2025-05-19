@@ -28,7 +28,7 @@ func spawn(spawn_point: Vector2) -> void:
 	
 	# Spawn grup drone
 	for i in drones_to_spawn:		
-		print("spawn drone")
+		#print("spawn drone")
 		var random_y = randf_range(screen_height * 0.2, screen_height * 0.8)
 		
 		var adjusted_spawn = Vector2(2000,random_y)

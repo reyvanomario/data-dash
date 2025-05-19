@@ -137,7 +137,7 @@ _data = {
 [node name="PowerUpCollectibles" type="Node2D" groups=["powerup"]]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_nqgn5")
-powerup_pool = Array[ExtResource("3_x1xbv")]([ExtResource("4_l3wis"), ExtResource("4_i0stt"), ExtResource("5_xg4vu")])
+powerup_pool = Array[ExtResource("3_x1xbv")]([ExtResource("5_xg4vu"), ExtResource("4_l3wis"), ExtResource("4_i0stt")])
 
 [node name="Collectable2D" type="Area2D" parent="."]
 script = ExtResource("1_3qwsg")
