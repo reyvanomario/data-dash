@@ -1,9 +1,8 @@
 extends CanvasLayer
 
 
-var start_selected_texture: Texture2D = preload("res://assets/compfest/Menus/Main-start (1).png")
-var exit_selected_texture: Texture2D = preload("res://assets/compfest/Menus/Main-exit (1).png")
-var credit_selected_texture: Texture2D = preload("res://assets/compfest/Menus/Main-credits (1).png")
+var start_selected_texture: Texture2D = preload("res://assets/compfest/Menus/main_menu_start_selected.PNG")
+var credit_selected_texture: Texture2D = preload("res://assets/compfest/Menus/main_menu_credits_selected.PNG")
 
 @onready var menu_option_texture: TextureRect = $MenuOptionTexture
 @onready var credit_texture: TextureRect = $CreditTexture
@@ -14,12 +13,12 @@ var credit_selected_texture: Texture2D = preload("res://assets/compfest/Menus/Ma
 @onready var input_code_container: Control = $InputCodeContainer
 
 var current_selection: int = 0
-const OPTION_COUNT = 3
+
 
 var _input_locked := false
 
 var credit_opened := false
-var input_opened := false
+var input_code_opened := false
 
 var _is_processing_request: bool = false
 
@@ -31,7 +30,7 @@ func _ready() -> void:
 	GlobalGameCodeVerifier.game_code_failed.connect(on_game_code_failed)
 	
 	line_edit.text_submitted.connect(on_line_edit_text_submitted)
-	update_menu_display()
+	#update_menu_display()
 	
 
 func _input(event):
@@ -46,25 +45,22 @@ func _input(event):
 			credit_opened = false
 		
 	
-	if input_opened:
+	if input_code_opened:
 		if event.is_action_pressed("ui_cancel"):
 			$RandomStreamPlayerComponent.play_random()
 			await $RandomStreamPlayerComponent.finished
 			input_code_container.visible = false
-			input_opened = false
+			input_code_opened = false
 			
 		
 		
-	if event.is_action_pressed("ui_down") and !credit_opened and !input_opened:
-		current_selection = (current_selection + 1) % OPTION_COUNT
-		update_menu_display()
-
-	elif event.is_action_pressed("ui_up") and !credit_opened and !input_opened:
-		current_selection = (current_selection + OPTION_COUNT - 1) % OPTION_COUNT
+	if event.is_action_pressed("ui_down") || event.is_action_pressed("ui_up"):
+		current_selection = 1 - current_selection  
+		
 		update_menu_display()
 		
 		
-	if event.is_action_pressed("ui_accept") and !credit_opened and !input_opened:
+	if event.is_action_pressed("ui_accept") and !credit_opened and !input_code_opened:
 		_input_locked = true
 		
 		$RandomStreamPlayerComponent.play_random()
@@ -82,9 +78,8 @@ func update_menu_display():
 		0:
 			menu_option_texture.texture = start_selected_texture
 		1:
-			menu_option_texture.texture = exit_selected_texture
-		2:
 			menu_option_texture.texture = credit_selected_texture
+	
 
 
 func handle_selection():
@@ -96,7 +91,7 @@ func handle_selection():
 		0:
 			if is_inside_tree():
 				input_code_container.visible = true
-				input_opened = true
+				input_code_opened = true
 			
 			
 			#if is_inside_tree():
@@ -107,10 +102,6 @@ func handle_selection():
 				#get_tree().change_scene_to_file("res://stages/main/main.tscn")
 
 		1:
-			if is_inside_tree():
-				get_tree().quit()
-		
-		2:
 			if is_inside_tree():
 				credit_texture.visible = true
 				credit_opened = true
@@ -134,10 +125,15 @@ func on_line_edit_text_submitted(game_code: String):
 	await $RandomStreamPlayerComponent.finished
 
 	
-	GlobalGameCodeVerifier.verify_game_code(game_code)
+	#GlobalGameCodeVerifier.verify_game_code(game_code)
 	
-	#print(game_code)
-	
+	if is_inside_tree():
+		ScreenTransition.transition()
+		await ScreenTransition.transitioned_halfway
+		
+		GameManager.game = GameManager.Game.NEW
+		get_tree().change_scene_to_file("res://stages/main/main.tscn")
+	#
 
 			
 			

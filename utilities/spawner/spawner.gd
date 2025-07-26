@@ -3,7 +3,6 @@ extends Node2D
 
 
 
-
 const possible_spawn_points: Array[Vector2] = []
 
 

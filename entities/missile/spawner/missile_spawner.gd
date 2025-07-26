@@ -15,14 +15,14 @@ var next_threshold: float = 50.0
 func spawn(spawn_point: Vector2) -> void:	
 	if GameManager.distance >= next_threshold:
 		# ga nambahin lagi klo udh max
-		if missiles_per_group > max_missiles_per_group:
-			return
+		if missiles_per_group < max_missiles_per_group:
+			missiles_per_group += 1
+			next_threshold += distance_threshold
 			
-		missiles_per_group += 1
-		next_threshold += distance_threshold
+			interval_min = base_interval_min * pow(interval_multiplier, missiles_per_group - 1)
+			interval_max = base_interval_max * pow(interval_multiplier, missiles_per_group - 1)
 		
-		interval_min = base_interval_min * pow(interval_multiplier, missiles_per_group - 1)
-		interval_max = base_interval_max * pow(interval_multiplier, missiles_per_group - 1)
+		
 	
 	var missiles_to_spawn = randi_range(1, missiles_per_group)
 	

@@ -1,59 +1,34 @@
-[gd_scene load_steps=26 format=3 uid="uid://bua8h7f2d4u26"]
+[gd_scene load_steps=20 format=3 uid="uid://bua8h7f2d4u26"]
 
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="1_t2egg"]
 [ext_resource type="Script" path="res://ui/game_over_screen/game_over_screen.gd" id="2_rovtf"]
-[ext_resource type="Texture2D" uid="uid://ceuw5ms3wpmnj" path="res://assets/compfest/Menus/Gameover-retry1 (1).png" id="5_2p4sn"]
+[ext_resource type="Texture2D" uid="uid://dl1sbfha83du1" path="res://assets/compfest/Menus/game_over_normal.PNG" id="4_meunp"]
 [ext_resource type="Texture2D" uid="uid://bkipdcybh0njc" path="res://assets/compfest/Menus/Bg-gameover resized.png" id="5_3m2s4"]
+[ext_resource type="Texture2D" uid="uid://vl53bf5d08s2" path="res://assets/compfest/Menus/game_over_glitch.PNG" id="5_h4fuu"]
 [ext_resource type="Texture2D" uid="uid://cntk6bk6623gd" path="res://assets/compfest/Items&obstacles (glow)/coin blue.PNG" id="5_jwxvj"]
-[ext_resource type="Texture2D" uid="uid://be4s61tgv2bdq" path="res://assets/compfest/Menus/Gameover-retry2 (1).png" id="6_c1y7j"]
 [ext_resource type="Script" path="res://ui/game_over_screen/game_over_sprite.gd" id="8_16yfh"]
-[ext_resource type="Texture2D" uid="uid://s5tanc4obq6t" path="res://assets/compfest/Menus/Gameover-exit1 (1).png" id="8_hpdg6"]
-[ext_resource type="Texture2D" uid="uid://631rpx1mrkll" path="res://assets/compfest/Menus/Gameover-exit2 (1).png" id="9_6hwum"]
-[ext_resource type="Script" path="res://ui/game_over_screen/exit_selected_sprite.gd" id="10_883e7"]
 [ext_resource type="Texture2D" uid="uid://bu6f87s06x2sr" path="res://assets/compfest/Menus/gameover-bg-1.PNG" id="11_1r47i"]
 [ext_resource type="Texture2D" uid="uid://dro5wtmeyms8s" path="res://assets/compfest/Menus/gameover-bg-2.PNG" id="12_h13ha"]
 [ext_resource type="PackedScene" uid="uid://bac06arj7ahsa" path="res://component/random_stream_player_component.tscn" id="12_wvvan"]
 [ext_resource type="AudioStream" uid="uid://cpx8e7r35ai84" path="res://assets/compfest/sfx/button-305770.wav" id="13_7jhbt"]
 [ext_resource type="Texture2D" uid="uid://clt6ml5nskgil" path="res://assets/compfest/Menus/gameover-bg-3.PNG" id="13_kc3un"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l4yqt"]
-atlas = ExtResource("5_2p4sn")
+[sub_resource type="AtlasTexture" id="AtlasTexture_au8o7"]
+atlas = ExtResource("4_meunp")
 region = Rect2(0, 0, 1920, 1080)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5ehws"]
-atlas = ExtResource("6_c1y7j")
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlkab"]
+atlas = ExtResource("5_h4fuu")
 region = Rect2(0, 0, 1920, 1080)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_khjr4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l4yqt")
+"texture": SubResource("AtlasTexture_au8o7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5ehws")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ow3ed"]
-atlas = ExtResource("8_hpdg6")
-region = Rect2(0, 0, 1920, 1080)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a5uwk"]
-atlas = ExtResource("9_6hwum")
-region = Rect2(0, 0, 1920, 1080)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3k7mn"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ow3ed")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a5uwk")
+"texture": SubResource("AtlasTexture_vlkab")
 }],
 "loop": true,
 "name": &"idle",
@@ -267,17 +242,9 @@ visible = false
 position = Vector2(2, 0)
 sprite_frames = SubResource("SpriteFrames_khjr4")
 animation = &"idle"
-frame_progress = 0.633154
+frame_progress = 0.86451
 offset = Vector2(960, 540)
 script = ExtResource("8_16yfh")
-
-[node name="ExitSelectedSprite" type="AnimatedSprite2D" parent="."]
-visible = false
-sprite_frames = SubResource("SpriteFrames_3k7mn")
-animation = &"idle"
-frame_progress = 0.543027
-offset = Vector2(960, 540)
-script = ExtResource("10_883e7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -425,10 +392,10 @@ bus = &"ui"
 
 [node name="distance" type="Label" parent="."]
 layout_mode = 0
-offset_left = 990.0
-offset_top = 268.0
-offset_right = 1203.0
-offset_bottom = 493.0
+offset_left = 974.0
+offset_top = 249.0
+offset_right = 1187.0
+offset_bottom = 474.0
 theme_override_colors/font_color = Color(0.737255, 0.615686, 0.294118, 1)
 theme_override_constants/outline_size = 64
 theme_override_font_sizes/font_size = 75
@@ -441,9 +408,9 @@ uppercase = true
 visible = false
 layout_mode = 0
 offset_left = 1121.0
-offset_top = 519.0
+offset_top = 490.0
 offset_right = 1149.0
-offset_bottom = 591.0
+offset_bottom = 562.0
 theme_override_colors/font_color = Color(1, 0.894118, 0.431373, 1)
 theme_override_constants/outline_size = 32
 theme_override_font_sizes/font_size = 64
@@ -455,9 +422,9 @@ uppercase = true
 visible = false
 layout_mode = 0
 offset_left = 1121.0
-offset_top = 431.0
+offset_top = 408.0
 offset_right = 1149.0
-offset_bottom = 503.0
+offset_bottom = 480.0
 theme_override_colors/font_color = Color(1, 0.894118, 0.431373, 1)
 theme_override_constants/outline_size = 32
 theme_override_font_sizes/font_size = 64
@@ -468,10 +435,10 @@ uppercase = true
 [node name="score" type="Label" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 1207.0
-offset_top = 599.0
-offset_right = 1268.0
-offset_bottom = 757.0
+offset_left = 1205.0
+offset_top = 560.0
+offset_right = 1266.0
+offset_bottom = 718.0
 theme_override_colors/font_color = Color(1, 0.960784, 0.784314, 1)
 theme_override_constants/outline_size = 64
 theme_override_font_sizes/font_size = 140

@@ -32,7 +32,7 @@ var displayed_score: int:
 		
 
 @onready var try_again_sprite: AnimatedSprite2D = $TryAgainSprite
-@onready var exit_selected_sprite: AnimatedSprite2D = $ExitSelectedSprite
+
 
 
 var current_selection: int = 0
@@ -56,7 +56,7 @@ func _ready() -> void:
 	GlobalGamePointSender.send_point_succeed.connect(on_send_point_succeed)
 	GlobalGamePointSender.send_point_failed.connect(on_send_point_failed)
 	
-	#update_menu_display()
+
 		
 
 func on_game_changed(game: int) -> void:
@@ -90,7 +90,7 @@ func on_game_changed(game: int) -> void:
 			 + quest_bonus)/2)
 			
 			# send poin ke compfest
-			GlobalGamePointSender.send_point(final_score)
+			#GlobalGamePointSender.send_point(final_score)
 			
 			await animation_player.animation_finished
 			
@@ -135,32 +135,15 @@ func count_up_score(target: int, duration: float = 0.5) -> void:
 func _input(event):
 	if GameManager.game != GameManager.Game.OVER || !can_handle_input:
 		return
-	
-		
-	if event.is_action_pressed("ui_left") || event.is_action_pressed("ui_right"):
-		current_selection = 1 - current_selection  
-		
-		update_menu_display()
 
 		
 		
 	if event.is_action_pressed("ui_accept"):
+		can_handle_input = false
 		$RandomStreamPlayerComponent.play_random()
 		await $RandomStreamPlayerComponent.finished
 		
 		handle_selection()
-		can_handle_input = false
-
-
-func update_menu_display():
-	match current_selection:
-		0:
-			$TryAgainSprite.visible = true
-			$ExitSelectedSprite.visible = false
-		1:
-			$TryAgainSprite.visible = false
-			$ExitSelectedSprite.visible = true
-
 
 
 
@@ -168,19 +151,15 @@ func handle_selection():
 	if GameManager.game != GameManager.Game.OVER:
 		return
 		
-	match current_selection:
-		0:
-			ScreenTransition.transition()
-			await ScreenTransition.transitioned_halfway
-			
-			GameManager.game = GameManager.Game.NEW
-			get_tree().change_scene_to_file("res://ui/menu/main_menu.tscn")
-			MusicPlayer.play_main_menu_music()
+	
+	ScreenTransition.transition()
+	await ScreenTransition.transitioned_halfway
+	
+	GameManager.game = GameManager.Game.NEW
+	get_tree().change_scene_to_file("res://ui/menu/main_menu.tscn")
+	MusicPlayer.play_main_menu_music()
 			
 
-		1:
-			get_tree().quit()
-			
 
 func on_request_failed(error_messages: String):
 	response_label.text = error_messages

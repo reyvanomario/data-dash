@@ -7,9 +7,9 @@ extends Node2D
 @onready var player = $Player
 
 @onready var quests: Array[Quest] = [
-	#$CoinQuest,
-	#$Take3PowerUpQuest,
-	#$SurvivalQuest,
+	$CoinQuest,
+	$Take3PowerUpQuest,
+	$SurvivalQuest,
 	$DistanceQuest
 ]
 
@@ -25,7 +25,6 @@ func _ready() -> void:
 	#print(GameManager.game)
 	
 	
-		
 	
 func start_quest_interval_timer():
 	quest_interval_timer.start()

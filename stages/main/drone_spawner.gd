@@ -17,11 +17,13 @@ var next_threshold: float = 40.0
 func spawn(spawn_point: Vector2) -> void:	
 	if GameManager.distance >= next_threshold:
 		# ga nambahin lagi klo udh max
-		if drones_per_group > max_drones_per_group:
-			return
+		if drones_per_group < max_drones_per_group:
+			drones_per_group += 1
+			next_threshold += distance_threshold
 			
-		drones_per_group += 1
-		next_threshold += distance_threshold
+			interval_min = base_interval_min * pow(interval_multiplier, drones_per_group - 1)
+			interval_max = base_interval_max * pow(interval_multiplier, drones_per_group - 1)
+		
 		
 	var drones_to_spawn = randi_range(1, drones_per_group)
 	var screen_height = get_viewport().get_visible_rect().size.y

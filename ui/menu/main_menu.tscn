@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://ui/menu/main_menu.gd" id="1_b5dg6"]
 [ext_resource type="Theme" uid="uid://f1t8okxjimt2" path="res://ui/base_theme.tres" id="2_2j24o"]
 [ext_resource type="Texture2D" uid="uid://cdus3iea2j50c" path="res://assets/compfest/Menus/Bg-main.PNG" id="2_xyvy7"]
-[ext_resource type="Texture2D" uid="uid://dn3svqraaufcy" path="res://assets/compfest/Menus/Main-start (1).png" id="3_hbrhu"]
+[ext_resource type="Texture2D" uid="uid://lo5imwjuuovy" path="res://assets/compfest/Menus/main_menu_start_selected.PNG" id="3_4sxt4"]
 [ext_resource type="Texture2D" uid="uid://c7dgh1hfj8ptu" path="res://assets/compfest/Menus/Bg+credits.PNG" id="4_ak1n3"]
 [ext_resource type="Texture2D" uid="uid://blvjq4f13c5th" path="res://assets/compfest/Menus/Press-esc.PNG" id="5_sdien"]
 [ext_resource type="PackedScene" uid="uid://bac06arj7ahsa" path="res://component/random_stream_player_component.tscn" id="6_7wej0"]
@@ -31,7 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_hbrhu")
+texture = ExtResource("3_4sxt4")
 expand_mode = 2
 
 [node name="CreditTexture" type="TextureRect" parent="."]
